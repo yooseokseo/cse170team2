@@ -1,0 +1,82 @@
+{{>header}}
+</head>
+<div class="page-container">
+		<div class="pageTitle-container">
+			<div class="page-Title">
+				APP LOGO
+			</div>
+			<div class="page-Search">
+				<div class="search-50">
+					<img src="/images/icons/search-50.png" alt="search button"><span> Search</span>
+				</div>
+
+			</div>
+		</div>
+		<div class="categories-container">
+			<div class="content-container">
+				<div class="content-Title">
+					{{currentCategorySelected}} Categories
+				</div>
+				<div class="content-More">
+					<a href="/browse">More &gt;</a>
+				</div>
+			</div>
+			<div class="categories-button">
+				<a href="/random">
+					<div class="categories">
+						Random <img src="/images/icons/random-100.png" alt="random play icon" height="70">
+					</div>
+				</a>
+
+				{{#each currentUserCategoryList}}
+					<a href="/{{id}}">
+						<div id="{{id}}" class="categories">
+							{{title}}
+						</div>
+					</a>
+				{{/each}}
+			</div>
+
+		</div>
+		<div class="recently-container">
+			<div class="content-container">
+				<div class="content-Title">
+					Browsing History
+				</div>
+				<div class="content-More">
+
+				</div>
+			</div>
+			<div class="recently-button">
+
+				<div class="recently">
+
+				</div>
+
+				<div class="recently">
+
+				</div>
+			</div>
+		</div>
+
+
+
+
+		<!-- SPACE FOR POPUP -->
+		<div id="profile_popup" class="modal"> </div>
+
+
+		<!-- BOTTOM NAVIGATION BAR -->
+		{{>navigation}}
+
+	</div>
+
+	<script src="/js/jquery-1.11.0.js"></script>
+	<script src="/js/bootstrap.js"></script>
+	<script src="/js/index.js"></script>
+	<script src="/js/profile.js"></script>
+</body>
+
+</html>
+
+</html>

@@ -1,0 +1,125 @@
+var userData = require('../userData.json');
+var data = require('../data.json');
+
+
+exports.linkview = function(req, res) {
+  var categoryTitle = req.params.categoryTitle;
+  var itemId = req.params.itemId;
+  var itemObj = data[itemId];
+  var itemTitle = itemObj.itemTitle;
+  var mediaHTML = '';
+  var type = itemObj.type;
+  console.log(type);
+  switch (type) {
+    case 'image':
+        console.log('image Type');
+        mediaHTML = '<img id="media" src="'+itemObj.URL+'" alt="">';
+        break;
+    case 'video':
+        console.log('video Type');
+        mediaHTML = '<video style="width:100%;" controls><source src='+ itemObj.URL+' type=video/mp4></video>';
+        break;
+    default:
+        console.log('check mediaType!');
+        break;
+  }
+  res.render('link', {
+    "type" : mediaHTML,
+    "itemTitle": itemTitle,
+    "caption": itemObj.caption,
+    "des": itemObj.summary,
+    "itemID" : itemId
+  });
+};
+
+exports.view = function(req, res) {
+  var categoryTitle = req.params.categoryTitle;
+  var itemId = req.params.itemId;
+  var itemObj = data[itemId];
+  var itemTitle = itemObj.itemTitle;
+  var mediaHTML = '';
+  var categoryList = userData.categoryList;
+  var currentItemIndex = userData.currentItemIndex;
+  console.log(userData.categoryList.length);
+  console.log(categoryList[itemId]);
+  console.log(currentItemIndex);
+
+
+
+  switch (categoryList[currentItemIndex].type) {
+    case 'image':
+        console.log('image Type');
+        mediaHTML = '<div class="preview-content"><img id="media" src="'+categoryList[currentItemIndex].URL+'" alt=""></div>';
+        break;
+    case 'video':
+          console.log('video Type');
+          mediaHTML = '<video style="width:100%;" controls><source src='+ categoryList[currentItemIndex].URL+' type=video/mp4></video>';
+          break;
+
+    default:
+        console.log('check mediaType!');
+        break;
+  }
+
+
+  res.render('share', {
+    'categoryTitle': categoryTitle,
+    'itemTitle': itemTitle,
+    'itemId': itemId,
+    'mediaHTML': mediaHTML,
+    'itemIdTotal':itemId
+  });
+};
+
+exports.infoview = function(req, res) {
+  var itemId = req.params.itemId;
+  var itemObj = data[itemId];
+  var itemTitle = itemObj.itemTitle;
+  var itemDescription = itemObj.summary;
+  var itemExtraInfo = itemObj.extraInfo;
+  var mediaHTML ='';
+  if(itemExtraInfo.length > 0){
+    console.log("item found");
+
+    for (var i = 0; i < itemExtraInfo.length; i++) {
+      switch (itemExtraInfo[i].type) {
+        case "location":
+          console.log("location form is loaded");
+          mediaHTML = '<div class="page-box location"><div id="location-addr">'+ itemExtraInfo[0].content +'</div><div id="location-btn">'
+          + ' Get Direction &gt;</div><div id="location-map"><img src="'+ itemObj.extraInfo[0].imageURL+'" alt=""></div></div>';
+          itemExtraInfo[i].contentHTML = mediaHTML;
+          break;
+        case "nearSearch":
+          console.log("nearSearch form is loaded");
+          var extraInfoLength = itemExtraInfo[i].container.length;
+          for (var j = 0; j < extraInfoLength; j++) {
+            var mediaHTML = '<div class="page-box box-btn page-box-padding weather"><a class="box-a" href="/sharedlink/'+itemId+'/info/'+j+'/external">'
+              + '<div class="box-title"><span class="box-data">'+itemExtraInfo[i].container[j].title +'</span> <span class="next">&gt;</span></div></a><div class="weather-temp">'
+              + '<span id="temp-data'+j+'">'+itemExtraInfo[i].container[j].tempDataF+'</span> <span clsss="temp-options"><span class="temp-active" id="temp-f'+j+'">&deg;F</span><span class="temp-div">&nbsp;&nbsp;|</span> <span id="temp-c'+j+'">&deg;C</span></span>'
+              + '</div><div class="weather-icon"><img src="'+ itemExtraInfo[i].container[j].iconURL+'" alt="" width="50rem;"></div></div>';
+              itemExtraInfo[i].container[j].mediaHTML = mediaHTML;
+          }
+        default:
+          mediaHTML ='';
+      }
+    }
+
+
+
+  }
+  else {
+    console.log("item not found");
+  }
+
+
+
+
+  res.render('linkinfo', {
+    'itemTitle': itemTitle,
+    'itemId': itemId,
+    'description': itemDescription,
+    'extra': itemExtraInfo,
+    'mediaHTML': mediaHTML
+
+  });
+};

@@ -1,0 +1,173 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+html, body{
+  height: 100%;
+  width: 100%;
+}
+
+a {
+  text-decoration: none;
+}
+
+
+
+.page-container {
+  height: 100%;
+  min-height: 100%;
+  width: 100%;
+  overflow: scroll;
+
+}
+
+.overflowHidden{
+  overflow: hidden;
+}
+
+.pageTitle-container{
+  margin: 0 auto;
+  display: grid;
+  grid-template-rows: 1fr;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-areas: "Back Title Filter";
+  padding-top: 1rem;
+  background-color: #DFDFDF;
+  position:fixed;
+  width: 100%;
+  height: 4.5rem;
+  z-index: 100;
+}
+
+.page-title{
+  font-size: 2rem;
+  grid-area: Title;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  text-transform: capitalize;
+}
+
+
+
+.page-back, .page-filter{
+  font-size: 1.1rem;
+  color: red;
+  margin: 0 1rem;
+  margin-top: 1.4rem;
+}
+
+.page-filter{
+  text-align: right;
+}
+
+.page-media{
+  margin-top: 4.5rem;
+  height: 100vw;
+  background-color: gray;
+  position: relative;
+  overflow: hidden;
+}
+
+.page-media{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
+
+.page-media #arrow-left, .page-media #arrow-right{
+  position: absolute;
+  width: 5rem;
+  top: 40vw;
+}
+
+#arrow-left {
+  left: 0;
+}
+
+#arrow-right {
+  right:0
+}
+
+#media {
+  width: 100%;
+}
+
+.page-media-more {
+  display: grid;
+  grid-template-rows: 1fr 1fr;
+  grid-template-columns: 1fr 2fr 2fr;
+  grid-template-areas:
+  "Title Title Btn"
+  "Caption Caption Btn";
+  height: 5rem;
+
+}
+
+#page-media-title{
+  grid-area: Title;
+  display: block;
+  font-size: 3rem;
+  font-weight: bold;
+}
+
+#page-madia-caption{
+  grid-area: Caption;
+  display: block;
+  font-size: 1.5rem;
+
+}
+
+.page-media-more{
+  grid-area:Btn;
+}
+
+#more-options{
+  width: 100%;
+  position: relative;
+}
+
+#more-options div{
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  padding: 1rem;
+
+
+}
+.more-options-btns i{
+  font-size: 1rem;
+}
+.pageContent-container{
+  position: relative;
+  height: 100%;
+}
+#nav-cover-top{
+  height: 2rem;
+}
+
+.page-logo{
+  font-size:2rem;
+  margin-left: 1rem;
+}
+
+#moreBtn{
+  margin-top:auto;
+
+  margin-left:auto;
+  margin-bottom: auto;
+}
+
+.sub-btns li a{
+  height: 45px;
+  width: 45px;
+}
+
+.sub-btns li a i{
+ line-height: 45px;
+}

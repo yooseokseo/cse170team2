@@ -1,0 +1,252 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+html, body{
+  height: 100%;
+  width: 100%;
+}
+
+a {
+  text-decoration: none;
+}
+
+.page-container {
+  height: 100%;
+  min-height: 100%;
+  width: 100%;
+  overflow: scroll;
+}
+
+.pageTitle-container{
+  margin: 0 auto;
+  display: grid;
+  grid-template-rows: 1fr;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-areas: "Back Title Filter";
+  padding-top: 1rem;
+  background-color: #DFDFDF;
+  position:fixed;
+  width: 100%;
+  height: 4.5rem;
+}
+
+.page-title{
+  font-size: 2rem;
+  grid-area: Title;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  text-transform: capitalize;
+}
+
+.page-back, .page-filter{
+  margin: 0 1rem;
+  font-size: 1.1rem;
+  color: red;
+  margin-top: 1.4rem;
+}
+
+.page-filter{
+  text-align: right;
+}
+
+.nav-container {
+  background-color: #DFDFDF;
+  position: fixed;
+  width: 100%;
+  display: grid;
+  grid-template-rows: 1fr;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-areas: "Home Brower Profile Search";
+  bottom: 0;
+  text-align: center;
+}
+
+.nav-images{
+  padding-top: 1rem;
+}
+
+.nav-images img {
+  width:2rem;
+}
+
+.nav-title {
+  font-size: 1rem;
+}
+
+.nav-divider{
+  border-right: 1px solid #efefef;
+
+}
+
+.page-subtitle{
+
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin: 0 1rem;
+  margin-top: 1rem;
+
+}
+
+#desc{
+  margin-top: 5.5rem;
+}
+
+.page-box{
+  margin: auto 1rem;
+  border: 1px solid #DFDFDF;
+
+}
+
+.page-box input{
+  margin-top: 1rem;
+}
+
+
+
+.location {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 3fr;
+  grid-template-areas:
+    "addr btn"
+    "map map";
+
+}
+
+#location-addr {
+  grid-area: addr;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  text-align: center;
+}
+
+#location-btn {
+  grid-area: btn;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  border-left: 1px solid #DFDFDF;
+  background-color: #cFcFcF;
+}
+
+
+#location-map {
+  grid-area: map;
+  width: 100%;
+}
+#location-map img {
+  width: 100%;
+}
+
+.box-btn {
+  font-size: 1.5rem;
+}
+
+.box-last {
+  border-bottom: 1px solid #DFDFDF;
+}
+
+.nav-cover {
+  margin-bottom: 4.5rem;
+}
+
+.weather {
+  display: grid;
+  grid-template-columns: 4fr 2fr 1fr;
+  grid-template-rows: 1fr;
+  grid-template-areas:
+  "Title Teamp Weather";
+  margin-bottom: 0.5rem;
+}
+
+.shop {
+  display: grid;
+  grid-template-columns: 6fr 3fr;
+  grid-template-rows: 1fr;
+  grid-template-areas:
+  "Title Price";
+}
+.weather a div{
+  width: 100%;
+}
+
+.weather a div, .weather-icon img{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.weather-icon{
+  width: 4vw;
+}
+
+.weather-temp{
+  text-align: center;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
+#temp-f0, #temp-c0, .temp-div{
+  font-size: 0.8rem;
+  position: relative;
+  top: -0.8rem;
+}
+#temp-f1, #temp-c1, .temp-div{
+  font-size: 0.8rem;
+  position: relative;
+  top: -0.8rem;
+}
+#temp-f2, #temp-c2, .temp-div{
+  font-size: 0.8rem;
+  position: relative;
+  top: -0.8rem;
+}
+
+
+.temp-active {
+  color:red;
+  pointer-events: none;
+}
+.temp-options{
+  letter-spacing: 0.5rem;
+}
+
+
+
+.box-data{
+  margin-left: 1rem;
+}
+.box-title{
+  position: relative;
+  width: 100%;
+
+}
+
+.box-a {
+  background-color: #cFcFcF;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.next{
+  position: absolute;
+  right: 1rem;
+}
+
+.price {
+  font-size: 1rem;
+  margin: 1rem;
+}
+.basic-padding{
+  padding:0 0.5rem;
+}
