@@ -16,7 +16,8 @@
     "express3-handlebars": "*",
     "mongodb": "*",
     "mongoose": "*",
-    "socket.io": "^2.0.4"
+    "socket.io": "^2.0.4",
+    "uglify-js": "2.6.0"
   },
   "engines": {
     "node": "0.10.x"
