@@ -22,13 +22,15 @@ exports.register = function(req, res) {
 	{
       "name": req.query.name,
       "email": req.query.email,
-      "password": req.query.password
+      "password": req.query.password,
+      "username": req.query.username
 	};
-	userData.userList.push(newUser);
+  //TODO: need to fix here. userdata should push into wholeUserData Json.
+	//userData.userList.push(newUser);
 	userData.loginStatus = true;
 	userData.userName = req.query.name;
 	console.log("login status: "+userData.loginStatus);
-	res.render('profile', {
+	res.render('preference', {
     userData,
     categoryList
   });
