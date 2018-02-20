@@ -1,11 +1,14 @@
 {{>header}}
+
 </head>
+<body>
+{{>searchbar}}
 <div class="page-container">
 		<div class="pageTitle-container">
 			<div class="page-Title">
 				APP LOGO
 			</div>
-			<div class="page-Search">
+			<div class="page-Search" onclick="show_overlay()">
 				<div class="search-50">
 					<img src="/images/icons/search-50.png" alt="search button"><span> Search</span>
 				</div>
@@ -22,14 +25,14 @@
 				</div>
 			</div>
 			<div class="categories-button">
-				<a href="/random">
+				<a href="/app/random">
 					<div class="categories">
 						Random <img src="/images/icons/random-100.png" alt="random play icon" height="70">
 					</div>
 				</a>
 
 				{{#each currentUserCategoryList}}
-					<a href="/{{id}}">
+					<a href="/app/{{id}}">
 						<div id="{{id}}" class="categories">
 							{{title}}
 						</div>
@@ -71,12 +74,8 @@
 
 	</div>
 
-	<script src="/js/jquery-1.11.0.js"></script>
-	<script src="/js/bootstrap.js"></script>
-	<script src="/js/index.js"></script>
-	<script src="/js/profile.js"></script>
-</body>
+		{{>script}}
 
-</html>
+</body>
 
 </html>

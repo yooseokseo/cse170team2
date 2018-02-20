@@ -2,17 +2,26 @@
   <link href="/css/play.css" rel="stylesheet">
 </head>
 <body>
+  {{>searchbar}}
 
   <div class="page-container">
 
     <div class="pageTitle-container">
         <div class="page-back">
-          <a id="back" href="/"> &lt; Back  </a>
+          {{#if isScreenShared}}
+          {{else}}
+            <a id="back" href="/"> &lt; Back  </a>
+          {{/if}}
         </div>
 
 
       <div class="page-title">
-        {{pageTitle}}
+        {{#if isScreenShared}}
+          <span style="color: red;">Sharing</span>
+        {{else}}
+          {{pageTitle}}
+        {{/if}}
+
       </div>
 
 
@@ -48,52 +57,71 @@
 
 
 
+
     </div>
 
     <!-- SPACE FOR POPUP -->
     <div id="profile_popup" class="modal"> </div>
 
-
     <div class="nav-share-2 chatroom-btns-layout">
       {{#if isScreenShared}}
-        <div id="exitChatroom" class="chatroom-btns displayNone">
+        {{#unless isAtChatroom}}
+        <div class="group-chat-container">
+
+          <a href="/userData/{{userIdNumber}}/{{pageTitle}}/{{itemID}}/unsetShare">  <div id="cancelGroupChat" class="group-chat-btn-layout">
+              Exit Sharing
+            </div></a>
+          <a href="/userData/{{userIdNumber}}/{{pageTitle}}/{{itemID}}/setChat"><div id="enterChatRoom" class="group-chat-btn-layout">
+            Enter Group Chatroom
+          </div></a>
+
+        </div>
+        {{/unless}}
+      {{/if}}
+
+    </div>
+
+    <!-- BOTTOM NAVIGATION BAR -->
+    {{#unless isAtChatroom}}
+    {{>navigation}}
+    {{/unless}}
+
+    {{#if isAtChatroom}}
+    <div class="chat-box-container">
+      <div class="chat-box-btns">
+        <a href="/userData/{{userIdNumber}}/{{pageTitle}}/{{itemID}}/unsetChat">
+        <div id="exit-chat" class="exit">
           Exit Chatroom
         </div>
-        <div id="up" class="chatroom-btns chatroom-btns-last displayNone">
-          UP
+      </a>
+        <div id="up-btn" class="up">
+          <img id="up-icon" src="/images/icons/up.svg" alt="">
         </div>
-      {{/if}}
       </div>
-      {{#if isScreenShared}}
-          <div class="nav-share chatroom-btns-layout">
-            <div id="exitSharing" class="chatroom-btns">
-              Exit Sharing
-            </div>
-            <div id="enterChatroom" class="chatroom-btns chatroom-btns-last">
-              Enter Chatroom
-            </div>
-          </div>
-      {{/if}}
+      <div class="chat-box-message-window">
 
+        <div id="conversation" class="message-window">
+
+
+
+        </div>
+      </div>
+
+      <div class="chat-box-message-input">
+        <input id="chat-input" type="text" name="" value="" placeholder="Message Here">
+        <input type="button" id="datasend" name="" value="SEND">
+      </div>
     </div>
-    <!-- BOTTOM NAVIGATION BAR -->
-{{#if isScreenShared}}
-    <div class="chat-view displayNone">
-      <iframe id="myFrame" src="https://chat-seo.herokuapp.com" width="100%" height="auto"></iframe>
-    </div>
-{{/if}}
-    <!-- BOTTOM NAVIGATION BAR -->
-    {{>navigation}}
 
-
-
+    {{/if}}
 
   <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
   <script type="text/javascript" src="/js/materialize.js"></script>
-  <script src="/js/jquery-1.11.0.js"></script>
+  	{{>chatScript}}
   <script src="/js/bootstrap.js"></script>
   <script src="/js/play.js"></script>
   <script src="/js/profile.js"></script>
+  <script src="/js/search.js"></script>
 </body>
 
 </html>

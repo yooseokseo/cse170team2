@@ -1,12 +1,14 @@
 {
   "loginStatus": false,
+  "userRole":null,
+  "userIdNumber": 0,
   "userName": null,
   "currentPageViewed": null,
   "currentCategorySelected": null,
   "currentItemIndex": 0,
   "isScreenShared": false,
+  "isAtChatroom": false,
   "categoryList": [],
-  "randomList": [],
   "favoriteList": [{
     "title": "Activities",
     "id": "activities"

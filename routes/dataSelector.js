@@ -1,6 +1,7 @@
 //database
 var userData = require('../userData.json');
 var data = require('../data.json');
+var categoryList = require('../categoryListData.json');
 
 //env setting
 var numberOfItemsSelected = 10;
@@ -99,16 +100,16 @@ exports.view = function(req, res){
 
   console.log("current Item (Ready To View):" + userData.categoryList[itemIndex].URL);
   //need to check type
-  var categoryList = userData.categoryList;
+  var categoryListUser = userData.categoryList;
 
-  switch (categoryList[itemIndex].type) {
+  switch (categoryListUser[itemIndex].type) {
     case 'image':
         console.log('image Type');
-        mediaHTML = '<img id="media" src="'+categoryList[itemIndex].URL+'" alt="">';
+        mediaHTML = '<img id="media" src="'+categoryListUser[itemIndex].URL+'" alt="">';
         break;
     case 'video':
         console.log('video Type');
-        mediaHTML = '<video style="width:100%;" controls><source src='+ categoryList[itemIndex].URL+' type=video/mp4></video>';
+        mediaHTML = '<video style="width:100%;" controls><source src='+ categoryListUser[itemIndex].URL+' type=video/mp4></video>';
         break;
     default:
         console.log('check mediaType!');
@@ -118,13 +119,18 @@ exports.view = function(req, res){
 
 
   console.log(categoryTitle);
-  console.log(userData.isScreenShared);
+  console.log("isScreenShared:" +userData.isScreenShared);
+
+
   res.render('play',{
     'pageTitle': categoryTitle,
     'type': mediaHTML,
-    'itemTitle' : categoryList[itemIndex].itemTitle,
-    'caption': categoryList[itemIndex].caption,
-    'itemID': categoryList[itemIndex].id,
-    'isScreenShared' : userData.isScreenShared
+    'itemTitle' : categoryListUser[itemIndex].itemTitle,
+    'caption': categoryListUser[itemIndex].caption,
+    'itemID': categoryListUser[itemIndex].id,
+    'isScreenShared' : userData.isScreenShared,
+    'userIdNumber': userData.userIdNumber,
+    'isAtChatroom': userData.isAtChatroom,
+    categoryList
   });
 };

@@ -1,6 +1,6 @@
 //database
 var data = require('../data.json');
-
+var categoryList = require('../categoryListData.json');
 
 
 exports.view = function(req, res){
@@ -8,13 +8,29 @@ exports.view = function(req, res){
   var itemId = req.params.itemId;
   var externalId = req.params.externalId;
   var extraInfoLength = data[itemId].extraInfo.length;
-
+  var containerIndex = 0;
+  var externalURL = '';
   //need to find URL from webURL
-  console.log(extraInfoLength);
-  console.log(data[itemId].extraInfo[0].container.length);
-  console.log(data[itemId].extraInfo[1].container.length);
+
+
+  console.log('info length: ' +extraInfoLength);
+  for (var i = 0; i < extraInfoLength; i++) {
+    console.log(data[itemId].extraInfo[i]);
+    if(data[itemId].extraInfo[i].type == "nearSearch"){
+      console.log('found nearSearch');
+      console.log('found index' + i);
+      containerIndex = i;
+      break;
+    }
+  }
+
+  console.log(data[itemId].extraInfo[containerIndex].container[externalId].webURL);
+
+
 	res.render('external', {
     'categoryTitle':categoryTitle,
-    'itemId':itemId
+    'itemId':itemId,
+    'URL': data[itemId].extraInfo[containerIndex].container[externalId].webURL,
+    categoryList
   });
 };

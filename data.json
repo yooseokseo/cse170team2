@@ -20,8 +20,8 @@
       {
         "type": "nearSearch",
         "title": "Beaches Near You",
-        "content": "8564 El Paseo Grande, La Jolla, CA 92037",
-        "imageURL": "/images/info/map.png",
+        "content": "",
+        "imageURL": "",
         "linkURL": "",
         "container": [{
             "title": "La Jolla Shores",
@@ -32,7 +32,7 @@
             "degree": "2",
             "iconURL": "/images/icons/cloudy-day-2.svg",
             "mediaHTML": "",
-            "webURL":""
+            "webURL":"http://enjoylajollashores.com"
           },
           {
             "title": "Black's Beach",
@@ -43,7 +43,7 @@
             "degree": "1",
             "iconURL": "/images/icons/cloudy-day-1.svg",
             "mediaHTML": "",
-            "webURL":""
+            "webURL":"https://www.californiabeaches.com/beach/blacks-beach-san-diego/"
           },
           {
             "title": "Shell Beach",
@@ -54,7 +54,7 @@
             "degree": "1",
             "iconURL": "/images/icons/rainy-1.svg",
             "mediaHTML": "",
-            "webURL":""
+            "webURL":"https://www.californiabeaches.com/map/shell-beach-area-pismo-beach/"
           }
         ],
         "contentHTML": ""

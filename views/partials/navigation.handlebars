@@ -24,27 +24,27 @@
     </div>
   </a>
 
-  <!-- Profile -->
-    <a class="profile" onclick="checkLoginStatus( {{currentUser.loginStatus}} )" >
-      <div class="profile nav-divider">
-      <div class="nav-images">
-        <img src="/images/icons/nav/profile-100.png" alt="profile navigation button">
-      </div>
-      <div class="nav-title">
-        Profile
-      </div>
-    </div>
-  </a>
+  <!-- Profile <a class="profile" onclick="checkLoginStatus( {{currentUser.loginStatus}} )" >-->
+   <a class="profile" onclick="checkLoginStatus( {{loginStatus}} )" >
+     <div class="profile nav-divider">
+     <div class="nav-images">
+       <img src="/images/icons/nav/profile-100.png" alt="profile navigation button">
+     </div>
+     <div class="nav-title">
+       Profile
+     </div>
+   </div>
+ </a>
 
-  <!-- Search -->
-  <a href="/">
-    <div class="search">
-      <div class="nav-images">
-        <img src="/images/icons/nav/search-100.png" alt="search navigation button">
-      </div>
-      <div class="nav-title">
-        Search
-      </div>
-    </div>
-  </a>
+ <!-- Search -->
+ <a class="search" onclick="show_overlay()">
+   <div class="search">
+     <div class="nav-images">
+       <img src="/images/icons/nav/search-100.png" alt="search navigation button">
+     </div>
+     <div class="nav-title">
+       Search
+     </div>
+   </div>
+ </a>
 </div>

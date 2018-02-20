@@ -1,0 +1,130 @@
+<div class="modal-content">
+    <!-- Header -->
+    <div class="modal-header">
+
+        <h4 class="modal-title" id="myModalLabel">LOGO<button style="font-size:2rem;" type="button" class="close" data-dismiss="modal" aria-hidden="true"> X </button></h4>
+    </div>
+
+    <div class="modal-body">
+        <div class="row">
+            <div class="col-lg-11">
+                <!-- Nav tabs -->
+                <ul class="nav nav-tabs">
+                    <li id="login-tab" class="active"><a href="#Login" data-toggle="tab">Login</a></li>
+                    <li id="signup-tab"><a href="#Registration" data-toggle="tab">Signup</a></li>
+                </ul>
+                <!-- Tab panes -->
+                <div class="tab-content">
+
+                    <!-- Login form -->
+                    <div class="tab-pane active" id="Login">
+                        <form role="form" class="form-horizontal">
+
+                            <div class="form-group">
+
+                              <div class="row">
+                                <div id="email-container" class="col-sm-12 ">
+                                    <input style="height: 2rem; margin-bottom:0; margin-top:1rem;" type="email" class="form-control" id="email1" placeholder="Email" />
+                                </div>
+                              </div>
+                            </div>
+
+                            <!-- Password -->
+                            <div class="form-group">
+                              <div class="row">
+                                <div id="password-container" class="col-sm-12">
+                                    <input style="height: 2rem; margin-bottom:0;" type="email" class="form-control" id="exampleInputPassword1" placeholder="Password" />
+                                </div>
+                              </div>
+
+                            </div>
+                            <div class="form-group">
+                            <!-- Forgot password -->
+
+                              <a id="forgotp" href="">Forgot password?</a>
+                            </div>
+
+                            <!-- Buttons -->
+                            <div class="row">
+
+                                <div class="col-sm-12">
+
+                                    <!-- Submit button -->
+                                    <input id="login-btn"type="button" class="btn btn-primary btn-sm" value="Login" onclick="window.location.href='/preference'" />
+
+
+
+                                </div>
+                            </div>
+
+
+                            <hr id="hr">
+
+
+                            <div class="or">
+                                <span id="or-span">OR</span>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-sm-12">
+
+                                    <!-- Submit button -->
+                                    <input id="flogin-btn"type="button" class="btn btn-primary btn-sm" value="Login with Facebook" onclick="window.location.href='/preference'" />
+
+
+
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-12">
+
+                                    <!-- Submit button -->
+                                    <input id="glogin-btn"type="button" class="btn btn-primary btn-sm" value="Login with Google" onclick="window.location.href='/preference'" />
+
+
+
+                                </div>
+                            </div>
+
+                        </form>
+                    </div>
+
+                    <!-- Registration form -->
+                    <div class="tab-pane" id="Registration">
+                        <form id="addFriendForm" role="form" method="get" action="/profile_register">
+                          <div class="form-group">
+
+                            <input type="email" class="form-control signup-input" id="email" placeholder="Email" name="email">
+                          </div>
+
+                            <div class="form-group">
+
+                              <input type="text" class="form-control signup-input" id="name" placeholder="Fullname" name="name">
+                            </div>
+
+
+                            <div class="form-group">
+
+                              <input type="text" class="form-control signup-input" id="username" placeholder="Username" name="username">
+                            </div>
+
+                            <div class="form-group">
+
+                              <input type="password" class="form-control signup-input" id="password" placeholder="Password" name="password">
+                            </div>
+                            <div id="signup-btn" class="form-group">
+                              <input type="submit" id="submitBtn" class="btn btn-default signup-input" value="Sign Up"></input>
+                            </div>
+
+                        </form>
+
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</div>

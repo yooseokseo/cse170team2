@@ -1,7 +1,7 @@
 //database
 var userData = require('../userData.json');
 var popularCategoryList = require('../popularCategoryListData.json');
-
+var categoryList = require('../categoryListData.json');
 //variables
 var loginStatus = userData.loginStatus;
 
@@ -49,6 +49,8 @@ exports.view = function(req, res){
   userData.currentItemIndex = 0;
   res.render('index', {
     'currentCategorySelected': userData.currentCategorySelected,
-    'currentUserCategoryList': userList
+    'currentUserCategoryList': userList,
+    'loginStatus': userData.loginStatus,
+    categoryList
   });
 };

@@ -1,5 +1,6 @@
 var userData = require('../userData.json');
 var data = require('../data.json');
+var categoryList = require('../categoryListData.json');
 
 
 exports.view = function(req, res) {
@@ -52,7 +53,11 @@ exports.view = function(req, res) {
     'itemId': itemId,
     'description': itemDescription,
     'extra': itemExtraInfo,
-    'mediaHTML': mediaHTML
+    'mediaHTML': mediaHTML,
+    'isScreenShared' : userData.isScreenShared,
+    'userIdNumber': userData.userIdNumber,
+    'isAtChatroom': userData.isAtChatroom,
+    categoryList
 
   });
 };

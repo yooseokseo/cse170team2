@@ -1,5 +1,5 @@
 var userData = require('../userData.json');
-
+var categoryList = require('../categoryListData.json');
 
 
 
@@ -58,7 +58,11 @@ exports.view = function(req, res) {
     'type': mediaHTML,
     'itemTitle' : itemTitle,
     'caption': caption,
-    'itemID': itemID
+    'itemID': itemID,
+    'isScreenShared' : userData.isScreenShared,
+    'userIdNumber': userData.userIdNumber,
+    'isAtChatroom': userData.isAtChatroom,
+    categoryList
   });
 
 };
