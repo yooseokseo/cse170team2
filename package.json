@@ -17,7 +17,9 @@
     "mongodb": "*",
     "mongoose": "*",
     "socket.io": "^2.0.4",
-    "uglify-js": "2.6.0"
+    "uglify-js": "2.6.0",
+    "handlebars": "4.0.0",
+    "semver": "4.3.2"
   },
   "engines": {
     "node": "0.10.x"
