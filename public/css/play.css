@@ -30,7 +30,7 @@ a {
   margin: 0 auto;
   display: grid;
   grid-template-rows: 1fr;
-  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-columns: 0.7fr 2fr 0.7fr;
   grid-template-areas: "Back Title Filter";
   padding-top: 1rem;
   background-color: #DFDFDF;
@@ -173,15 +173,15 @@ a {
 }
 .group-chat-container{
    position: fixed;
-   bottom: 5rem;
+   bottom: 8rem;
    width: 100%;
-   height: 2.5rem;
    display: grid;
    grid-template-rows: 1fr;
    grid-template-columns: 2fr 3fr;
    grid-template-areas:
    "Cancel Enter";
    font-size: 1.3rem;
+   right: -5rem;
 }
 .group-chat-container a{
   width: 100%;
@@ -213,6 +213,8 @@ a {
 #enterChatRoom{
   width: 100%;
   height: 100%;
+  position: relative;
+  text-align: center
 }
 
 .chat-box-container{
@@ -264,14 +266,15 @@ a {
     margin: 0;
     font-size: 1.5rem;
     margin-bottom: 0.5rem;
-    height: 4rem;
+    height: 7rem;
     background-color: #DFDFDF;
+    font-size: 1.3rem;
   }
   .chat-box-btns{
     width: 100%;
     display: grid;
     grid-template-rows: 1fr;
-    grid-template-columns: 2fr 1fr 1fr 1fr;
+    grid-template-columns: 1fr 2fr 2fr 1fr;
     grid-template-areas:
     "Cancel . . Up";
     font-size: 1.3rem;
@@ -302,7 +305,7 @@ a {
     grid-area: Cancel;
     border-top-right-radius: 1rem;
     border-top-left-radius: 1rem;
-    height: 2.5rem;
+    height: 2rem;
 
 
 
@@ -317,3 +320,75 @@ a {
     border: 1px solid #a9a9a9;
     border-radius: 0.5rem;
   }
+
+  .new-options{
+    width: 100%;
+    height: 3.5rem;
+    margin-top: 0.5rem;
+    display: grid;
+    grid-template-rows:  1fr;
+    grid-template-columns: 0.3fr 1fr 1fr 1fr 1fr 0.3fr;
+    grid-template-areas:
+
+    ". btn1 btn2 btn3 btn4 .";
+    border-bottom:1px solid #a9a9a9;
+
+  }
+
+
+
+  #share-btn2{
+    grid-area: btn1;
+    margin: 0 auto;
+  }
+
+  #save-btn2{
+    grid-area: btn2;
+    margin: 0 auto;
+  }
+
+  #like-btn2{
+    grid-area: btn3;
+    margin: 0 auto;
+  }
+
+  #info-btn2{
+    grid-area: btn4;
+    margin: 0 auto;
+  }
+
+  .new-options2{
+    width: 100%;
+    height: 3.5rem;
+    margin-top: 0.5rem;
+    display: grid;
+    grid-template-rows:  1fr 1fr;
+    grid-template-columns: 0.3fr 1fr 1fr 1fr 1fr 0.3fr;
+    grid-template-areas:
+
+    ". Title Title Title Title  ."
+    ". caption caption caption caption .";
+
+
+  }
+
+  .title{
+    grid-area: Title;
+    font-size: 2rem;
+    margin: auto 0;
+    font-weight:bold;
+  }
+
+  .caption{
+    grid-area: caption;
+    font-size: 1rem;
+
+  }
+
+  .centered {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 1rem;
+}
