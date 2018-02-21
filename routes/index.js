@@ -54,6 +54,7 @@ exports.view = function(req, res){
     'currentCategorySelected': userData.currentCategorySelected,
     'currentUserCategoryList': userList,
     'loginStatus': userData.loginStatus,
-    categoryList
+    categoryList,
+    'loginStatus': userData.loginStatus
   });
 };

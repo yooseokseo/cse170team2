@@ -57,7 +57,8 @@ exports.view = function(req, res) {
     'isScreenShared' : userData.isScreenShared,
     'userIdNumber': userData.userIdNumber,
     'isAtChatroom': userData.isAtChatroom,
-    categoryList
+    categoryList,
+    'loginStatus': userData.loginStatus
 
   });
 };
