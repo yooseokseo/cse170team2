@@ -1,0 +1,23 @@
+[
+  {
+    "id": 0,
+    "dataType" : "Image",
+    "URL":""
+  },
+  {
+    "id": 1,
+    "dataType" : "Video",
+    "URL":""
+  },
+  {
+    "id": 2,
+    "dataType" : "Music",
+    "URL":""
+  },
+  {
+    "id": 3,
+    "dataType" : "Literature",
+    "URL":""
+  }
+
+]

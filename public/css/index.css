@@ -16,20 +16,26 @@ a {
   height: 100%;
   min-height: 100%;
   overflow: scroll;
+  width: 100%;
 }
 
 .pageTitle-container{
-  margin: 2rem auto;
+  height: 0.5rem;
+  margin: 0 1rem;
+  /*
   display: grid;
   grid-template-rows: 1fr;
   grid-template-columns: 3fr 2fr;
   grid-template-areas: "Title Search";
+  */
 }
 
 .page-Title{
+  position: relative;
   font-size: 2.7rem;
   grid-area: Title;
-  text-align: center;
+  text-align: right;
+
 }
 
 .page-Search{
@@ -63,6 +69,7 @@ a {
 
 .categories-container {
   margin-bottom: 0.5rem;
+  width: 100%;
 }
 .content-container{
   display: grid;
@@ -75,6 +82,7 @@ a {
 
 .categories-button{
   margin: 0 1rem;
+  margin-top: 1rem;
 }
 
 .categories img {
@@ -187,4 +195,36 @@ a {
   flex-direction: row;
   align-items: center;
   justify-content: center;
+}
+.content-media{
+  margin: 0 1rem;
+  height: 93vw;
+  border: 1px solid #dfdfdf;
+  background-color: gray;
+}
+
+.playbuttons{
+  display: grid;
+  grid-template-rows: 1fr 1fr;
+  grid-template-columns: 1fr 1fr;
+  grid-template-areas:
+    "Image Video"
+    "Music Literature";
+}
+
+#Image{
+  grid-area:Image;
+}
+#Video{
+  grid-area:Video;
+}
+#Music{
+  grid-area:Music;
+}
+#Literature{
+  grid-area:Literature;
+}
+
+.content-media img{
+  width: 100%;
 }
