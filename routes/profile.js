@@ -35,6 +35,8 @@ exports.register = function(req, res) {
   wholeUserData.push(newUser);
   populateUserData(newUser.userIdNumber);
 
+  console.log(userData);
+
   //TODO: need to fix here. userdata should push into wholeUserData Json.
 	//userData.userList.push(newUser);
 	console.log("login status: "+userData.loginStatus);
