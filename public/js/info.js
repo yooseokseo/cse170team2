@@ -66,7 +66,7 @@ $(document).ready(function() {
     if(isUp){
       isUp = false;
       console.log('it was Up so it should down');
-      $('.message-window').animate({height: "4rem"});
+      $('.message-window').animate({height: "7rem"});
 
       $('#up-icon').animate({  borderSpacing: 0 }, {
       step: function(now,fx) {

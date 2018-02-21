@@ -474,3 +474,118 @@ exports.shareView = function(req, res) {
       'loginStatus': userData.loginStatus
     });
 };
+
+exports.enterChatRoomShare = function(req, res) {
+  var categoryTitle = req.params.categoryTitle;
+  var itemId = req.params.itemId;
+  var itemObj = data[itemId];
+  var itemTitle = itemObj.itemTitle;
+  var mediaHTML = '';
+  var categoryListUser = userData.categoryList;
+  var currentItemIndex = userData.currentItemIndex;
+  var userIdNumber = 0;
+  userData.isAtChatroom= true;
+  if (userData.loginStatus) {
+    userIdNumber = userData.userIdNumber;
+  }
+  else {
+    // dummy data
+    userIdNumber = 0;
+  }
+
+
+
+  switch (categoryListUser[currentItemIndex].type) {
+    case 'image':
+        console.log('image Type');
+        mediaHTML = '<div class="preview-content"><img id="media" src="'+categoryListUser[currentItemIndex].URL+'" alt=""></div>';
+        break;
+    case 'video':
+          console.log('video Type');
+          mediaHTML = '<video style="width:100%;" controls><source src='+ categoryListUser[currentItemIndex].URL+' type=video/mp4></video>';
+          break;
+
+    default:
+        console.log('check mediaType!');
+        break;
+  }
+
+
+
+  res.render('share', {
+    'categoryTitle': categoryTitle,
+    'itemTitle': itemTitle,
+    'itemId': itemId,
+    'mediaHTML': mediaHTML,
+    'itemIdTotal':itemId,
+    'userIdNumber':userIdNumber,
+    categoryList,
+    'loginStatus': userData.loginStatus,
+    'isScreenShared' : userData.isScreenShared,
+    'userIdNumber': userData.userIdNumber,
+    'isAtChatroom': userData.isAtChatroom
+
+  });
+
+
+  //console.log(itemExtraInfo[1].contentHTML.container[0]);
+
+
+};
+exports.exitChatRoomShare = function(req, res) {
+  var categoryTitle = req.params.categoryTitle;
+  var itemId = req.params.itemId;
+  var itemObj = data[itemId];
+  var itemTitle = itemObj.itemTitle;
+  var mediaHTML = '';
+  var categoryListUser = userData.categoryList;
+  var currentItemIndex = userData.currentItemIndex;
+  var userIdNumber = 0;
+  userData.isAtChatroom= false;
+  if (userData.loginStatus) {
+    userIdNumber = userData.userIdNumber;
+  }
+  else {
+    // dummy data
+    userIdNumber = 0;
+  }
+
+
+
+  switch (categoryListUser[currentItemIndex].type) {
+    case 'image':
+        console.log('image Type');
+        mediaHTML = '<div class="preview-content"><img id="media" src="'+categoryListUser[currentItemIndex].URL+'" alt=""></div>';
+        break;
+    case 'video':
+          console.log('video Type');
+          mediaHTML = '<video style="width:100%;" controls><source src='+ categoryListUser[currentItemIndex].URL+' type=video/mp4></video>';
+          break;
+
+    default:
+        console.log('check mediaType!');
+        break;
+  }
+
+
+
+  res.render('share', {
+    'categoryTitle': categoryTitle,
+    'itemTitle': itemTitle,
+    'itemId': itemId,
+    'mediaHTML': mediaHTML,
+    'itemIdTotal':itemId,
+    'userIdNumber':userIdNumber,
+    categoryList,
+    'loginStatus': userData.loginStatus,
+    'isScreenShared' : userData.isScreenShared,
+    'userIdNumber': userData.userIdNumber,
+    'isAtChatroom': userData.isAtChatroom
+
+  });
+
+
+  //console.log(itemExtraInfo[1].contentHTML.container[0]);
+
+
+};

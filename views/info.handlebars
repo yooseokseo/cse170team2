@@ -53,68 +53,68 @@
     <!-- SPACE FOR POPUP -->
     <div id="profile_popup" class="modal"> </div>
 
-{{#if isScreenShared}}
     <div class="nav-share-2 chatroom-btns-layout">
-
+      {{#if isScreenShared}}
         {{#unless isAtChatroom}}
-        <div class="group-chat-container">
+          <div class="group-chat-container">
 
-          <a href="/userData/{{userIdNumber}}/{{categoryTitle}}/{{itemId}}/unsetShareInfo">  <div id="cancelGroupChat" class="group-chat-btn-layout">
-                Exit Sharing
-              </div></a>
-          <a href="/userData/{{userIdNumber}}/{{categoryTitle}}/{{itemId}}/setChatInfo"><div id="enterChatRoom" class="group-chat-btn-layout">
-            Enter Group Chatroom
-          </div></a>
+            <a>
+              <div>
 
-        </div>
+              </div>
+            </a>
+            <a href="/userData/{{userIdNumber}}/{{categoryTitle}}/{{itemId}}/setChatInfo">
+              <div id="enterChatRoom" class="">
+                <img src="/images/icons/chat50.png" alt=""><div class="centered">
+                  Chat
+                </div>
+              </div>
+            </a>
+
+          </div>
         {{/unless}}
-
+      {{/if}}
 
     </div>
-  {{/if}}
+
     <!-- BOTTOM NAVIGATION BAR -->
     {{#unless isAtChatroom}}
-    {{>navigation}}
+      {{>navigation}}
     {{/unless}}
 
     {{#if isAtChatroom}}
-    <div class="chat-box-container">
-      <div class="chat-box-btns">
-        <a href="/userData/{{userIdNumber}}/{{categoryTitle}}/{{itemId}}/unsetChatInfo">
-        <div id="exit-chat" class="exit">
-          Exit Chatroom
+      <div class="chat-box-container">
+        <div class="chat-box-btns">
+          <a href="/userData/{{userIdNumber}}/{{categoryTitle}}/{{itemId}}/unsetChatInfo">
+            <div id="exit-chat" class="exit">
+              Exit
+            </div>
+          </a>
+          <div id="up-btn" class="up">
+            <img id="up-icon" src="/images/icons/up.svg" alt="">
+          </div>
         </div>
-      </a>
-        <div id="up-btn" class="up">
-          <img id="up-icon" src="/images/icons/up.svg" alt="">
+        <div class="chat-box-message-window">
+
+          <div id="conversation" class="message-window">
+
+
+
+          </div>
+        </div>
+
+        <div class="chat-box-message-input">
+          <input id="chat-input" type="text" name="" value="" placeholder="Message Here">
+          <input type="button" id="datasend" name="" value="SEND">
         </div>
       </div>
-      <div class="chat-box-message-window">
-        <div class="message-window">
-          <div class="">
-            User1 : Hello World!
-          </div>
-          <div class="">
-              User2 : What's up
-          </div>
-          <div class="">
-              User3 : What's up
-          </div>
-
-
-        </div>
-        </div>
-
-      <div class="chat-box-message-input">
-        <input id="chat-input" type="text" name="" value="" placeholder="Message Here">
-      </div>
-    </div>
 
     {{/if}}
 
 
 
   </div>
+  {{>chatScript}}
     {{>script}}
 
 </body>

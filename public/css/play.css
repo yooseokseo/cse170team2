@@ -173,7 +173,7 @@ a {
 }
 .group-chat-container{
    position: fixed;
-   bottom: 8rem;
+   bottom: 7.9rem;
    width: 100%;
    display: grid;
    grid-template-rows: 1fr;
@@ -374,7 +374,7 @@ a {
 
   .title{
     grid-area: Title;
-    font-size: 2rem;
+    font-size: 2.5rem;
     margin: auto 0;
     font-weight:bold;
   }
