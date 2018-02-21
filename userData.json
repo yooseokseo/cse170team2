@@ -3,6 +3,7 @@
   "userRole":null,
   "userIdNumber": 0,
   "userName": null,
+  "actualName": null,
   "currentPageViewed": null,
   "currentCategorySelected": null,
   "currentItemIndex": 0,

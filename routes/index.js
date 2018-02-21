@@ -55,6 +55,6 @@ exports.view = function(req, res){
     'currentUserCategoryList': userList,
     'loginStatus': userData.loginStatus,
     categoryList,
-    'loginStatus': userData.loginStatus
+    userData
   });
 };
