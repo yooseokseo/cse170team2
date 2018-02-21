@@ -59,3 +59,46 @@ exports.view = function(req, res){
     'loginStatus': userData.loginStatus
   });
 };
+
+
+exports.viewOneItem = function(req, res){
+  var categoryTitle = req.params.categoryTitle;
+  var itemId = req.params.itemId;
+  var itemObj = data[itemId];
+  var index = 0;
+  var mediaHTML='';
+  var isOneItem = true;
+
+
+  switch (itemObj.type) {
+    case 'image':
+        console.log('image Type');
+        mediaHTML = '<img id="media" src="'+itemObj.URL+'" alt="">';
+        break;
+    case 'video':
+          console.log('video Type');
+          mediaHTML = '<video style="width:100%;" controls><source src='+ itemObj.URL+' type=video/mp4></video>';
+          break;
+
+    default:
+        console.log('check mediaType!');
+        break;
+  }
+
+  console.log('categoryTitle: '+ categoryTitle);
+
+  res.render('play',{
+    'pageTitle': categoryTitle,
+    'type': mediaHTML,
+    'itemId' : itemId,
+    'itemTitle' : itemObj.itemTitle,
+    'caption': itemObj.caption,
+    'itemID': itemObj.id,
+    'isScreenShared' : userData.isScreenShared,
+    'userIdNumber': userData.userIdNumber,
+    'isAtChatroom': userData.isAtChatroom,
+    categoryList,
+    'loginStatus': userData.loginStatus,
+    isOneItem
+  });
+};

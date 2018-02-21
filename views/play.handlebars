@@ -45,8 +45,10 @@
     <div class="pageContent-container">
       <div class="page-media">
         {{{type}}}
-        <a href="/{{pageTitle}}/left"><img id="arrow-left" src="/images/icons/arrow-left.svg" alt=""></a>
-        <a href="/{{pageTitle}}/right"><img id="arrow-right" src="/images/icons/arrow-right.svg" alt=""></a>
+        {{#unless isOneItem}}
+          <a href="/{{pageTitle}}/left"><img id="arrow-left" src="/images/icons/arrow-left.svg" alt=""></a>
+          <a href="/{{pageTitle}}/right"><img id="arrow-right" src="/images/icons/arrow-right.svg" alt=""></a>
+        {{/unless}}
       </div>
       <div id="nav-cover-top">
 
@@ -54,21 +56,29 @@
 
 
       <div class="new-options">
-        <a href="/{{pageTitle}}/{{itemID}}/share" id="share-btn2" class="btn-floating more-options-btns"><i class="material-icons">Share</i></a>
+        {{#if isOneItem}}
+          <a href="/{{pageTitle}}/{{itemID}}/share" id="share-btn2" class="btn-floating more-options-btns"><i class="material-icons">One</i></a>
+        {{else}}
+          <a href="/{{pageTitle}}/{{itemID}}/share" id="share-btn2" class="btn-floating more-options-btns"><i class="material-icons">Share</i></a>
+        {{/if}}
         <a id="save-btn2" class="btn-floating darken-1 more-options-btns"><i class="material-icons">Save</i></a>
         <a id="like-btn2" class="btn-floating more-options-btns"><i class="material-icons">Like</i></a>
-        <a id="info-btn2" href="/{{pageTitle}}/{{itemID}}/info" class="btn-floating more-options-btns"><i class="material-icons">Info</i></a>
+        {{#if isOneItem}}
+          <a id="info-btn2" href="/{{pageTitle}}/{{itemID}}/info" class="btn-floating more-options-btns"><i class="material-icons">Info</i></a>
+        {{else}}
+          <a id="info-btn2" href="/{{pageTitle}}/{{itemID}}/info" class="btn-floating more-options-btns"><i class="material-icons">Info</i></a>
+        {{/if}}
       </div>
 
       {{#unless isAtChatroom}}
-      <div class="new-options2">
-        <div class="title">
-          {{itemTitle}}
+        <div class="new-options2">
+          <div class="title">
+            {{itemTitle}}
+          </div>
+          <div class="caption">
+            {{caption}}
+          </div>
         </div>
-        <div class="caption">
-          {{caption}}
-        </div>
-      </div>
 
       {{/unless}}
 
@@ -95,7 +105,8 @@
             </a>
             <a href="/userData/{{userIdNumber}}/{{pageTitle}}/{{itemID}}/setChat">
               <div id="enterChatRoom" class="">
-                <img src="/images/icons/chat50.png" alt=""><div class="centered">
+                <img src="/images/icons/chat50.png" alt="">
+                <div class="centered">
                   Chat
                 </div>
               </div>

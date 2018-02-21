@@ -70,6 +70,7 @@ app.get('/:categoryTitle/left', left.view);
 app.get('/:categoryTitle/:itemId/info', info.view);
 app.get('/:categoryTitle/:itemId/share', share.view);
 app.get('/:categoryTitle/:itemId/show', show.view);
+app.get('/:categoryTitle/:itemId/showOneItem', show.viewOneItem);
 app.get('/:categoryTitle/:itemId/info/:externalId/external', external.view);
 app.get('/preference', preference.view);
 //app.get('/:categoryTitle/:itemId/info/:externalId/external/:webaddress', external.webview);

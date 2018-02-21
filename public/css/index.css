@@ -197,6 +197,10 @@ a {
   justify-content: center;
 }
 .content-media{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
   margin: 0 1rem;
   height: 93vw;
   border: 1px solid #dfdfdf;

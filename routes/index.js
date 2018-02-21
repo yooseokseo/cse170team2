@@ -15,6 +15,8 @@ var randomNumber = Math.floor(Math.random() * totalNumberOfItems);
 var todayItem = data[randomNumber];
 var mediaHTML ='';
 var todayType = todayItem.type;
+var todayCategoryTitle = todayItem.category;
+var todayItemId = todayItem.id;
 
 console.log('todayType:' + todayType);
 
@@ -77,6 +79,8 @@ exports.view = function(req, res){
     'loginStatus': userData.loginStatus,
     categoryList,
     'dataTypeList':dataType,
-    'mediaHTML': mediaHTML
+    'mediaHTML': mediaHTML,
+    'categoryTitle': todayCategoryTitle,
+    'itemId': todayItemId
   });
 };

@@ -1,7 +1,7 @@
 'use strict';
 
-var isUp = false;
 
+var isUp = false;
 $(document).ready(function() {
   function toInt(n){ return Math.round(Number(n)); };
 
@@ -61,41 +61,47 @@ $(document).ready(function() {
     $('#temp-data2').text(tempFValInt);
   });
 
-  $('#up-btn').click(function(){
+  $('#up-btn').click(function() {
 
-    if(isUp){
-      isUp = false;
-      console.log('it was Up so it should down');
-      $('.message-window').animate({height: "7rem"});
+  if (isUp) {
+    isUp = false;
+    console.log('it was Up so it should down');
+    $('.message-window').animate({
+      height: "7rem"
+    });
 
-      $('#up-icon').animate({  borderSpacing: 0 }, {
-      step: function(now,fx) {
-        $(this).css('-webkit-transform','rotate('+now+'deg)');
-        $(this).css('-moz-transform','rotate('+now+'deg)');
-        $(this).css('transform','rotate('+now+'deg)');
+    $('#up-icon').animate({
+      borderSpacing: 0
+    }, {
+      step: function(now, fx) {
+        $(this).css('-webkit-transform', 'rotate(' + now + 'deg)');
+        $(this).css('-moz-transform', 'rotate(' + now + 'deg)');
+        $(this).css('transform', 'rotate(' + now + 'deg)');
       },
-      duration:'slow'
-  },'linear');
-    }
-    else {
-      isUp = true;
-      console.log('it was Down so it should Up');
-      $('.message-window').animate({height: "36rem"});
-      $('#up-icon').animate({  borderSpacing: -180 }, {
-      step: function(now,fx) {
-        $(this).css('-webkit-transform','rotate('+now+'deg)');
-        $(this).css('-moz-transform','rotate('+now+'deg)');
-        $(this).css('transform','rotate('+now+'deg)');
+      duration: 'slow'
+    }, 'linear');
+  } else {
+    isUp = true;
+    console.log('it was Down so it should Up');
+    $('.message-window').animate({
+      height: "36rem"
+    });
+    $('#up-icon').animate({
+      borderSpacing: -180
+    }, {
+      step: function(now, fx) {
+        $(this).css('-webkit-transform', 'rotate(' + now + 'deg)');
+        $(this).css('-moz-transform', 'rotate(' + now + 'deg)');
+        $(this).css('transform', 'rotate(' + now + 'deg)');
       },
-      duration:'slow'
-    },'linear');
+      duration: 'slow'
+    }, 'linear');
 
-    }
+  }
 
 
 
-  })
-
+})
 
 
 
