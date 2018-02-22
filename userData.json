@@ -3,6 +3,8 @@
   "userRole":null,
   "userIdNumber": 0,
   "userName": null,
+  "actualName": null,
+  "profileImgURL": "/images/icons/default_profile.jpg",
   "currentPageViewed": null,
   "currentCategorySelected": null,
   "currentItemIndex": 0,

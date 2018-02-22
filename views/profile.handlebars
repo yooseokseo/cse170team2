@@ -3,24 +3,28 @@
 <body>
 
   {{>searchbar}}
-
-
   <div class="page-container">
     <div class="heading-container">
       <div class= "profile_pic">
-        <img src="/images/icons/default_profile.jpg" alt="profile picture" style="width:130px;height:130px;">
+        <img src={{profileImgURL}} alt="profile picture" style="width:130px;height:130px;">
       </div>
+
       <div class = "description">
         <div class="page-box page-box-padding">
               Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
           </div>
-        </div>
-      <div class = "username">
-        <p>{{userName}}</p>
       </div>
-          <div class= "edit-profile">
-            <a href="/">Edit Profile</a>
-          </div>
+      
+      <div class = "username">
+        <p>{{actualName}}</p>
+      </div>
+
+      <div class= "edit-profile">
+        <a href="/">Edit Profile</a>
+        <a href="/profile_logout">LOG OUT</a>
+      </div>
+
+
     </div>
 
 

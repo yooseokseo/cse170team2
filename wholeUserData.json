@@ -1,10 +1,46 @@
-[
+[  
   {
+    "loginStatus": false,
+    "userRole":null,
     "userIdNumber": 0,
+    "userName": null,
+    "actualName": null,
+    "profileImgURL": "/images/icons/default_profile.jpg",
+    "currentPageViewed": null,
+    "currentCategorySelected": null,
+    "currentItemIndex": 0,
+    "isScreenShared": false,
+    "isAtChatroom": false,
+    "categoryList": [],
+    "favoriteList": [{
+      "title": "Activities",
+      "id": "activities"
+    }, {
+      "title": "Food",
+      "id": "food"
+    }, {
+      "title": "Travel",
+      "id": "travel"
+    }, {
+      "title": "Movies",
+      "id": "movies"
+    }, {
+      "title": "Pets",
+      "id": "pets"
+    }, {
+      "title": "Home",
+      "id": "home"
+    }],
+    "userList": []
+  },
+
+  {
+    "userIdNumber": 1,
     "userName": "Dummy User1",
     "password": "1234",
     "email":"dummy@ucsd.edu",
-    "profileImgURL":null,
+    "actualName" : "Dummy User",
+    "profileImgURL": "/images/icons/default_profile.jpg",
     "currentItemIndex": 0,
     "isScreenShared": false,
     "categoryList": [],
@@ -29,11 +65,12 @@
     }]
   },
   {
-    "userIdNumber": 1,
+    "userIdNumber": 2,
     "userName": "yooseokSeo",
     "password": "1234",
     "email":"yos017@ucsd.edu",
-    "profileImgURL":null,
+    "actualName" : "Yooseok Seo",
+    "profileImgURL": "/images/icons/default_profile.jpg",
     "currentItemIndex": 0,
     "currentCategorySelected": "random",
     "isScreenShared": true,

@@ -18,13 +18,13 @@
 
                     <!-- Login form -->
                     <div class="tab-pane active" id="Login">
-                        <form role="form" class="form-horizontal">
+                        <form role="form" class="form-horizontal" method="get" action="/profile_login">
 
+                            <!-- Email -->
                             <div class="form-group">
-
                               <div class="row">
                                 <div id="email-container" class="col-sm-12 ">
-                                    <input style="height: 2rem; margin-bottom:0; margin-top:1rem;" type="email" class="form-control" id="email1" placeholder="Email" />
+                                    <input style="height: 2rem; margin-bottom:0; margin-top:1rem;" type="email" class="form-control" id="email1" placeholder="Email" name="email1" />
                                 </div>
                               </div>
                             </div>
@@ -33,27 +33,36 @@
                             <div class="form-group">
                               <div class="row">
                                 <div id="password-container" class="col-sm-12">
-                                    <input style="height: 2rem; margin-bottom:0;" type="email" class="form-control" id="exampleInputPassword1" placeholder="Password" />
+                                    <input style="height: 2rem; margin-bottom:0;" type="password" class="form-control" id="exampleInputPassword1" placeholder="Password" name="exampleInputPassword1" />
                                 </div>
                               </div>
-
                             </div>
-                            <div class="form-group">
-                            <!-- Forgot password -->
 
+                            <!-- Name (hidden) -->
+                            <div class="form-group" style="display:none">
+                                    <input type="text" class="form-control" id="fb_gg_name" name="fb_gg_name"/>
+                            </div>
+
+                            <!-- Image (hidden) -->
+                            <div class="form-group" style="display:none">
+                                    <input type="text" class="form-control" id="fb_gg_image" name="fb_gg_image"/>
+                            </div>
+
+                            <!-- Username (hidden) -->
+                            <div class="form-group" style="display:none">
+                                    <input type="text" class="form-control" id="fb_gg_username" name="fb_gg_username"/>
+                            </div>
+
+
+                            <!-- Forgot password -->
+                            <div class="form-group">
                               <a id="forgotp" href="">Forgot password?</a>
                             </div>
 
-                            <!-- Buttons -->
+                            <!-- Submit button -->
                             <div class="row">
-
                                 <div class="col-sm-12">
-
-                                    <!-- Submit button -->
-                                    <input id="login-btn"type="button" class="btn btn-primary btn-sm" value="Login" onclick="window.location.href='/'" />
-
-
-
+                                    <input type="submit" id="login-btn" type="button" class="btn btn-primary btn-sm" value="Login" />
                                 </div>
                             </div>
 
@@ -65,24 +74,22 @@
                                 <span id="or-span">OR</span>
                             </div>
 
+                            <!-- Login with Facebook -->
                             <div class="row">
                                 <div class="col-sm-12">
 
-                                    <!-- Submit button -->
-                                    <input id="flogin-btn"type="button" class="btn btn-primary btn-sm" value="Login with Facebook" onclick="window.location.href='/'" />
-
-
+                                    <!-- Facebook submit button -->
+                                    <input id="flogin-btn" type="button" class="btn btn-primary btn-sm" value="Login with Facebook" data-target="#login-btn" onclick="checkLoginState();"/>
 
                                 </div>
                             </div>
-                            <div class="row">
+
+                            <script>startApp();</script>
+                            <!-- Login with Google -->
+                            <div class="row" id="customBtn1">
                                 <div class="col-sm-12">
-
-                                    <!-- Submit button -->
-                                    <input id="glogin-btn"type="button" class="btn btn-primary btn-sm" value="Login with Google" onclick="window.location.href='/'" />
-
-
-
+                                    <!-- Google submit button -->
+                                    <input id="glogin-btn"type="button" class="btn btn-primary btn-sm" value="Login with Google">
                                 </div>
                             </div>
 
@@ -92,28 +99,30 @@
                     <!-- Registration form -->
                     <div class="tab-pane" id="Registration">
                         <form id="addFriendForm" role="form" method="get" action="/profile_register">
-                          <div class="form-group">
 
+                          <!-- Email -->
+                          <div class="form-group">
                             <input type="email" class="form-control signup-input" id="email" placeholder="Email" name="email">
                           </div>
 
-                            <div class="form-group">
-
+                          <!-- Name -->
+                             <div class="form-group">
                               <input type="text" class="form-control signup-input" id="name" placeholder="Fullname" name="name">
                             </div>
 
-
+                            <!-- Username -->
                             <div class="form-group">
-
                               <input type="text" class="form-control signup-input" id="username" placeholder="Username" name="username">
                             </div>
 
+                            <!-- Password -->
                             <div class="form-group">
-
                               <input type="password" class="form-control signup-input" id="password" placeholder="Password" name="password">
                             </div>
+
+                            <!-- Sign-up button -->
                             <div id="signup-btn" class="form-group">
-                              <input type="submit" id="submitBtn" class="btn btn-default signup-input" value="Sign Up"></input>
+                              <input type="submit" id="submitBtn" class="btn btn-default signup-input" value="Sign Up" ></input>
                             </div>
 
                         </form>
@@ -128,3 +137,4 @@
         </div>
     </div>
 </div>
+

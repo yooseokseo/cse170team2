@@ -78,6 +78,7 @@ exports.view = function(req, res){
     'currentUserCategoryList': userList,
     'loginStatus': userData.loginStatus,
     categoryList,
+    userData,
     'dataTypeList':dataType,
     'mediaHTML': mediaHTML,
     'categoryTitle': todayCategoryTitle,
