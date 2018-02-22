@@ -2,7 +2,7 @@
 
 </head>
 <body>
-	
+
 {{>searchbar}}
 
 <div class="page-container">
@@ -43,8 +43,8 @@
 
 				<div class="playbuttons">
 					{{#each dataTypeList}}
-						<a href="/app/{{id}}">
-							<div id="{{dataType}}" class="categories">
+						<a href="/app/{{title}}/filteredRandom">
+							<div id="{{title}}" class="categories">
 								{{dataType}} <img src="/images/icons/random-100.png" alt="random play icon" height="70">
 							</div>
 						</a>
@@ -71,7 +71,7 @@
 
 	</div>
 
-	{{>script}}	
+	{{>script}}
 
 
 </body>

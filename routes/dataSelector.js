@@ -111,6 +111,12 @@ exports.view = function(req, res){
         console.log('video Type');
         mediaHTML = '<video style="width:100%;" controls><source src='+ categoryListUser[itemIndex].URL+' type=video/mp4></video>';
         break;
+    case 'literature':
+        mediaHTML = '<img id="media" src="' + categoryListUser[itemIndex].URL + '" alt="">';
+        break;
+        case 'music':
+          mediaHTML = '<audio style="width:70%;" controls><source src="'+ categoryListUser[itemIndex].URL + '" type="audio/ogg">Your browser does not support the audio element.</audio>';
+          break;
     default:
         console.log('check mediaType!');
         break;

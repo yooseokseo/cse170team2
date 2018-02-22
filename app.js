@@ -19,6 +19,7 @@ var external = require('./routes/external');
 var userInfo = require('./routes/userInfo');
 var browse = require('./routes/browse');
 var preference = require('./routes/preference');
+var filteredrRandom = require('./routes/filteredRandom');
 // Example route
 // var user = require('./routes/user');
 var profile = require('./routes/profile');
@@ -80,6 +81,7 @@ app.get('/:categoryTitle/:itemId/show', show.view);
 app.get('/:categoryTitle/:itemId/showOneItem', show.viewOneItem);
 app.get('/:categoryTitle/:itemId/info/:externalId/external', external.view);
 app.get('/preference', preference.view);
+app.get('/app/:title/filteredRandom', filteredrRandom.view);
 //app.get('/:categoryTitle/:itemId/info/:externalId/external/:webaddress', external.webview);
 
 

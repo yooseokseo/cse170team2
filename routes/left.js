@@ -9,13 +9,13 @@ exports.view = function(req, res) {
   var catagoryTitle = req.params.categoryTitle;
   var itemIndex = userData.currentItemIndex;
   var length = userData.categoryList.length;
-  var mediaHTML ='';
+  var mediaHTML = '';
 
   console.log('catagoryTitle: ' + catagoryTitle);
   console.log('itemIndex: ' + itemIndex);
   console.log('length' + length);
 
-  if(itemIndex ===0){
+  if (itemIndex === 0) {
     itemIndex = length;
   }
   itemIndex--;
@@ -41,9 +41,15 @@ exports.view = function(req, res) {
 
     case 'video':
       console.log('video Type');
-      mediaHTML = '<video style="width:100%;" controls><source src='+ itemURL+' type=video/mp4></video>';
+      mediaHTML = '<video style="width:100%;" controls><source src=' + itemURL + ' type=video/mp4></video>';
       break;
 
+    case 'literature':
+      mediaHTML = '<img id="media" src="' + itemURL + '" alt="">';
+      break;
+      case 'music':
+        mediaHTML = '<audio style="width:70%;" controls><source src="'+ itemURL + '" type="audio/ogg">Your browser does not support the audio element.</audio>';
+        break;
     default:
       console.log('check mediaType!');
       break;
@@ -53,13 +59,13 @@ exports.view = function(req, res) {
   res.render('play', {
     'pageTitle': catagoryTitle,
     'type': mediaHTML,
-    'itemTitle' : itemTitle,
+    'itemTitle': itemTitle,
     'caption': caption,
     'itemID': itemID,
-    'isScreenShared' : userData.isScreenShared,
+    'isScreenShared': userData.isScreenShared,
     'userIdNumber': userData.userIdNumber,
     'isAtChatroom': userData.isAtChatroom,
-      categoryList,
+    categoryList,
     'loginStatus': userData.loginStatus
   });
 

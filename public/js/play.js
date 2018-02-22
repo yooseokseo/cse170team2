@@ -6,7 +6,18 @@ $(document).ready(function() {
 
 });
 
+$('#save-btn2').click(function(){
+  $('.save-popup').fadeIn(500);
+  $('.save-popup').fadeOut(2000);
 
+})
+
+$('#like-lable').click(function(){
+  console.log('like clicked');
+  $(this).fadeOut(300);
+  $('#like-heart').fadeIn(300);
+
+})
 
 $('#up-btn').click(function() {
 
