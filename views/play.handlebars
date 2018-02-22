@@ -1,59 +1,89 @@
 {{>header}}
-  <link href="/css/play.css" rel="stylesheet">
+<link href="/css/play.css" rel="stylesheet">
 </head>
+
 <body>
   {{>searchbar}}
 
   <div class="page-container">
 
     <div class="pageTitle-container">
-        <div class="page-back">
-          {{#if isScreenShared}}
-          {{else}}
-            <a id="back" href="/"> &lt; Back  </a>
-          {{/if}}
-        </div>
+      <div class="page-back">
+        {{#if isScreenShared}}
+          <a href="/userData/{{userIdNumber}}/{{pageTitle}}/{{itemID}}/unsetShare">
+            <div style="color:red;" id="cancelGroupChat">
+              Exit
+            </div>
+          </a>
+        {{else}}
+          <a id="back" href="/"> &lt; Back  </a>
+        {{/if}}
+      </div>
 
 
       <div class="page-title">
         {{#if isScreenShared}}
-          <span style="color: red;">Sharing</span>
+          <span style="color: red; font-size:2rem;">Screen Sharing</span>
         {{else}}
           {{pageTitle}}
         {{/if}}
 
       </div>
 
-
+      {{#if isScreenShared}}
+        <div style="color:black;" class="page-filter">
+          Filter
+        </div>
+      {{else}}
         <div class="page-filter">
           Filter
         </div>
+      {{/if}}
+
     </div>
 
     <div class="pageContent-container">
       <div class="page-media">
         {{{type}}}
-        <a href="/{{pageTitle}}/left"><img id="arrow-left" src="/images/icons/arrow-left.svg" alt=""></a>
-        <a href="/{{pageTitle}}/right"><img id="arrow-right" src="/images/icons/arrow-right.svg" alt=""></a>
+        {{#unless isOneItem}}
+          <a href="/{{pageTitle}}/left"><img id="arrow-left" src="/images/icons/arrow-left.svg" alt=""></a>
+          <a href="/{{pageTitle}}/right"><img id="arrow-right" src="/images/icons/arrow-right.svg" alt=""></a>
+        {{/unless}}
       </div>
       <div id="nav-cover-top">
 
       </div>
-      <div id="more-options">
-        <div style="width: 100%;height:6rem;" class="page-media-more fixed-action-btn horizontal click-to-toggle">
-          <span id="page-media-title">{{itemTitle}}</span>
-          <span id="page-madia-caption">{{caption}}</span>
-            <a id="moreBtn" class="page-media-more btn-floating btn-large red">
-              <i style="font-size: 1rem;" class="material-icons">More</i>
-            </a>
-            <ul style="right:auto; position:absolute; width:100%; text-align:center; top:60%;" class="sub-btns">
-              <li><a href="/{{pageTitle}}/{{itemID}}/share" id="share-btn" class="btn-floating more-options-btns"><i class="material-icons">Share</i></a></li>
-              <li><a class="btn-floating darken-1 more-options-btns"><i class="material-icons">Save</i></a></li>
-              <li><a class="btn-floating more-options-btns"><i class="material-icons">Like</i></a></li>
-              <li><a href="/{{pageTitle}}/{{itemID}}/info" class="btn-floating more-options-btns"><i class="material-icons">Info</i></a></li>
-            </ul>
-          </div>
+
+
+      <div class="new-options">
+        {{#if isOneItem}}
+          <a href="/{{pageTitle}}/{{itemID}}/share" id="share-btn2" class="btn-floating more-options-btns"><i class="material-icons">One</i></a>
+        {{else}}
+          <a href="/{{pageTitle}}/{{itemID}}/share" id="share-btn2" class="btn-floating more-options-btns"><i class="material-icons">Share</i></a>
+        {{/if}}
+        <a id="save-btn2" class="btn-floating darken-1 more-options-btns"><i class="material-icons">Save</i></a>
+        <a id="like-btn2" class="btn-floating more-options-btns"><i class="material-icons">Like</i></a>
+        {{#if isOneItem}}
+          <a id="info-btn2" href="/{{pageTitle}}/{{itemID}}/info" class="btn-floating more-options-btns"><i class="material-icons">Info</i></a>
+        {{else}}
+          <a id="info-btn2" href="/{{pageTitle}}/{{itemID}}/info" class="btn-floating more-options-btns"><i class="material-icons">Info</i></a>
+        {{/if}}
       </div>
+
+      {{#unless isAtChatroom}}
+        <div class="new-options2">
+          <div class="title">
+            {{itemTitle}}
+          </div>
+          <div class="caption">
+            {{caption}}
+          </div>
+        </div>
+
+      {{/unless}}
+
+
+
 
 
 
@@ -66,16 +96,23 @@
     <div class="nav-share-2 chatroom-btns-layout">
       {{#if isScreenShared}}
         {{#unless isAtChatroom}}
-        <div class="group-chat-container">
+          <div class="group-chat-container">
 
-          <a href="/userData/{{userIdNumber}}/{{pageTitle}}/{{itemID}}/unsetShare">  <div id="cancelGroupChat" class="group-chat-btn-layout">
-              Exit Sharing
-            </div></a>
-          <a href="/userData/{{userIdNumber}}/{{pageTitle}}/{{itemID}}/setChat"><div id="enterChatRoom" class="group-chat-btn-layout">
-            Enter Group Chatroom
-          </div></a>
+            <a>
+              <div>
 
-        </div>
+              </div>
+            </a>
+            <a href="/userData/{{userIdNumber}}/{{pageTitle}}/{{itemID}}/setChat">
+              <div id="enterChatRoom" class="">
+                <img src="/images/icons/chat50.png" alt="">
+                <div class="centered">
+                  Chat
+                </div>
+              </div>
+            </a>
+
+          </div>
         {{/unless}}
       {{/if}}
 
@@ -83,46 +120,45 @@
 
     <!-- BOTTOM NAVIGATION BAR -->
     {{#unless isAtChatroom}}
-    {{>navigation}}
+      {{>navigation}}
     {{/unless}}
 
     {{#if isAtChatroom}}
-    <div class="chat-box-container">
-      <div class="chat-box-btns">
-        <a href="/userData/{{userIdNumber}}/{{pageTitle}}/{{itemID}}/unsetChat">
-        <div id="exit-chat" class="exit">
-          Exit Chatroom
+      <div class="chat-box-container">
+        <div class="chat-box-btns">
+          <a href="/userData/{{userIdNumber}}/{{pageTitle}}/{{itemID}}/unsetChat">
+            <div id="exit-chat" class="exit">
+              Exit
+            </div>
+          </a>
+          <div id="up-btn" class="up">
+            <img id="up-icon" src="/images/icons/up.svg" alt="">
+          </div>
         </div>
-      </a>
-        <div id="up-btn" class="up">
-          <img id="up-icon" src="/images/icons/up.svg" alt="">
+        <div class="chat-box-message-window">
+
+          <div id="conversation" class="message-window">
+
+
+
+          </div>
+        </div>
+
+        <div class="chat-box-message-input">
+          <input id="chat-input" type="text" name="" value="" placeholder="Message Here">
+          <input type="button" id="datasend" name="" value="SEND">
         </div>
       </div>
-      <div class="chat-box-message-window">
-
-        <div id="conversation" class="message-window">
-
-
-
-        </div>
-      </div>
-
-      <div class="chat-box-message-input">
-        <input id="chat-input" type="text" name="" value="" placeholder="Message Here">
-        <input type="button" id="datasend" name="" value="SEND">
-      </div>
-    </div>
 
     {{/if}}
 
-  <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-  <script type="text/javascript" src="/js/materialize.js"></script>
-  	{{>chatScript}}
-    {{>script}}
-  <script src="/js/bootstrap.js"></script>
-  <script src="/js/play.js"></script>
-  <script src="/js/profile.js"></script>
-  <script src="/js/search.js"></script>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script type="text/javascript" src="/js/materialize.js"></script>
+    {{>chatScript}} {{>script}}
+    <script src="/js/bootstrap.js"></script>
+    <script src="/js/play.js"></script>
+    <script src="/js/profile.js"></script>
+    <script src="/js/search.js"></script>
 </body>
 
 </html>

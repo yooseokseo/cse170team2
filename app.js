@@ -62,8 +62,10 @@ app.get('/userData/:userIdNumber/:categoryTitle/:itemId/unsetShare', userInfo.vi
 app.get('/userData/:userIdNumber/:categoryTitle/:itemId/unsetShareInfo', userInfo.exitShareInfo);
 app.get('/userData/:userIdNumber/:categoryTitle/:itemId/setChat', userInfo.enterChatRoom);
 app.get('/userData/:userIdNumber/:categoryTitle/:itemId/setChatInfo', userInfo.enterChatRoomInfo);
+app.get('/userData/:userIdNumber/:categoryTitle/:itemId/setChatShare', userInfo.enterChatRoomShare);
 app.get('/userData/:userIdNumber/:categoryTitle/:itemId/unsetChat', userInfo.exitChatRoom);
 app.get('/userData/:userIdNumber/:categoryTitle/:itemId/unsetChatInfo', userInfo.exitChatRoomInfo);
+app.get('/userData/:userIdNumber/:categoryTitle/:itemId/unsetChatShare', userInfo.exitChatRoomShare);
 app.get('/sharedlink/:itemId/show', share.linkview);
 app.get('/sharedlink/:itemId/show/info', share.infoview);
 app.get('/sharedlink/:itemId/show/share', share.shareview);
@@ -73,6 +75,7 @@ app.get('/:categoryTitle/left', left.view);
 app.get('/:categoryTitle/:itemId/info', info.view);
 app.get('/:categoryTitle/:itemId/share', share.view);
 app.get('/:categoryTitle/:itemId/show', show.view);
+app.get('/:categoryTitle/:itemId/showOneItem', show.viewOneItem);
 app.get('/:categoryTitle/:itemId/info/:externalId/external', external.view);
 app.get('/preference', preference.view);
 //app.get('/:categoryTitle/:itemId/info/:externalId/external/:webaddress', external.webview);

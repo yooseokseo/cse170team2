@@ -33,16 +33,18 @@
     </div>
 
     <div class="page-subtitle">
-      Send a Sharable Link to Others
+      Share Link
     </div>
-    <div class="page-box page-box-padding basic-padding share">
-      <input style="margin-top:1rem; border: 0px; width:95%; height:1.5rem; font-size:1.5rem;" type="text" name="" value="" placeholder="Email Address">
+    <div class="page-box page-box-padding share">
+      <input id="email" style="border: 0px; width:95%; height:1.5rem; font-size:1.5rem; padding-top:0;" type="text" name="" value="" placeholder="Email Address">
       <div class="shareBtn">Send</div>
+      <div class="shareBtn">Copy</div>
     </div>
-
+  <!--
     <div class="page-subtitle">
       Get a Sharable Link
     </div>
+
     <div class="page-box page-box-padding basic-padding share">
       <div style="margin-top:1rem; border: 0px; width:95%; height:1.5rem; font-size:1rem;" class="url">
         localhost:3000/sharedlink/{{itemIdTotal}}/show
@@ -51,18 +53,17 @@
 
     </div>
 
+-->
     <div class="page-subtitle">
-      Send a Request for a Group Chat
+      Screen Sharing with Other Users
     </div>
-    <div class="page-box page-box-padding basic-padding share">
-      <input style="margin-top:1rem; border: 0px; width:95%; height:1.5rem; font-size:1.5rem;" type="text" name="" value="" placeholder="UserName">
-      <a id="group-chat-send-a" href="/userData/{{userIdNumber}}/{{categoryTitle}}/{{itemId}}/setShare"><div id="group-chat-send" class="shareBtn">Send</div></a>
+    <div class="page-box page-box-padding share2">
+      <input id="username" style="margin-top:1rem; border: 0px; width:95%; height:1.5rem; font-size:1.5rem;" type="text" name="" value="" placeholder="UserName">
+      <a id="group-chat-send-a" href="/userData/{{userIdNumber}}/{{categoryTitle}}/{{itemId}}/setShare"><div id="group-chat-send" class="shareBtn">Start Sharing</div></a>
     </div>
     <div id="group-chat-link">
       localhost:3000/sharedchat/{{userIdNumber}}/show
     </div>
-
-
 
 
     <div class="nav-cover">
@@ -70,16 +71,68 @@
 
     <!-- SPACE FOR POPUP -->
     <div id="profile_popup" class="modal"> </div>
+    <div class="nav-share-2 chatroom-btns-layout">
+      {{#if isScreenShared}}
+        {{#unless isAtChatroom}}
+          <div class="group-chat-container">
 
+            <a>
+              <div>
+
+              </div>
+            </a>
+            <a href="/userData/{{userIdNumber}}/{{categoryTitle}}/{{itemId}}/setChatShare">
+              <div id="enterChatRoom" class="">
+                <img src="/images/icons/chat50.png" alt=""><div class="centered">
+                  Chat
+                </div>
+              </div>
+            </a>
+
+          </div>
+        {{/unless}}
+      {{/if}}
+
+    </div>
 
     <!-- BOTTOM NAVIGATION BAR -->
-    {{>navigation}}
+    {{#unless isAtChatroom}}
+      {{>navigation}}
+    {{/unless}}
 
+    {{#if isAtChatroom}}
+      <div class="chat-box-container">
+        <div class="chat-box-btns">
+          <a href="/userData/{{userIdNumber}}/{{categoryTitle}}/{{itemId}}/unsetChatShare">
+            <div id="exit-chat" class="exit">
+              Exit
+            </div>
+          </a>
+          <div id="up-btn" class="up">
+            <img id="up-icon" src="/images/icons/up.svg" alt="">
+          </div>
+        </div>
+        <div class="chat-box-message-window">
+
+          <div id="conversation" class="message-window">
+
+
+
+          </div>
+        </div>
+
+        <div class="chat-box-message-input">
+          <input id="chat-input" type="text" name="" value="" placeholder="Message Here">
+          <input type="button" id="datasend" name="" value="SEND">
+        </div>
+      </div>
+
+    {{/if}}
 
 
   </div>
 
-
+  {{>chatScript}}
   		{{>script}}
 </body>
 

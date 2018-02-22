@@ -2,15 +2,38 @@
 var userData = require('../userData.json');
 var popularCategoryList = require('../popularCategoryListData.json');
 var categoryList = require('../categoryListData.json');
+var dataType = require('../dataType.json');
+var data = require('../data.json');
 //variables
 var loginStatus = userData.loginStatus;
-
+var totalNumberOfItems = data.length;
 
 //set current page = home
 userData.currentPageViewed ="home";
+var randomNumber = Math.floor(Math.random() * totalNumberOfItems);
 
+var todayItem = data[randomNumber];
+var mediaHTML ='';
+var todayType = todayItem.type;
+var todayCategoryTitle = todayItem.category;
+var todayItemId = todayItem.id;
 
+console.log('todayType:' + todayType);
 
+switch (todayType) {
+  case 'image':
+      console.log('image Type');
+      mediaHTML = '<img id="media" src="'+todayItem.URL+'" alt="">';
+      break;
+  case 'video':
+        console.log('video Type');
+        mediaHTML = '<video style="width:100%;" controls><source src='+ todayItem.URL+' type=video/mp4></video>';
+        break;
+
+  default:
+      console.log('check mediaType!');
+      break;
+}
 
 //check a user is logged in or not
 if (loginStatus) {
@@ -55,6 +78,10 @@ exports.view = function(req, res){
     'currentUserCategoryList': userList,
     'loginStatus': userData.loginStatus,
     categoryList,
-    userData
+    userData,
+    'dataTypeList':dataType,
+    'mediaHTML': mediaHTML,
+    'categoryTitle': todayCategoryTitle,
+    'itemId': todayItemId
   });
 };

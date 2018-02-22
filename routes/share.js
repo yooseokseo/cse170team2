@@ -31,7 +31,10 @@ exports.linkview = function(req, res) {
     "caption": itemObj.caption,
     "des": itemObj.summary,
     "itemID" : itemId,
-    'loginStatus': userData.loginStatus
+    'loginStatus': userData.loginStatus,
+    'isScreenShared' : userData.isScreenShared,
+    'userIdNumber': userData.userIdNumber,
+    'isAtChatroom': userData.isAtChatroom
   });
 };
 
@@ -79,7 +82,10 @@ exports.view = function(req, res) {
     'itemIdTotal':itemId,
     'userIdNumber':userIdNumber,
     categoryList,
-    'loginStatus': userData.loginStatus
+    'loginStatus': userData.loginStatus,
+    'isScreenShared' : userData.isScreenShared,
+    'userIdNumber': userData.userIdNumber,
+    'isAtChatroom': userData.isAtChatroom
 
   });
 };
