@@ -2,6 +2,7 @@ var data = require('../data.json');
 var userData = require('../userData.json');
 var categoryList = require('../categoryListData.json');
 var wholeUserData = require('../wholeUserData.json');
+var dataTypeList = require('../dataType.json');
 
 //-----------------------------------------------
 //-----------------/PROFILE_VIEW-----------------
@@ -51,7 +52,7 @@ exports.register = function(req, res) {
 //helper function to create new users
 function createNewUser(id, userName, password, email, img, actualName)
 {
-  var newUser = 
+  var newUser =
   {
     "userIdNumber": id,
     "userName" : userName,
@@ -217,8 +218,8 @@ exports.logout = function(req, res) {
     'currentUserCategoryList': userList,
     'loginStatus': userData.loginStatus,
     categoryList,
-    userData
+    userData,
+    'dataTypeList': dataTypeList
   });
 
 };
-
