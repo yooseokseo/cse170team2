@@ -57,16 +57,19 @@
 
       <div class="new-options">
         {{#if isOneItem}}
-          <a href="/{{pageTitle}}/{{itemID}}/share" id="share-btn2" class="btn-floating more-options-btns"><i class="material-icons">One</i></a>
+          <a href="/{{pageTitle}}/{{itemID}}/shareOne" id="share-btn2" class="btn-floating more-options-btns"><i style="font-family: Arial; font-style:normal;" class="material-icons">Share</i></a>
         {{else}}
-          <a href="/{{pageTitle}}/{{itemID}}/share" id="share-btn2" class="btn-floating more-options-btns"><i class="material-icons">Share</i></a>
+          <a href="/{{pageTitle}}/{{itemID}}/share" id="share-btn2" class="btn-floating more-options-btns"><i style="font-family: Arial; font-style:normal;" class="material-icons">Share</i></a>
         {{/if}}
-        <a id="save-btn2" class="btn-floating darken-1 more-options-btns"><i class="material-icons">Save</i></a>
-        <a id="like-btn2" class="btn-floating more-options-btns"><i class="material-icons">Like</i></a>
+        <a id="save-btn2" class="btn-floating darken-1 more-options-btns"><i style="font-family: Arial; font-style:normal;" class="material-icons">Save</i></a>
+        <a id="like-btn2" class="btn-floating more-options-btns">
+          <i id="like-lable" style="font-family: Arial; font-style:normal;" class="material-icons">Like</i>
+          <img id="like-heart" width="40" src="/images/icons/heart-48.png" alt="">
+        </a>
         {{#if isOneItem}}
-          <a id="info-btn2" href="/{{pageTitle}}/{{itemID}}/info" class="btn-floating more-options-btns"><i class="material-icons">Info</i></a>
+          <a id="info-btn2" href="/{{pageTitle}}/{{itemID}}/infoOne" class="btn-floating more-options-btns"><i style="font-family: Arial; font-style:normal;" class="material-icons">Info</i></a>
         {{else}}
-          <a id="info-btn2" href="/{{pageTitle}}/{{itemID}}/info" class="btn-floating more-options-btns"><i class="material-icons">Info</i></a>
+          <a id="info-btn2" href="/{{pageTitle}}/{{itemID}}/info" class="btn-floating more-options-btns"><i style="font-family: Arial; font-style:normal;" class="material-icons">Info</i></a>
         {{/if}}
       </div>
 
@@ -151,14 +154,19 @@
       </div>
 
     {{/if}}
+    <div class="notification-hidden">
+
+      <div class="save-popup">
+        <img id="check-icon" src="/images/icons/check-500.png" alt=""> Added to Your Profile
+      </div>
+    </div>
 
     <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
     <script type="text/javascript" src="/js/materialize.js"></script>
-    {{>chatScript}} {{>script}}
-    <script src="/js/bootstrap.js"></script>
-    <script src="/js/play.js"></script>
-    <script src="/js/profile.js"></script>
-    <script src="/js/search.js"></script>
+    {{>chatScript}}
+    {{>script}}
+
+
 </body>
 
 </html>

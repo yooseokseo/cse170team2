@@ -9,7 +9,11 @@
     <div class="pageTitle-container">
 
       <div class="page-back">
+        {{#if isOneItem}}
+        <a href="/{{categoryTitle}}/{{itemId}}/showOneItem"> &lt; Back  </a>
+        {{else}}
         <a href="/{{categoryTitle}}/{{itemId}}/show"> &lt; Back  </a>
+        {{/if}}
       </div>
 
       <div class="page-title">
@@ -17,7 +21,9 @@
       </div>
 
       <div class="page-filter">
-        Save
+          <div class="topNav-save-btn">
+            Save
+          </div>
       </div>
 
     </div>
@@ -114,8 +120,18 @@
 
 
   </div>
-  {{>chatScript}}
+  <div class="notification-hidden">
+
+    <div class="save-popup">
+      <img id="check-icon" src="/images/icons/check-500.png" alt=""> Added to Your Profile
+    </div>
+  </div>
+
     {{>script}}
+    {{>chatScript}}
+    <script src="/js/info.js">
+
+    </script>
 
 </body>
 

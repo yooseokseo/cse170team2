@@ -19,6 +19,7 @@ var external = require('./routes/external');
 var userInfo = require('./routes/userInfo');
 var browse = require('./routes/browse');
 var preference = require('./routes/preference');
+var filteredrRandom = require('./routes/filteredRandom');
 // Example route
 // var user = require('./routes/user');
 var profile = require('./routes/profile');
@@ -73,11 +74,14 @@ app.get('/app/:categoryTitle', dataSelector.view);
 app.get('/:categoryTitle/right', right.view);
 app.get('/:categoryTitle/left', left.view);
 app.get('/:categoryTitle/:itemId/info', info.view);
+app.get('/:categoryTitle/:itemId/infoOne', info.viewOne);
 app.get('/:categoryTitle/:itemId/share', share.view);
+app.get('/:categoryTitle/:itemId/shareOne', share.viewOne);
 app.get('/:categoryTitle/:itemId/show', show.view);
 app.get('/:categoryTitle/:itemId/showOneItem', show.viewOneItem);
 app.get('/:categoryTitle/:itemId/info/:externalId/external', external.view);
 app.get('/preference', preference.view);
+app.get('/app/:title/filteredRandom', filteredrRandom.view);
 //app.get('/:categoryTitle/:itemId/info/:externalId/external/:webaddress', external.webview);
 
 

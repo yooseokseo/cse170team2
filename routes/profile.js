@@ -2,21 +2,21 @@ var data = require('../data.json');
 var userData = require('../userData.json');
 var categoryList = require('../categoryListData.json');
 var wholeUserData = require('../wholeUserData.json');
+var dataTypeList = require('../dataType.json');
 
 //-----------------------------------------------
 //-----------------/PROFILE_VIEW-----------------
 //-----------------------------------------------
-exports.view = function(req, res){
-    var loginStatus = userData.loginStatus;
+exports.view = function(req, res) {
+  var loginStatus = userData.loginStatus;
 
-    console.log("User is loggeed in: "+loginStatus);
+  console.log("User is loggeed in: " + loginStatus);
 
-    if (!loginStatus) { //not logged in; show pop up
-    	res.render('profile_popup');
-    }
-    else {				//logged in; show profile page
-    	res.render('profile', userData);
-    }
+  if (!loginStatus) { //not logged in; show pop up
+    res.render('profile_popup');
+  } else { //logged in; show profile page
+    res.render('profile', userData);
+  }
 
 };
 
@@ -24,23 +24,23 @@ exports.view = function(req, res){
 //----------------/PROFILE_REGISTER---------------
 //------------------------------------------------
 exports.register = function(req, res) {
-	console.log("register");
+  console.log("register");
 
   var newUser = createNewUser(wholeUserData.length,
-                              req.query.username,
-                              req.query.password,
-                              req.query.email,
-                              "/images/icons/default_profile.jpg",
-                              req.query.name);
+    req.query.username,
+    req.query.password,
+    req.query.email,
+    "/images/icons/default_profile.jpg",
+    req.query.name);
   wholeUserData.push(newUser);
   populateUserData(newUser.userIdNumber);
 
   console.log(userData);
 
   //TODO: need to fix here. userdata should push into wholeUserData Json.
-	//userData.userList.push(newUser);
-	console.log("login status: "+userData.loginStatus);
-	res.render('preference', {
+  //userData.userList.push(newUser);
+  console.log("login status: " + userData.loginStatus);
+  res.render('preference', {
     userData,
     categoryList
   });
@@ -49,16 +49,14 @@ exports.register = function(req, res) {
 
 
 //helper function to create new users
-function createNewUser(id, userName, password, email, img, actualName)
-{
-  var newUser = 
-  {
+function createNewUser(id, userName, password, email, img, actualName) {
+  var newUser = {
     "userIdNumber": id,
-    "userName" : userName,
-    "password" : password,
-    "email" : email,
-    "profileImgURL" : img,
-    "actualName" : actualName,
+    "userName": userName,
+    "password": password,
+    "email": email,
+    "profileImgURL": img,
+    "actualName": actualName,
     "currentItemIndex": 0,
     "isScreenShared": false,
     "categoryList": [],
@@ -88,8 +86,7 @@ function createNewUser(id, userName, password, email, img, actualName)
 
 //helper function to populate userData after new user/existing user logs in
 //sets userData to values from wholeUserData
-function populateUserData(userIdNumber)
-{
+function populateUserData(userIdNumber) {
   userData.userIdNumber = userIdNumber;
   userData.userName = wholeUserData[userIdNumber].userName;
   userData.actualName = wholeUserData[userIdNumber].actualName;
@@ -103,8 +100,7 @@ function populateUserData(userIdNumber)
 
 //helper function to populate wholeUserData after user logs out
 //stores current userData to wholeUserData and replace userData w/ default data
-function resetUserData(userIdNumber)
-{
+function resetUserData(userIdNumber) {
   //populate wholeUserData with current userData
   wholeUserData[userIdNumber].currentItemIndex = userData.currentItemIndex;
   wholeUserData[userIdNumber].isScreenShared = userData.isScreenShared;
@@ -124,33 +120,29 @@ function resetUserData(userIdNumber)
 exports.login = function(req, res) {
 
   //facebook/google login
-  if (req.query.fb_gg_username != "")
-  {
+  if (req.query.fb_gg_username != "") {
     console.log("facebook/google login");
 
     var newUser = createNewUser(wholeUserData.length,
-                                req.query.fb_gg_username,
-                                req.query.exampleInputPassword1,
-                                req.query.email1,
-                                req.query.fb_gg_image,
-                                req.query.fb_gg_name);
+      req.query.fb_gg_username,
+      req.query.exampleInputPassword1,
+      req.query.email1,
+      req.query.fb_gg_image,
+      req.query.fb_gg_name);
     var isNewUser = true;
     var userIdNumber = newUser.userIdNumber;
 
-    for (var i = 0; i < wholeUserData.length; i++)
-    {
+    for (var i = 0; i < wholeUserData.length; i++) {
       //existing user (email and password exists in database)
       if (newUser.email == wholeUserData[i].email &&
-          newUser.password == wholeUserData[i].password)
-      {
+        newUser.password == wholeUserData[i].password) {
         isNewUser = false;
         userIdNumber = i;
       }
     }
 
     //new user; push newUser to wholeUserData
-    if (isNewUser)
-    {
+    if (isNewUser) {
       wholeUserData.push(newUser);
     }
 
@@ -163,16 +155,13 @@ exports.login = function(req, res) {
   }
 
   //manual login
-  else
-  {
+  else {
     console.log("manual login");
 
-    for (var i = 0; i < wholeUserData.length; i++)
-    {
+    for (var i = 0; i < wholeUserData.length; i++) {
       //existing user (email and password exists in database)
       if (req.query.email1 == wholeUserData[i].email &&
-          req.query.exampleInputPassword1 == wholeUserData[i].password)
-      {
+        req.query.exampleInputPassword1 == wholeUserData[i].password) {
         console.log("EXISTING USER");
 
         populateUserData(i);
@@ -206,7 +195,7 @@ exports.logout = function(req, res) {
   var popularCategoryList = require('../popularCategoryListData.json');
   userData.currentCategorySelected = "Popular";
 
-  userData.userList=[];
+  userData.userList = [];
   for (var i = 0; i < 4; i++) {
     userData.userList.push(popularCategoryList[i]);
   }
@@ -217,8 +206,8 @@ exports.logout = function(req, res) {
     'currentUserCategoryList': userList,
     'loginStatus': userData.loginStatus,
     categoryList,
-    userData
+    userData,
+    'dataTypeList': dataTypeList
   });
 
 };
-

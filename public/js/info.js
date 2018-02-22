@@ -5,6 +5,11 @@ var isUp = false;
 $(document).ready(function() {
   function toInt(n){ return Math.round(Number(n)); };
 
+  $('.topNav-save-btn').click(function(){
+    $('.save-popup').fadeIn(500);
+    $('.save-popup').fadeOut(2000);
+  })
+
   $('#temp-c0').click(function() {
     $('#temp-f0').removeClass('temp-active');
     $('#temp-c0').addClass('temp-active');
@@ -104,20 +109,7 @@ $(document).ready(function() {
 })
 
 
-
-})
-
-
-
-
-
-
-
-
-
-
-
-
+});
 
 
 

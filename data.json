@@ -256,5 +256,73 @@
     "URL": "/video/toys/1.mp4",
     "extraInfo": []
 
+  },
+  {
+    "id": 16,
+    "category": "kid",
+    "itemTitle": "The Hobbit and the Lord of the Rings",
+    "type": "literature",
+    "date": "February 6",
+    "caption": "kid 1 caption",
+    "summary": "kid 1 summary",
+    "keyword": "",
+    "URL": "/images/kid/1.png",
+    "extraInfo": []
+
+  },
+  {
+    "id": 17,
+    "category": "art",
+    "itemTitle": "art 1",
+    "type": "literature",
+    "date": "February 6",
+    "caption": "art 1 caption",
+    "summary": "art 1 summary",
+    "keyword": "",
+    "URL": "/images/art/1.jpeg",
+    "extraInfo": []
+
+  },
+  {
+    "id": 18,
+    "category": "art",
+    "itemTitle": "art 2",
+    "type": "literature",
+    "date": "February 6",
+    "caption": "art 2 caption",
+    "summary": "art 2 summary",
+    "keyword": "",
+    "URL": "/images/art/2.jpeg",
+    "extraInfo": []
+
+  },
+  {
+    "id": 19,
+    "category": "art",
+    "itemTitle": "art 3",
+    "type": "literature",
+    "date": "February 6",
+    "caption": "art 3 caption",
+    "summary": "art 3 summary",
+    "keyword": "",
+    "URL": "/images/art/3.jpeg",
+    "extraInfo": []
+
+  },
+  {
+    "id": 20,
+    "category": "music",
+    "itemTitle": "music 1",
+    "type": "music",
+    "date": "February 6",
+    "caption": "music 1 caption",
+    "summary": "music 1 summary",
+    "keyword": "",
+    "URL": "/music/1.ogg",
+    "extraInfo": []
+
   }
+
+
+
 ]

@@ -30,6 +30,6 @@ $(function() {
       //$('#chat-input').focus();
     }
   })
-  
+
 
 })

@@ -1,9 +1,10 @@
 //database
 var data = require('../data.json');
 var categoryList = require('../categoryListData.json');
+var userData = require('../userData.json');
 
 
-exports.view = function(req, res){
+exports.view = function(req, res) {
   var categoryTitle = req.params.categoryTitle;
   var itemId = req.params.itemId;
   var externalId = req.params.externalId;
@@ -13,10 +14,10 @@ exports.view = function(req, res){
   //need to find URL from webURL
 
 
-  console.log('info length: ' +extraInfoLength);
+  console.log('info length: ' + extraInfoLength);
   for (var i = 0; i < extraInfoLength; i++) {
     console.log(data[itemId].extraInfo[i]);
-    if(data[itemId].extraInfo[i].type == "nearSearch"){
+    if (data[itemId].extraInfo[i].type == "nearSearch") {
       console.log('found nearSearch');
       console.log('found index' + i);
       containerIndex = i;
@@ -27,9 +28,9 @@ exports.view = function(req, res){
   console.log(data[itemId].extraInfo[containerIndex].container[externalId].webURL);
 
 
-	res.render('external', {
-    'categoryTitle':categoryTitle,
-    'itemId':itemId,
+  res.render('external', {
+    'categoryTitle': categoryTitle,
+    'itemId': itemId,
     'URL': data[itemId].extraInfo[containerIndex].container[externalId].webURL,
     categoryList,
     'loginStatus': userData.loginStatus
