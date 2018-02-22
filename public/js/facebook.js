@@ -20,8 +20,7 @@ function statusChangeCallback(response) {
   }
 }
 
-function changeUser(response) {
-  
+function changeUser(response) {  
     //after clicking on FB sign in, set all informations to input box (some are hidden) then call
     //route file; info will be extracted from input boxes in route files
     $("#email1").attr('value', response.email);

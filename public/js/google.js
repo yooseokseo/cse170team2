@@ -33,10 +33,6 @@ console.log(element.id);
 auth2.attachClickHandler(element, {},
     function(googleUser) {
     	var profile = googleUser.getBasicProfile();
-    	
-    	$("#name").text("Signed in as: "+profile.getName());
-
-
 		$("#email1").attr('value', profile.getEmail());
 	    $("#exampleInputPassword1").attr('value', profile.getId());
 	    $("#fb_gg_name").attr('value', profile.getName());
@@ -44,20 +40,7 @@ auth2.attachClickHandler(element, {},
 	    $("#fb_gg_username").attr('value', profile.getGivenName()+"."+profile.getFamilyName()+"."+profile.getId());
 	    
 	    //automatically click login (so it seems like it's 1 step, when it's really 2)
-	    //$("#login-btn").attr('action', '/profile_facebook');
-	    $("#login-btn").click();
-
-
-
-
-
-
-
-
-
-
-
-     
+	    $("#login-btn").click();     
     });
 }
 

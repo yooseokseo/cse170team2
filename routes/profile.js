@@ -87,6 +87,7 @@ function createNewUser(id, userName, password, email, img, actualName)
 }
 
 //helper function to populate userData after new user/existing user logs in
+//sets userData to values from wholeUserData
 function populateUserData(userIdNumber)
 {
   userData.userIdNumber = userIdNumber;
@@ -96,7 +97,25 @@ function populateUserData(userIdNumber)
   userData.isScreenShared = wholeUserData[userIdNumber].isScreenShared;
   userData.categoryList = wholeUserData[userIdNumber].categoryList;
   userData.favoriteList = wholeUserData[userIdNumber].favoriteList;
+  userData.profileImgURL = wholeUserData[userIdNumber].profileImgURL;
   userData.loginStatus = true;
+}
+
+//helper function to populate wholeUserData after user logs out
+//stores current userData to wholeUserData and replace userData w/ default data
+function resetUserData(userIdNumber)
+{
+  //populate wholeUserData with current userData
+  wholeUserData[userIdNumber].currentItemIndex = userData.currentItemIndex;
+  wholeUserData[userIdNumber].isScreenShared = userData.isScreenShared;
+  wholeUserData[userIdNumber].categoryList = userData.categoryList;
+  wholeUserData[userIdNumber].favoriteList = userData.favoriteList;
+  userData.loginStatus = false;
+
+  //replace userData w/ default data
+  userData = wholeUserData[0];
+
+  console.log(userData);
 }
 
 //-----------------------------------------------
@@ -107,7 +126,7 @@ exports.login = function(req, res) {
   //facebook/google login
   if (req.query.fb_gg_username != "")
   {
-    console.log("facebook login");
+    console.log("facebook/google login");
 
     var newUser = createNewUser(wholeUserData.length,
                                 req.query.fb_gg_username,
@@ -146,6 +165,8 @@ exports.login = function(req, res) {
   //manual login
   else
   {
+    console.log("manual login");
+
     for (var i = 0; i < wholeUserData.length; i++)
     {
       //existing user (email and password exists in database)
@@ -176,10 +197,28 @@ exports.incorrect_login = function(req, res) {
 
 
 //-----------------------------------------------
-//----------------/PROFILE_GOOGLE----------------
+//----------------/PROFILE_LOGOUT----------------
 //-----------------------------------------------
-/*
-exports.google = function(req, res) {
-  console.log("google");
+exports.logout = function(req, res) {
+  resetUserData(userData.userIdNumber);
+
+  //Code copied from index.js
+  var popularCategoryList = require('../popularCategoryListData.json');
+  userData.currentCategorySelected = "Popular";
+
+  userData.userList=[];
+  for (var i = 0; i < 4; i++) {
+    userData.userList.push(popularCategoryList[i]);
+  }
+
+  var userList = userData.userList;
+  res.render('index', {
+    'currentCategorySelected': userData.currentCategorySelected,
+    'currentUserCategoryList': userList,
+    'loginStatus': userData.loginStatus,
+    categoryList,
+    userData
+  });
+
 };
-*/
+
