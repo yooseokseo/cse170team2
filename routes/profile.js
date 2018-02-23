@@ -149,7 +149,9 @@ exports.login = function(req, res) {
     console.log("userData");
     console.log(userData);
 
-    res.render('profile', userData);
+    //res.render('profile', userData);
+    //EDIT
+    res.render('profile_signin_reroute', userData);
   }
 
   //manual login

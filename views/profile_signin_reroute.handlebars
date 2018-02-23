@@ -36,31 +36,14 @@ iframe {
 <body onload="goBack()">
 	{{>searchbar}}
 
-<!--<iframe class="iframe">
-</iframe>-
-<div class="holder">
-   <iframe class="iframe"></iframe>
-   
-   <div class="bar" id="bar" class="modal">
-     <div class="penis"></div>
-     
-   </div>
- </a>
-
-
-
-   </div>
-   
-
-</div>​ -->
-
-
 <script>
 function goBack() {
 	//$(".iframe").attr('src', document.referrer);
 	//$(".penis").load("/profile");
 
-    window.history.back();
+    window.location.href = document.referrer;
+
+    //window.history.back();
 }
 
 
