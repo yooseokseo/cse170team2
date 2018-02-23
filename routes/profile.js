@@ -1,8 +1,6 @@
 var data = require('../data.json');
 var userData = require('../userData.json');
-var categoryList = require('../categoryListData.json');
 var wholeUserData = require('../wholeUserData.json');
-var dataTypeList = require('../dataType.json');
 
 //-----------------------------------------------
 //-----------------/PROFILE_VIEW-----------------
@@ -193,21 +191,57 @@ exports.logout = function(req, res) {
 
   //Code copied from index.js
   var popularCategoryList = require('../popularCategoryListData.json');
+  var categoryList = require('../categoryListData.json');
+  var dataType = require('../dataType.json');
+  var data = require('../data.json');
+  var totalNumberOfItems = data.length;
+
+//set current page = home
+userData.currentPageViewed ="home";
+var randomNumber = Math.floor(Math.random() * totalNumberOfItems);
+
+var todayItem = data[randomNumber];
+var mediaHTML ='';
+var todayType = todayItem.type;
+var todayCategoryTitle = todayItem.category;
+var todayItemId = todayItem.id;
+
+console.log('todayType:' + todayType);
+
+switch (todayType) {
+  case 'image':
+      console.log('image Type');
+      mediaHTML = '<img id="media" src="'+todayItem.URL+'" alt="">';
+      break;
+  case 'video':
+        console.log('video Type');
+        mediaHTML = '<video style="width:100%;" controls><source src='+ todayItem.URL+' type=video/mp4></video>';
+        break;
+
+  default:
+      console.log('check mediaType!');
+      break;
+}//update currentCategorySelected to print "Popular" text
   userData.currentCategorySelected = "Popular";
 
-  userData.userList = [];
+  // copy 4 most popular categories
+  // from popularCategoryList to userList in userData.json
+  userData.userList=[];
   for (var i = 0; i < 4; i++) {
     userData.userList.push(popularCategoryList[i]);
   }
-
   var userList = userData.userList;
+
   res.render('index', {
     'currentCategorySelected': userData.currentCategorySelected,
     'currentUserCategoryList': userList,
     'loginStatus': userData.loginStatus,
     categoryList,
     userData,
-    'dataTypeList': dataTypeList
+    'dataTypeList':dataType,
+    'mediaHTML': mediaHTML,
+    'categoryTitle': todayCategoryTitle,
+    'itemId': todayItemId
   });
 
 };
