@@ -5,29 +5,8 @@ var wholeUserData = require('../wholeUserData.json');
 var dataTypeList = require('../dataType.json');
 
 
-exports.testLogin = function(username, password)
-{
-  console.log("TEST_LOGIN in VIEW/PROFILE; username = "+username+"; password = "+password);
-
-  for (var i = 0; i < wholeUserData.length; i++) {
-      //existing user (email and password exists in database)
-      if (username == wholeUserData[i].email &&
-          password == wholeUserData[i].password) {
-        
-        return true;
-
-      }
-    }
-
-    console.log("Wrong username or password!!!!!!!!!!");
-    return false;
-    
-
-}
-
-
 //-----------------------------------------------
-//-----------------/PROFILE_VIEW-----------------
+//---------------------VIEW()--------------------
 //-----------------------------------------------
 exports.view = function(req, res) {
   var loginStatus = userData.loginStatus;
@@ -42,31 +21,66 @@ exports.view = function(req, res) {
 
 };
 
-//------------------------------------------------
-//----------------/PROFILE_REGISTER---------------
-//------------------------------------------------
-exports.register = function(req, res) {
-  console.log("register");
+//return userIdNumber if user exists; -1 otherwise
+exports.existingUser = function(email, password, checkPassword)
+{
+  for (var i = 0; i < wholeUserData.length; i++) 
+  {
+    //user alreay exists
+    if (email == wholeUserData[i].email) 
+    {
+      if (checkPassword && password != wholeUserData[i].password)
+      {
+        return -1;
+      }
+      return i;
+    }
+  }
 
-  var newUser = createNewUser(wholeUserData.length,
-    req.query.username,
-    req.query.password,
-    req.query.email,
-    "/images/icons/default_profile.jpg",
-    req.query.name);
+  return -1; //new user
+}
+
+//-----------------------------------------------
+//--------------------LOGIN()--------------------
+//-----------------------------------------------
+//return true if successful login; false otherwise
+exports.login = function(email, password, userName, img, actualName)
+{
+  //check if existing user (matching email and password in database)
+  var i;
+  if ( (i = this.existingUser(email, password, true)) != -1)
+  {
+    populateUserData(i);
+    return true;
+  }
+
+  //-----------------------
+
+  var facebook_google_login = userName != null;
+
+  //not existing user; if Facebook or Google login, create user based on extracted info
+  if (facebook_google_login)
+  {
+    this.register(email, password, userName, img, actualName)
+
+    return true;
+  }
+
+  return false; //not existing user and manual login = invalid login info  
+}
+
+//------------------------------------------------
+//-------------------REGISTER()-------------------
+//------------------------------------------------
+exports.register = function(email, password, userName, img, actualName)
+{
+  //user doesn't exist; register user with provided info
+  var id = wholeUserData.length;
+  var newUser = createNewUser(id, userName, password, email, img, actualName);
+
   wholeUserData.push(newUser);
-  populateUserData(newUser.userIdNumber);
-
-  console.log(userData);
-
-  //TODO: need to fix here. userdata should push into wholeUserData Json.
-  //userData.userList.push(newUser);
-  console.log("login status: " + userData.loginStatus);
-  res.render('preference', {
-    userData,
-    categoryList
-  });
-};
+  populateUserData(id); 
+}
 
 
 
@@ -139,76 +153,6 @@ function resetUserData(userIdNumber) {
 
   console.log(userData);
 }
-
-//-----------------------------------------------
-//---------------/PROFILE_FACEBOOK---------------
-//-----------------------------------------------
-exports.login = function(req, res) {
-
-  //facebook/google login
-  if (req.query.fb_gg_username != "") {
-    console.log("facebook/google login");
-
-    var newUser = createNewUser(wholeUserData.length,
-      req.query.fb_gg_username,
-      req.query.exampleInputPassword1,
-      req.query.email1,
-      req.query.fb_gg_image,
-      req.query.fb_gg_name);
-    var isNewUser = true;
-    var userIdNumber = newUser.userIdNumber;
-
-    for (var i = 0; i < wholeUserData.length; i++) {
-      //existing user (email and password exists in database)
-      if (newUser.email == wholeUserData[i].email &&
-        newUser.password == wholeUserData[i].password) {
-        isNewUser = false;
-        userIdNumber = i;
-      }
-    }
-
-    //new user; push newUser to wholeUserData
-    if (isNewUser) {
-      wholeUserData.push(newUser);
-    }
-
-    populateUserData(userIdNumber);
-
-    console.log("userData");
-    console.log(userData);
-
-    res.render('profile', userData);
-  }
-
-  //manual login
-  else {
-    console.log("manual login");
-
-    for (var i = 0; i < wholeUserData.length; i++) {
-      //existing user (email and password exists in database)
-      if (req.query.email1 == wholeUserData[i].email &&
-        req.query.exampleInputPassword1 == wholeUserData[i].password) {
-        console.log("EXISTING USER");
-
-        populateUserData(i);
-
-        console.log("userData");
-        console.log(userData);
-
-        res.render('profile', userData);
-      }
-    }
-
-    console.log("Wrong username or password");
-    //res.render('profile_incorrect_login');
-
-  }
-}
-
-exports.incorrect_login = function(req, res) {
-  res.render('profile_incorrect_login');
-}
-
 
 
 //-----------------------------------------------

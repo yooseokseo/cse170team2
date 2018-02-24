@@ -18,7 +18,7 @@
 
                     <!-- Login form -->
                     <div class="tab-pane " id="Login">
-                        <form role="form" class="form-horizontal" method="get" action="/profile_login">
+                        <form role="form" class="form-horizontal">
 
                             <!-- Email -->
                             <div class="form-group">
@@ -79,11 +79,10 @@
                                 <div class="col-sm-12">
 
                                     <!-- Facebook submit button -->
-                                    <input id="flogin-btn" type="button" class="btn btn-primary btn-sm" value="Login with Facebook" data-target="#login-btn" onclick="checkLoginState();"/>
+                                    <input id="flogin-btn" type="button" class="btn btn-primary btn-sm" value="Login with Facebook" onclick="checkLoginState();"/>
 
                                 </div>
                             </div>
-
 
                       
 
@@ -92,7 +91,7 @@
 
                     <!-- Registration form -->
                     <div class="tab-pane active" id="Registration">
-                        <form id="addFriendForm" role="form" method="get" action="/profile_register">
+                        <form id="addFriendForm" role="form">
 
                           <!-- Email -->
                           <div class="form-group">
@@ -116,7 +115,7 @@
 
                             <!-- Sign-up button -->
                             <div id="signup-btn" class="form-group">
-                              <input type="submit" id="submitBtn" class="btn btn-default signup-input" value="Sign Up" ></input>
+                              <input type="submit" id="signUpBtn" class="btn btn-default signup-input" value="Sign Up" ></input>
                             </div>
 
                         </form>
@@ -132,19 +131,51 @@
     </div>
 </div>
 
+<!-- Check if user enter correct login information -->
+<script src="/socket.io/socket.io.js"></script>
 <script>
     var socket = io.connect('http://localhost:3000');
 
+    //---------
 
-    $('#login-btn').click(function() {
-        var email = document.getElementById('email1').value;
-        var pWord = document.getElementById('exampleInputPassword1').value;
-        socket.emit('loginEmit', email, pWord); 
-
+    //for login
+    $('#login-btn').click(function() 
+    {
+        var email = $('#email1').val();
+        var pWord = $('#exampleInputPassword1').val();
+        var usrName = $('fb_gg_username').val();
+        var usrImg = $('fb_gg_image').val();
+        var actualName = $('fb_gg_name').val();
+        socket.emit('checkLogin', email, pWord, usrName, usrImg, actualName); 
     });
 
-    socket.on('wrongLogin', function() {
-        alert('WRONG LOGIN!');
+    socket.on('failedLogin', function() 
+    {
+        alert('INCORRECT EMAIL AND/OR PASSWORD!');
     });
+
+    socket.on('successfulLogin', function() 
+    {
+        alert("Successful Login");
+    })
+
+    //---------
+
+    //for signup
+    $('#signUpBtn').click(function()
+    {
+        console.log("SIGN UP");
+        var email = $('#email').val();
+        var actualName = $('#name').val();
+        var usrName = $('#username').val();
+        var pWord = $('#password').val();
+        var usrImg = '/images/icons/default_profile.jpg';
+        socket.emit('register', email, pWord, usrName, usrImg, actualName);
+    });
+
+    socket.on('alreadyExist', function()
+    {
+        alert("This email already exists. Please sign in or try a different email");
+    })
 
 </script>

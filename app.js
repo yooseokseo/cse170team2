@@ -54,8 +54,6 @@ app.get('/', index.view);
 app.get('/browse', browse.view);
 app.get('/profile', profile.view);
 app.get('/profile_register', profile.register);
-app.get('/profile_login', profile.login);
-app.get('/profile_incorrect_login', profile.incorrect_login);
 app.get('/profile_logout', profile.logout);
 
 //app.get('/profile_goodle', profile.google);
@@ -134,45 +132,41 @@ io.sockets.on('connection', function(socket){
     socket.leave(socket.room);
   });
 
+  //check login in (both manual input and social media login)
+  socket.on('checkLogin', function (email, password, userName, img, actualName) 
+  {
+    var validLogin = profile.login(email, password, userName, img, actualName);
+    console.log('logged in successfully: '+validLogin);
+
+    if (!validLogin)
+    {
+      socket.emit('failedLogin');
+    }
+    else
+    {
+      socket.emit('successfulLogin');
+    }
+  });
+
+  socket.on('register', function (email, password, userName, img, actualName) 
+  {
+    var alreadyExist = profile.existingUser(email, password, false);
+    console.log('User already exists: '+alreadyExist);
+
+    if (alreadyExist != -1)
+    {
+      socket.emit('alreadyExist');
+    }
+    else
+    {
+      profile.register(email, password, userName, img, actualName);
+      socket.emit('successfulLogin');
+    }
+  });
 
 
 
 
-
-    // As soon as the username is received, it's stored as a session variable
-    
-
-    // When a "message" is received (click on the button), it's logged in the console
-    socket.on('toAppJS', function (username, message) {
-
-      socket.username = username;
-        // The username of the person who clicked is retrieved from the session variables        
-
-        //var test = require('./routes/test.js');
-        //var testFunction = test.testFunction;
-        //var otherFunction = test.otherFunction;
-        var ret = require('./routes/test.js').testFunction(socket.username, message);
-        console.log(ret);
-        
-        if (ret == 'userName is wrong')
-        {
-          socket.emit('wrongUser', ret);
-        }
-
-        
-        //testFunction(); // this will work
-        
-    }); 
-
-    socket.on('loginEmit', function (username, password) {
-      var correctLogin = profile.testLogin(username, password);
-      console.log('correctLogin (in app.js): '+correctLogin);
-
-      if (!correctLogin)
-      {
-        socket.emit('wrongLogin');
-      }
-    });
 
 
 
