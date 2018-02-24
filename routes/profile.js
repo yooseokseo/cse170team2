@@ -4,6 +4,28 @@ var categoryList = require('../categoryListData.json');
 var wholeUserData = require('../wholeUserData.json');
 var dataTypeList = require('../dataType.json');
 
+
+exports.testLogin = function(username, password)
+{
+  console.log("TEST_LOGIN in VIEW/PROFILE; username = "+username+"; password = "+password);
+
+  for (var i = 0; i < wholeUserData.length; i++) {
+      //existing user (email and password exists in database)
+      if (username == wholeUserData[i].email &&
+          password == wholeUserData[i].password) {
+        
+        return true;
+
+      }
+    }
+
+    console.log("Wrong username or password!!!!!!!!!!");
+    return false;
+    
+
+}
+
+
 //-----------------------------------------------
 //-----------------/PROFILE_VIEW-----------------
 //-----------------------------------------------

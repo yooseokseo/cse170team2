@@ -7,6 +7,8 @@ var express = require('express');
 var http = require('http');
 var path = require('path');
 var handlebars = require('express3-handlebars')
+var fs = require('fs');
+
 
 var index = require('./routes/index');
 var dataSelector = require('./routes/dataSelector');
@@ -85,6 +87,8 @@ app.get('/app/:title/filteredRandom', filteredrRandom.view);
 //app.get('/:categoryTitle/:itemId/info/:externalId/external/:webaddress', external.webview);
 
 
+
+
 // Example route
 // app.get('/users', user.list);
 
@@ -116,7 +120,6 @@ io.sockets.on('connection', function(socket){
 
   });
 
-
   //send message
   socket.on('sendChat', function(data){
     console.log(socket.username + "sent a message");
@@ -130,6 +133,53 @@ io.sockets.on('connection', function(socket){
     updateGlobal(socket, 'disconnected');
     socket.leave(socket.room);
   });
+
+
+
+
+
+
+    // As soon as the username is received, it's stored as a session variable
+    
+
+    // When a "message" is received (click on the button), it's logged in the console
+    socket.on('toAppJS', function (username, message) {
+
+      socket.username = username;
+        // The username of the person who clicked is retrieved from the session variables        
+
+        //var test = require('./routes/test.js');
+        //var testFunction = test.testFunction;
+        //var otherFunction = test.otherFunction;
+        var ret = require('./routes/test.js').testFunction(socket.username, message);
+        console.log(ret);
+        
+        if (ret == 'userName is wrong')
+        {
+          socket.emit('wrongUser', ret);
+        }
+
+        
+        //testFunction(); // this will work
+        
+    }); 
+
+    socket.on('loginEmit', function (username, password) {
+      var correctLogin = profile.testLogin(username, password);
+      console.log('correctLogin (in app.js): '+correctLogin);
+
+      if (!correctLogin)
+      {
+        socket.emit('wrongLogin');
+      }
+    });
+
+
+
+
+
+
+  
 
 });
 

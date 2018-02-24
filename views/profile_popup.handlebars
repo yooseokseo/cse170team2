@@ -131,3 +131,20 @@
         </div>
     </div>
 </div>
+
+<script>
+    var socket = io.connect('http://localhost:3000');
+
+
+    $('#login-btn').click(function() {
+        var email = document.getElementById('email1').value;
+        var pWord = document.getElementById('exampleInputPassword1').value;
+        socket.emit('loginEmit', email, pWord); 
+
+    });
+
+    socket.on('wrongLogin', function() {
+        alert('WRONG LOGIN!');
+    });
+
+</script>
