@@ -10,15 +10,15 @@
             <div class="col-lg-11">
                 <!-- Nav tabs -->
                 <ul class="nav nav-tabs" id="nav-tabs">
-                    <li id="login-tab" class="active"><a href="#Login" data-toggle="tab">Login</a></li>
-                    <li id="signup-tab"><a href="#Registration" data-toggle="tab">Signup</a></li>
+                    <li id="login-tab" ><a href="#Login" data-toggle="tab">Login</a></li>
+                    <li id="signup-tab" class="active"><a href="#Registration" data-toggle="tab">Signup</a></li>
                 </ul>
                 <!-- Tab panes -->
                 <div class="tab-content" id="tab-content">
 
                     <!-- Login form -->
-                    <div class="tab-pane active" id="Login">
-                        <form role="form" class="form-horizontal" method="get" action="/profile_login" >
+                    <div class="tab-pane " id="Login">
+                        <form role="form" class="form-horizontal" method="get" action="/profile_login">
 
                             <!-- Email -->
                             <div class="form-group">
@@ -84,20 +84,14 @@
                                 </div>
                             </div>
 
-                           <!-- <script>startApp();</script>-->
-                            <!-- Login with Google -->
-                            <div class="row" id="customBtn1">
-                                <div class="col-sm-12">
-                                    <!-- Google submit button -->
-                                    <input id="glogin-btn"type="button" class="btn btn-primary btn-sm" value="Login with Google">
-                                </div>
-                            </div>
+
+                      
 
                         </form>
                     </div>
 
                     <!-- Registration form -->
-                    <div class="tab-pane" id="Registration">
+                    <div class="tab-pane active" id="Registration">
                         <form id="addFriendForm" role="form" method="get" action="/profile_register">
 
                           <!-- Email -->
@@ -137,4 +131,3 @@
         </div>
     </div>
 </div>
-

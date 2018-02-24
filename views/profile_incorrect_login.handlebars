@@ -5,7 +5,6 @@ html, body {
     height: 100%;
     margin: 0;         /* Reset default margin on the body element */
 }
-
 iframe {
     display: block;       /* iframes are inline by default */
     border: none;         /* Reset default border */
@@ -37,7 +36,7 @@ iframe {
 	{{>searchbar}}
 
 <!--<iframe class="iframe">
-</iframe>-
+</iframe>-->
 <div class="holder">
    <iframe class="iframe"></iframe>
    
@@ -52,15 +51,15 @@ iframe {
    </div>
    
 
-</div>​ -->
+</div>​
 
 
 <script>
 function goBack() {
-	//$(".iframe").attr('src', document.referrer);
-	//$(".penis").load("/profile");
+	$(".iframe").attr('src', document.referrer);
+	$(".penis").load("/profile");
 
-    window.history.back();
+    //window.history.back();
 }
 
 

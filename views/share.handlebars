@@ -43,6 +43,10 @@
       <div id="link-send" class="shareBtn">Send</div>
       <div id="link-copy" class="shareBtn">Copy</div>
     </div>
+    <div style="color: red;" class="required">
+      * In order to simulate shared like<br>
+      https://a7-cogs120team2.herokuapp.com/sharedlink/{{itemIdTotal}}/show
+    </div>
   <!--
     <div class="page-subtitle">
       Get a Sharable Link
@@ -58,19 +62,26 @@
 
 -->{{#unless isOneItem}}
     <div class="page-subtitle">
-      Screen Sharing with Other Users
+      Screen Sharing with Others
     </div>
     <div class="page-box page-box-padding share2">
       <input id="username" style="margin-top:1rem; border: 0px; width:95%; height:1.5rem; font-size:1.5rem;" type="text" name="" value="" placeholder="UserName">
       <a id="group-chat-send-a" href="/userData/{{userIdNumber}}/{{categoryTitle}}/{{itemId}}/setShare"><div id="group-chat-send" class="shareBtn">Start Sharing</div></a>
     </div>
-    <div id="group-chat-link">
-      localhost:3000/sharedchat/{{userIdNumber}}/show
+    <div class="required">
+      you are required to login to use screen sharing.
     </div>
+    <div  style="color: red;" class="required">
+      * In order to simulate shared link<br>https://a7-cogs120team2.herokuapp.com/sharedChat/1/random/0/show
+    </div>
+
+
+    </div>
+
     {{/unless}}
 
 
-    <div class="nav-cover">
+    <div class="nav-cover-down">
     </div>
 
     <!-- SPACE FOR POPUP -->

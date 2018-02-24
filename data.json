@@ -321,6 +321,86 @@
     "URL": "/music/1.ogg",
     "extraInfo": []
 
+  },
+{
+    "id": 21,
+    "category": "movies",
+    "itemTitle": "movie 1",
+    "type": "image",
+    "date": "February 6",
+    "caption": "movie 1 caption",
+    "summary": "movie 1 summary",
+    "keyword": "",
+    "URL": "/images/movies/1.jpeg",
+    "extraInfo": []
+
+  },
+  {
+    "id": 22,
+    "category": "sports",
+    "itemTitle": "sport 1",
+    "type": "image",
+    "date": "February 6",
+    "caption": "sport 1 caption",
+    "summary": "sport 1 summary",
+    "keyword": "",
+    "URL": "/images/sports/1.jpeg",
+    "extraInfo": []
+
+  },
+
+  {
+    "id": 23,
+    "category": "garden",
+    "itemTitle": "garden 1",
+    "type": "image",
+    "date": "February 6",
+    "caption": "Flower Garden",
+    "summary": "Beautiful flower Garden",
+    "keyword": "Garden",
+    "URL": "/images/garden/1.jpeg",
+    "extraInfo": []
+     
+   },
+   {
+   "id": 24,
+    "category": "home",
+    "itemTitle": "Home Decor",
+    "type": "image",
+    "date": "February 6",
+    "caption": "Minimalist Design",
+    "summary": "All white",
+    "keyword": "Home",
+    "URL": "/images/home/1.jpeg",
+    "extraInfo": []
+        
+    },
+
+    {
+    "id": 25,
+    "category": "audio",
+    "itemTitle": "audio 1",
+    "type": "image",
+    "date": "February 6",
+    "caption": "Home Stereo System!",
+    "summary": "This vintage system includes Bluetooth! CD Audio Speakers Hi Fi Retro FM Radio Aux! Check it out at https://www.ebay.com/itm/Home-Stereo-System-Bluetooth-Vintage-CD-Audio-Speakers-Hi-Fi-Retro-FM-Radio-Aux-/253221498737",
+    "keyword": "",
+    "URL": "/images/audio/1.jpeg",
+    "extraInfo": []
+
+  },
+    {
+    "id": 26,
+    "category": "games",
+    "itemTitle": "games 1",
+    "type": "image",
+    "date": "February 6",
+    "caption": "Super Mario Galaxy!!",
+    "summary": "Best Game Ever!! You can find it on amazon or at your local Best Buy. Seriously the best game I've ever played!",
+    "keyword": "",
+    "URL": "/images/games/1.jpeg",
+    "extraInfo": []
+
   }
 
 

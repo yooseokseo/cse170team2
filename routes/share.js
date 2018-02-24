@@ -196,7 +196,7 @@ exports.shareview = function(req, res) {
   }
 
 
-
+  console.log("userData loginStatus: " +userData.loginStatus );
 
   res.render('linkshare', {
     'categoryTitle': categoryTitle,

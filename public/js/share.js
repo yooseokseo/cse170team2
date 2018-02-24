@@ -9,7 +9,7 @@ $(document).ready(function() {
     $('.save-popup').fadeOut(2000);
   })
   $('#link-copy').click(function(){
-    $('.save-popup').html('<img id="check-icon" src="/images/icons/check-500.png" alt=""> Copyed Link');
+    $('.save-popup').html('<img id="check-icon" src="/images/icons/check-500.png" alt=""> Copied Link');
     $('.save-popup').fadeIn(500);
     $('.save-popup').fadeOut(2000);
   })
