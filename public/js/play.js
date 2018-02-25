@@ -70,23 +70,22 @@ function bookmark(itemID)
   socket.on('bookmarkFail', function()
   {
     alert("Please log in or sign up to bookmark");
-  });
-
-    
-  
+  }); 
 }
 
 function like(itemID)
 {
-  alert("id = "+itemID);
-  if (!loginStatus) //not logged in; can't like
-  {
-    alert("Please log in or sign up to like");
-  }
-  else
+  socket.emit('like', itemID); 
+
+  socket.on('likeSuccess', function()
   {
     console.log('like clicked');
-    $(this).fadeOut(300);
+    $('#like-lable').fadeOut(300);
     $('#like-heart').fadeIn(300);
-  }
+  });
+
+  socket.on('likeFail', function()
+  {
+    alert("Please log in or sign up to like");
+  }); 
 }

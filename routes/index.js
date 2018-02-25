@@ -78,8 +78,6 @@ exports.updateUserData = function(usrData)
 };
 
 exports.view = function(req, res) {
-  console.log("in view");
-  console.log(userData);
   userData.currentItemIndex = 0;
   console.log(userList);
   res.render('index', {

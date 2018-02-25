@@ -3,18 +3,18 @@ var userData = require('../userData.json');
 
 //return true if successfully bookmarked (user logged in);
 //false otherwise (not logged in)
-exports.bookmark = function(itemID)
+exports.like = function(itemID)
 {
-	console.log("in routes/bookmark");
+	console.log("in routes/like");
 
 	if (userData.loginStatus)
 	{
-		userData.bookmarkedList.push(data[itemID]);
+		userData.likedList.push(data[itemID]);
 
 		return true;
 	}
 
-	console.log("not logged in; cannot bookmark");
+	console.log("not logged in; cannot like");
 	return false;
 }
 

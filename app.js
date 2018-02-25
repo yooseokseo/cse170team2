@@ -24,6 +24,8 @@ var preference = require('./routes/preference');
 var filteredrRandom = require('./routes/filteredRandom');
 var profile = require('./routes/profile');
 var bookmark = require('./routes/bookmark');
+var like = require('./routes/like');
+
 
 var app = express();
 var server = http.createServer(app);
@@ -145,6 +147,8 @@ io.sockets.on('connection', function(socket){
     else
     {
       socket.emit('successfulLogin');
+
+      updateUserData( profile.getUserData() );
     }
   });
 
@@ -152,7 +156,6 @@ io.sockets.on('connection', function(socket){
   socket.on('register', function (email, password, userName, img, actualName) 
   {
     var alreadyExist = profile.existingUser(email, password, false);
-    console.log('User already exists: '+alreadyExist);
 
     if (alreadyExist != -1)
     {
@@ -161,16 +164,14 @@ io.sockets.on('connection', function(socket){
     else
     {
       profile.register(email, password, userName, img, actualName);
-      updateUserData(profile.getUserData());
       socket.emit('successfulLogin');
-    }
 
-    //var json = require('./userData.json');
-    //console.log("app.js; json file "+JSON.stringify(json));
+      updateUserData( profile.getUserData() );
+    }
   });
 
 
-  //liking item
+  //bookmark item
   socket.on('bookmark', function(itemID)
   {
     var bookmarkSuccess = bookmark.bookmark(itemID);
@@ -183,7 +184,21 @@ io.sockets.on('connection', function(socket){
     {
       socket.emit('bookmarkFail');
     }
+  });
 
+  //liking item
+  socket.on('like', function(itemID)
+  {
+    var likeSuccess = like.like(itemID);
+    console.log("liked: "+likeSuccess)  ;
+    if (likeSuccess) //user logged in; bookmarked 
+    {
+      socket.emit('likeSuccess');
+    }
+    else //not logged in; cannot bookmak
+    {
+      socket.emit('likeFail');
+    }
   });
 
 
@@ -199,21 +214,27 @@ io.sockets.on('connection', function(socket){
 
 });
 
+
+//get all routes file and add it to an array
+//updateUserData() loops through it
+var routeFiles = [];
+fs.readdirSync('./routes/').forEach(file => 
+{
+  var fileName = file.substring(0, file.length-3); //removes ".js"
+  if (fileName != "profile")
+  {
+    routeFiles.push( require('./routes/'+fileName) );
+  }
+});
+
+//manually update userData in every route files
+//fixes "bug" (from asynchronicity) where loginStatus sometimes isn't updated
 function updateUserData(userData)
 {
-  bookmark.updateUserData(userData);
-  browse.updateUserData(userData);
-  dataSelector.updateUserData(userData);
-  external.updateUserData(userData);
-  filteredrRandom.updateUserData(userData);
-  index.updateUserData(userData);
-  info.updateUserData(userData);
-  left.updateUserData(userData);
-  preference.updateUserData(userData);
-  right.updateUserData(userData);
-  share.updateUserData(userData);
-  show.updateUserData(userData);
-  userInfo.updateUserData(userData);
+  for (var i = 0; i < routeFiles.length; i++)
+  {
+    routeFiles[i].updateUserData(userData);
+  }
 }
 
 
