@@ -393,7 +393,10 @@ a {
     font-size: 1rem;
 }
 
-.bookmark-popup{
+.bookmark-popup, 
+.bookmark-fail-popup,
+.like-fail-popup
+{
   display: none;
   border-radius: 1rem;
   height: 16rem;
@@ -425,3 +428,8 @@ a {
 #like-heart{
   display: none;
 }
+
+#bookmark-icon{
+  display:none;
+}
+

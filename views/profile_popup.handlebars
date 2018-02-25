@@ -131,6 +131,12 @@
     </div>
 </div>
 
+<div class="notification-hidden">
+  <div class="success-popup">
+    <img id="check-icon" src="/images/icons/check-500.png" alt=""> Added to Your Profile
+  </div>
+</div>
+
 <!-- Check if user enter correct login information -->
 <script src="/socket.io/socket.io.js"></script>
 <script>
@@ -152,11 +158,18 @@
     socket.on('failedLogin', function() 
     {
         alert('INCORRECT EMAIL AND/OR PASSWORD!');
+        console.log("incorrect")
+        //$('.success-popup').fadeIn(500);
+        //$('.success-popup').fadeOut(50000);
+
     });
 
+   
     socket.on('successfulLogin', function() 
     {
         alert("Successful Login");
+        //$('.success-popup').fadeIn(500);
+        //$('.success-popup').fadeOut(50000);
     })
 
     //---------

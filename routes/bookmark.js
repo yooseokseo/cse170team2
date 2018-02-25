@@ -18,6 +18,19 @@ exports.bookmark = function(itemID)
 	return false;
 }
 
+exports.checkBookmark = function(itemID)
+{
+	console.log("checkBookmark; itemID = "+itemID);
+	for (var i = 0; i < userData.bookmarkedList.length; i++)
+	{
+		if (itemID == userData.bookmarkedList[i].id)
+		{
+			return true;
+		}
+	}
+	return false;
+}
+
 exports.updateUserData = function(usrData)
 {
   userData = usrData;

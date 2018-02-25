@@ -36,7 +36,7 @@
 
     <div class = "tabs_container">
       <ul class="nav nav-tabs">
-        <li class="active"><a href="#Saved" data-toggle="tab">Saved</a></li>
+        <li class="active"><a href="#Bookmarked" data-toggle="tab">Bookmarked</a></li>
         <li><a href="#Uploaded" data-toggle="tab">Uploaded</a></li>
         <li><a href="#Shared" data-toggle="tab">Shared</a></li>
       </ul>
@@ -45,8 +45,11 @@
       <div class="tab-content">
 
         <!-- Saved tab -->
-        <div class="tab-pane active" id="Saved">
-            <h5> <center><br>SAVED CONTENT.. </center></h5>
+        <div class="tab-pane active" id="Bookmarked">
+            {{#each bookmarkedList}}
+              <a href="#"> <img id="img" src={{URL}}> </a>
+            {{/each}}
+
         </div>
 
         <!-- Uploaded tab -->

@@ -1,11 +1,6 @@
 'use strict';
 var isUp = false;
 
-$(document).ready(function() {
-
-
-});
-
 $('#up-btn').click(function() {
 
   if (isUp) {
@@ -53,23 +48,76 @@ $('#moreBtn').click(function() {
   $('#page-madia-caption').toggle("slow");
 });
 
+$(document).ready(function() 
+{
+});
+
+
+
+
+function check(itemID)
+{
+  checkBookmark(itemID);
+  checkLike(itemID);
+}
+
+//check if item already bookmarked; show bookmarked icon if so
+function checkBookmark(itemID)
+{
+  socket.emit('checkBookmark', itemID);
+  socket.once('bookmarked', function()
+  {
+    $('#bookmark-lable').hide();
+    $('#bookmark-icon').show();
+  });
+
+  socket.once('notBookmarked', function()
+  {
+    $('#bookmark-lable').show();
+    $('#bookmark-icon').hide();
+  })
+}
+
+//check if item alerady liked; show like heart if so
+function checkLike(itemID)
+{
+  socket.emit('checkLike', itemID);
+  socket.once('liked', function()
+  {
+    $('#like-lable').hide();
+    $('#like-heart').show();
+  });
+
+  socket.once('notLiked', function()
+  {
+    $('#like-lable').show();
+    $('#like-heart').hide();
+  })
+}
 
 //for like and bookmark buttons
 //use socket in order to add item to json without reloading page
-var socket = io.connect('http://localhost:3000');
 function bookmark(itemID)
 {
   socket.emit('bookmark', itemID); 
 
-  socket.on('bookmarkSuccess', function()
+  socket.once('bookmarkSuccess', function()
   {
+    console.log("show bookmark popup");
     $('.bookmark-popup').fadeIn(500);
     $('.bookmark-popup').fadeOut(2000);
+
+    $('#bookmark-lable').fadeOut(300);
+    $('#bookmark-icon').fadeIn(300);
   });
 
-  socket.on('bookmarkFail', function()
+  socket.once('bookmarkFail', function()
   {
-    alert("Please log in or sign up to bookmark");
+    //alert("Please log in or sign up to bookmark");
+    console.log("show bookmark popup");
+
+    $('.bookmark-fail-popup').fadeIn(250);
+    $('.bookmark-fail-popup').fadeOut(3000);
   }); 
 }
 
@@ -77,15 +125,16 @@ function like(itemID)
 {
   socket.emit('like', itemID); 
 
-  socket.on('likeSuccess', function()
+  socket.once('likeSuccess', function()
   {
-    console.log('like clicked');
     $('#like-lable').fadeOut(300);
     $('#like-heart').fadeIn(300);
   });
 
-  socket.on('likeFail', function()
+  socket.once('likeFail', function()
   {
-    alert("Please log in or sign up to like");
+    //alert("Please log in or sign up to like");
+    $('.like-fail-popup').fadeIn(250);
+    $('.like-fail-popup').fadeOut(3000);
   }); 
 }

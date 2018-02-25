@@ -175,14 +175,34 @@ io.sockets.on('connection', function(socket){
   socket.on('bookmark', function(itemID)
   {
     var bookmarkSuccess = bookmark.bookmark(itemID);
-    console.log("bookmarked: "+bookmarkSuccess)  ;
+    console.log("bookmarked: "+bookmarkSuccess);
+
     if (bookmarkSuccess) //user logged in; bookmarked 
     {
       socket.emit('bookmarkSuccess');
+
+      //updateUserData( bookmark.getUserData() );
+
     }
     else //not logged in; cannot bookmak
     {
       socket.emit('bookmarkFail');
+    }
+  });
+
+  //check if item is alrady bookmarked; display bookmark icon if so
+  socket.on('checkBookmark', function(itemID)
+  {
+    var bookmarked = bookmark.checkBookmark(itemID);
+
+    if (bookmarked)
+    {
+      socket.emit('bookmarked');
+    }
+    else
+    {
+      console.log("not bookmarked");
+      socket.emit('notBookmarked');
     }
   });
 
@@ -194,10 +214,28 @@ io.sockets.on('connection', function(socket){
     if (likeSuccess) //user logged in; bookmarked 
     {
       socket.emit('likeSuccess');
+
+      //updateUserData( like.getUserData() );
+
     }
     else //not logged in; cannot bookmak
     {
       socket.emit('likeFail');
+    }
+  });
+
+  //check if item already liked; show like heart if so
+  socket.on('checkLike', function(itemID)
+  {
+    var liked = like.checkBookmark(itemID);
+
+    if (liked)
+    {
+      socket.emit('liked');
+    }
+    else
+    {
+      socket.emit('notLiked');
     }
   });
 

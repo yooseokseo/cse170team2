@@ -18,6 +18,19 @@ exports.like = function(itemID)
 	return false;
 }
 
+exports.checkBookmark = function(itemID)
+{
+	console.log("checkLike; itemID = "+itemID);
+	for (var i = 0; i < userData.likedList.length; i++)
+	{
+		if (itemID == userData.likedList[i].id)
+		{
+			return true;
+		}
+	}
+	return false;
+}
+
 exports.updateUserData = function(usrData)
 {
   userData = usrData;
