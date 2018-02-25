@@ -56,7 +56,7 @@
       <div id="nav-cover-top">
 
       </div>
-
+      
       <!-- Buttons -->
       <div class="new-options">
 
@@ -68,11 +68,11 @@
         {{/if}}
 
         <!-- Bookmark button -->
-        <a id="bookmark-btn2" class="btn-floating darken-1 more-options-btns"><i style="font-family: Arial; font-style:normal;" class="material-icons" onclick="bookmark({{loginStatus}})">Bmark</i></a>
+        <a id="bookmark-btn2" class="btn-floating darken-1 more-options-btns"><i style="font-family: Arial; font-style:normal;" class="material-icons" onclick="bookmark( {{itemID}} )">Bmark</i></a>
         
         <!-- Like button -->
         <a id="like-btn2" class="btn-floating more-options-btns">
-          <i id="like-lable" style="font-family: Arial; font-style:normal;" class="material-icons" onclick="like( {{loginStatus}} )"> Like </i>
+          <i id="like-lable" style="font-family: Arial; font-style:normal;" class="material-icons" onclick="like( {{itemID}} )"> Like </i>
           <img id="like-heart" width="40" src="/images/icons/heart-48.png" alt="">
         </a>
 

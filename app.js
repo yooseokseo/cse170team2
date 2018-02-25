@@ -22,9 +22,9 @@ var userInfo = require('./routes/userInfo');
 var browse = require('./routes/browse');
 var preference = require('./routes/preference');
 var filteredrRandom = require('./routes/filteredRandom');
-// Example route
-// var user = require('./routes/user');
 var profile = require('./routes/profile');
+var bookmark = require('./routes/bookmark');
+
 var app = express();
 var server = http.createServer(app);
 var io = require('socket.io')(server);
@@ -161,8 +161,29 @@ io.sockets.on('connection', function(socket){
     else
     {
       profile.register(email, password, userName, img, actualName);
+      updateUserData(profile.getUserData());
       socket.emit('successfulLogin');
     }
+
+    //var json = require('./userData.json');
+    //console.log("app.js; json file "+JSON.stringify(json));
+  });
+
+
+  //liking item
+  socket.on('bookmark', function(itemID)
+  {
+    var bookmarkSuccess = bookmark.bookmark(itemID);
+    console.log("bookmarked: "+bookmarkSuccess)  ;
+    if (bookmarkSuccess) //user logged in; bookmarked 
+    {
+      socket.emit('bookmarkSuccess');
+    }
+    else //not logged in; cannot bookmak
+    {
+      socket.emit('bookmarkFail');
+    }
+
   });
 
 
@@ -177,6 +198,23 @@ io.sockets.on('connection', function(socket){
   
 
 });
+
+function updateUserData(userData)
+{
+  bookmark.updateUserData(userData);
+  browse.updateUserData(userData);
+  dataSelector.updateUserData(userData);
+  external.updateUserData(userData);
+  filteredrRandom.updateUserData(userData);
+  index.updateUserData(userData);
+  info.updateUserData(userData);
+  left.updateUserData(userData);
+  preference.updateUserData(userData);
+  right.updateUserData(userData);
+  share.updateUserData(userData);
+  show.updateUserData(userData);
+  userInfo.updateUserData(userData);
+}
 
 
 function updateClient(socket, username, newRoom){

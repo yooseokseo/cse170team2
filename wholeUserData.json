@@ -27,7 +27,9 @@
     }, {
       "title": "Home",
       "id": "home"
-    }]
+    }],
+    "likedList" : [],
+    "bookmarkedList":[]
   },
   {
     "userIdNumber": 1,
@@ -124,6 +126,8 @@
     }, {
       "title": "Home",
       "id": "home"
-    }]
+    }],
+    "likedList" : [],
+    "bookmarkedList":[]
   }
 ]

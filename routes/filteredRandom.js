@@ -65,3 +65,8 @@ exports.view = function(req, res) {
   });
 
 };
+
+exports.updateUserData = function(usrData)
+{
+  userData = usrData;
+};

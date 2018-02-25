@@ -11,3 +11,8 @@ exports.view = function(req, res){
   console.log(categoryList);
   console.log(data);
 };
+
+exports.updateUserData = function(usrData)
+{
+  userData = usrData;
+};

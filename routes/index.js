@@ -72,8 +72,14 @@ if (loginStatus) {
 }
 var userList = userData.userList;
 
+exports.updateUserData = function(usrData)
+{
+  userData = usrData;
+};
 
 exports.view = function(req, res) {
+  console.log("in view");
+  console.log(userData);
   userData.currentItemIndex = 0;
   console.log(userList);
   res.render('index', {
@@ -87,4 +93,9 @@ exports.view = function(req, res) {
     'categoryTitle': todayCategoryTitle,
     'itemId': todayItemId
   });
+};
+
+exports.updateUserData = function(usrData)
+{
+  userData = usrData;
 };

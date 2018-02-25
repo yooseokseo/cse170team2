@@ -117,7 +117,10 @@ function createNewUser(id, userName, password, email, img, actualName) {
     }, {
       "title": "Home",
       "id": "home"
-    }]
+    }],
+     "userList": [],
+     "likedList" : [],
+     "bookmarkedList":[]
   }
 
   return newUser;
@@ -126,30 +129,59 @@ function createNewUser(id, userName, password, email, img, actualName) {
 //helper function to populate userData after new user/existing user logs in
 //sets userData to values from wholeUserData
 function populateUserData(userIdNumber) {
-  userData.userIdNumber = userIdNumber;
-  userData.userName = wholeUserData[userIdNumber].userName;
-  userData.actualName = wholeUserData[userIdNumber].actualName;
-  userData.currentItemIndex = wholeUserData[userIdNumber].currentItemIndex;
-  userData.isScreenShared = wholeUserData[userIdNumber].isScreenShared;
-  userData.categoryList = wholeUserData[userIdNumber].categoryList;
-  userData.favoriteList = wholeUserData[userIdNumber].favoriteList;
-  userData.profileImgURL = wholeUserData[userIdNumber].profileImgURL;
-  userData.isAtChatroom =  wholeUserData[userIdNumber].isAtChatroom;
-  userData.loginStatus = true;
+  userData = wholeUserData[userIdNumber];
+  userData["currentPageViewed"] = null;
+  userData["currentCategorySelected"] = null;
+  userData["loginStatus"] = true;
 }
 
 //helper function to populate wholeUserData after user logs out
 //stores current userData to wholeUserData and replace userData w/ default data
 function resetUserData(userIdNumber) {
   //populate wholeUserData with current userData
-  wholeUserData[userIdNumber].currentItemIndex = userData.currentItemIndex;
-  wholeUserData[userIdNumber].isScreenShared = userData.isScreenShared;
-  wholeUserData[userIdNumber].categoryList = userData.categoryList;
-  wholeUserData[userIdNumber].favoriteList = userData.favoriteList;
-  userData.loginStatus = false;
+  delete userData['currentPageViewed'];
+  delete userData['currentCategorySelected'];
+  delete userData['loginStatus'];
+  wholeUserData[userIdNumber] = userData;
 
   //replace userData w/ default data
-  userData = wholeUserData[0];
+  //id, userName, password, email, img, actualName
+  userData = {
+    "loginStatus": false,
+    "userRole":null,
+    "userIdNumber": 0,
+    "userName": null,
+    "actualName": null,
+    "profileImgURL": "/images/icons/default_profile.jpg",
+    "currentPageViewed": null,
+    "currentCategorySelected": null,
+    "currentItemIndex": 0,
+    "isScreenShared": false,
+    "isAtChatroom": false,
+    "categoryList": [],
+    "favoriteList": [{
+      "title": "Activities",
+      "id": "activities"
+    }, {
+      "title": "Food",
+      "id": "food"
+    }, {
+      "title": "Travel",
+      "id": "travel"
+    }, {
+      "title": "Movies",
+      "id": "movies"
+    }, {
+      "title": "Pets",
+      "id": "pets"
+    }, {
+      "title": "Home",
+      "id": "home"
+    }],
+    "userList": [],
+    "likedList" : [],
+    "bookmarkedList": []
+  }
 
   console.log(userData);
 }
@@ -181,3 +213,13 @@ exports.logout = function(req, res) {
   });
 
 };
+
+exports.getUserData = function()
+{
+  return userData;
+}
+
+exports.getWholeUserData = function()
+{
+  return wholeUserData;
+}

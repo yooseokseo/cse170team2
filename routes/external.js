@@ -36,3 +36,8 @@ exports.view = function(req, res) {
     'loginStatus': userData.loginStatus
   });
 };
+
+exports.updateUserData = function(usrData)
+{
+  userData = usrData;
+};

@@ -1,6 +1,5 @@
 {
   "loginStatus": false,
-  "userRole":null,
   "userIdNumber": 0,
   "userName": null,
   "actualName": null,
@@ -30,5 +29,7 @@
     "title": "Home",
     "id": "home"
   }],
-  "userList": []
+  "userList": [],
+  "likedList" : [],
+  "bookmarkedList": []
 }
