@@ -146,7 +146,7 @@
         var usrName = $('fb_gg_username').val();
         var usrImg = $('fb_gg_image').val();
         var actualName = $('fb_gg_name').val();
-        socket.emit('checkLogin', email, pWord, usrName, usrImg, actualName); 
+        socket.emit('login', email, pWord, usrName, usrImg, actualName); 
     });
 
     socket.on('failedLogin', function() 

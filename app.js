@@ -133,7 +133,7 @@ io.sockets.on('connection', function(socket){
   });
 
   //check login in (both manual input and social media login)
-  socket.on('checkLogin', function (email, password, userName, img, actualName) 
+  socket.on('login', function (email, password, userName, img, actualName) 
   {
     var validLogin = profile.login(email, password, userName, img, actualName);
     console.log('logged in successfully: '+validLogin);
@@ -148,6 +148,7 @@ io.sockets.on('connection', function(socket){
     }
   });
 
+  //for registering
   socket.on('register', function (email, password, userName, img, actualName) 
   {
     var alreadyExist = profile.existingUser(email, password, false);

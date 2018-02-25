@@ -343,7 +343,7 @@ a {
     margin: 0 auto;
   }
 
-  #save-btn2{
+  #bookmark-btn2{
     grid-area: btn2;
     margin: 0 auto;
   }
@@ -393,7 +393,7 @@ a {
     font-size: 1rem;
 }
 
-.save-popup{
+.bookmark-popup{
   display: none;
   border-radius: 1rem;
   height: 16rem;

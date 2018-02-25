@@ -57,18 +57,26 @@
 
       </div>
 
-
+      <!-- Buttons -->
       <div class="new-options">
+
+        <!-- Share button -->
         {{#if isOneItem}}
           <a href="/{{pageTitle}}/{{itemID}}/shareOne" id="share-btn2" class="btn-floating more-options-btns"><i style="font-family: Arial; font-style:normal;" class="material-icons">Share</i></a>
         {{else}}
           <a href="/{{pageTitle}}/{{itemID}}/share" id="share-btn2" class="btn-floating more-options-btns"><i style="font-family: Arial; font-style:normal;" class="material-icons">Share</i></a>
         {{/if}}
-        <a id="save-btn2" class="btn-floating darken-1 more-options-btns"><i style="font-family: Arial; font-style:normal;" class="material-icons">Save</i></a>
+
+        <!-- Bookmark button -->
+        <a id="bookmark-btn2" class="btn-floating darken-1 more-options-btns"><i style="font-family: Arial; font-style:normal;" class="material-icons" onclick="bookmark({{loginStatus}})">Bmark</i></a>
+        
+        <!-- Like button -->
         <a id="like-btn2" class="btn-floating more-options-btns">
-          <i id="like-lable" style="font-family: Arial; font-style:normal;" class="material-icons">Like</i>
+          <i id="like-lable" style="font-family: Arial; font-style:normal;" class="material-icons" onclick="like( {{loginStatus}} )"> Like </i>
           <img id="like-heart" width="40" src="/images/icons/heart-48.png" alt="">
         </a>
+
+        <!-- Info button -->
         {{#if isOneItem}}
           <a id="info-btn2" href="/{{pageTitle}}/{{itemID}}/infoOne" class="btn-floating more-options-btns"><i style="font-family: Arial; font-style:normal;" class="material-icons">Info</i></a>
         {{else}}
@@ -159,7 +167,7 @@
     {{/if}}
     <div class="notification-hidden">
 
-      <div class="save-popup">
+      <div class="bookmark-popup">
         <img id="check-icon" src="/images/icons/check-500.png" alt=""> Added to Your Profile
       </div>
     </div>

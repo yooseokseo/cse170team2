@@ -6,18 +6,32 @@ $(document).ready(function() {
 
 });
 
-$('#save-btn2').click(function(){
-  $('.save-popup').fadeIn(500);
-  $('.save-popup').fadeOut(2000);
+function bookmark(loginStatus)
+{
+  if (!loginStatus) // not logged in; can't save
+  {
+    alert("Please log in or sign up to bookmark");
+  }
+  else
+  {
+    $('.bookmark-popup').fadeIn(500);
+    $('.bookmark-popup').fadeOut(2000);
+  }
+}
 
-})
-
-$('#like-lable').click(function(){
-  console.log('like clicked');
-  $(this).fadeOut(300);
-  $('#like-heart').fadeIn(300);
-
-})
+function like(loginStatus)
+{
+  if (!loginStatus)
+  {
+    alert("Please log in or sign up to like");
+  }
+  else
+  {
+    console.log('like clicked');
+    $(this).fadeOut(300);
+    $('#like-heart').fadeIn(300);
+  }
+}
 
 $('#up-btn').click(function() {
 
