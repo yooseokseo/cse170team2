@@ -223,3 +223,62 @@ exports.getWholeUserData = function()
 {
   return wholeUserData;
 }
+
+exports.getLoginStatus = function()
+{
+  return userData.loginStatus;
+}
+
+exports.addMediaHTML = function()
+{
+  console.log("addMediaHTML in routes/profile");
+  for (var i = 0; i < userData.bookmarkedList.length; i++)
+  {
+    var mediaHTML = getMediaHTML(userData.bookmarkedList[i]);
+    userData.bookmarkedList[i]['mediaHTML'] = mediaHTML;
+  }
+
+  /*
+  for (var i = 0; i < user.UPLOADLIST.length; i++)
+  {
+    var mediaHTML = getMediaHTML(userData.UPLOADLIST[i]);
+    userData.UPLOADLIST[i]['mediaHTML'] = mediaHTML
+  }
+
+  for (var i = 0; i < user.SHARED.length; i++)
+  {
+    var mediaHTML = getMediaHTML(userData.SHARED[i]);
+    userData.SHARED[i]['mediaHTML'] = mediaHTML
+  }
+  */
+}
+
+function getMediaHTML(item)
+{
+  var mediaHTML;
+  switch(item.type)
+  {
+    case 'image':
+          console.log('image Type');
+          mediaHTML = '<img id="mediaHTML" src="'+item.URL+'" alt="">';
+          break;
+      case 'video':
+          console.log('video Type');
+          mediaHTML = '<video id="mediaHTML" style="width:100%;" controls><source src='+ item.URL+' type=video/mp4></video>';
+          break;
+      case 'literature':
+          mediaHTML = '<img id="mediaHTML" src="' + item.URL + '" alt="">';
+          break;
+      case 'music':
+        mediaHTML = '<div id="mediaHTML"> <audio id="audio" style="width:70%;" controls><source src="'
+                    + item.URL + '" type="audio/ogg">Your browser does not support the audio element.'
+                    +'</audio></div>';
+        break;
+      default:
+          console.log('check mediaType!');
+          break;
+  }
+
+  return mediaHTML;
+
+}

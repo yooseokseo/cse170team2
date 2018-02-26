@@ -72,13 +72,13 @@
         <!-- Bookmark button -->
         <a id="bookmark-btn2" class="btn-floating more-options-btns">
           <i id="bookmark-lable" style="font-family: Arial; font-style:normal;" class="material-icons" onclick="bookmark( {{itemID}} )"> Bmark </i>
-          <img id="bookmark-icon" width="40" src="/images/icons/bookmark.png" alt="">
+          <img id="bookmark-icon" width="40" src="/images/icons/bookmark.png" alt="" onclick="bookmark( {{itemID}} )">
         </a>
         
         <!-- Like button -->
         <a id="like-btn2" class="btn-floating more-options-btns">
           <i id="like-lable" style="font-family: Arial; font-style:normal;" class="material-icons" onclick="like( {{itemID}} )"> Like </i>
-          <img id="like-heart" width="40" src="/images/icons/heart-48.png" alt="">
+          <img id="like-heart" width="40" src="/images/icons/heart-48.png" alt="" onclick="like( {{itemID}} )">
         </a>
 
         <!-- Info button -->
@@ -181,6 +181,13 @@
     <div class="notification-hidden">
       <div class="bookmark-fail-popup">
         <img id="check-icon" src="/images/icons/x-mark.png" alt=""> Sign in to bookmark
+      </div>
+    </div>
+
+    <!-- like success popup -->
+    <div class="notification-hidden">
+      <div class="like-popup">
+        <img id="check-icon" src="/images/icons/heart-popup.png" alt="">
       </div>
     </div>
 

@@ -56,85 +56,69 @@ $(document).ready(function()
 
 
 function check(itemID)
-{
-  checkBookmark(itemID);
-  checkLike(itemID);
+{  
+  bookmark(itemID, true);
+  like(itemID, true);
 }
 
-//check if item already bookmarked; show bookmarked icon if so
-function checkBookmark(itemID)
-{
-  socket.emit('checkBookmark', itemID);
-  socket.once('bookmarked', function()
-  {
-    $('#bookmark-lable').hide();
-    $('#bookmark-icon').show();
-  });
 
-  socket.once('notBookmarked', function()
+//itemID = id of item to check for bookmark
+//pageLoad = when page first loads; if true, simply if item is bookmarked.
+//  otherwise, add/remove item from bookmark list
+function bookmark(itemID, pageLoad)
+{
+  socket.emit('bookmark', itemID, pageLoad); 
+  socket.once('bookmarkResult', function(success)
   {
-    $('#bookmark-lable').show();
-    $('#bookmark-icon').hide();
-  })
+    if (success == 1)
+    {
+      if (!pageLoad) //user clicks bookmark; show confirmation 
+      {
+        $('.bookmark-popup').fadeIn(500);
+        $('.bookmark-popup').fadeOut(2000);
+      }
+      //show bookmark icon
+      $('#bookmark-lable').hide();
+      $('#bookmark-icon').show();
+    }
+    else if (success == 0) //unbookmark or not bookmarked
+    { //hide bookmark icon
+      $('#bookmark-lable').show();
+      $('#bookmark-icon').hide();
+    }
+    else //not logged in; bookmark fail
+    {
+      $('.bookmark-fail-popup').fadeIn(250);
+      $('.bookmark-fail-popup').fadeOut(3000);
+    }
+  });
 }
 
-//check if item alerady liked; show like heart if so
-function checkLike(itemID)
+function like(itemID, pageLoad)
 {
-  socket.emit('checkLike', itemID);
-  socket.once('liked', function()
+  socket.emit('like', itemID, pageLoad); 
+  socket.once('likeResult', function(success)
   {
-    $('#like-lable').hide();
-    $('#like-heart').show();
+    if (success == 1)
+    {
+      if (!pageLoad) //user clicks bookmark; show confirmation 
+      {
+        $('.like-popup').fadeIn(500);
+        $('.like-popup').fadeOut(2000);
+      }
+      //show bookmark icon
+      $('#like-lable').hide();
+      $('#like-heart').show();
+    }
+    else if (success == 0) //unbookmark or not bookmarked
+    { //hide bookmark icon
+      $('#like-lable').show();
+      $('#like-heart').hide();
+    }
+    else //not logged in; bookmark fail
+    {
+      $('.like-fail-popup').fadeIn(250);
+      $('.like-fail-popup').fadeOut(3000);
+    }
   });
-
-  socket.once('notLiked', function()
-  {
-    $('#like-lable').show();
-    $('#like-heart').hide();
-  })
-}
-
-//for like and bookmark buttons
-//use socket in order to add item to json without reloading page
-function bookmark(itemID)
-{
-  socket.emit('bookmark', itemID); 
-
-  socket.once('bookmarkSuccess', function()
-  {
-    console.log("show bookmark popup");
-    $('.bookmark-popup').fadeIn(500);
-    $('.bookmark-popup').fadeOut(2000);
-
-    $('#bookmark-lable').fadeOut(300);
-    $('#bookmark-icon').fadeIn(300);
-  });
-
-  socket.once('bookmarkFail', function()
-  {
-    //alert("Please log in or sign up to bookmark");
-    console.log("show bookmark popup");
-
-    $('.bookmark-fail-popup').fadeIn(250);
-    $('.bookmark-fail-popup').fadeOut(3000);
-  }); 
-}
-
-function like(itemID)
-{
-  socket.emit('like', itemID); 
-
-  socket.once('likeSuccess', function()
-  {
-    $('#like-lable').fadeOut(300);
-    $('#like-heart').fadeIn(300);
-  });
-
-  socket.once('likeFail', function()
-  {
-    //alert("Please log in or sign up to like");
-    $('.like-fail-popup').fadeIn(250);
-    $('.like-fail-popup').fadeOut(3000);
-  }); 
 }

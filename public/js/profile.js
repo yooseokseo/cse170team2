@@ -1,12 +1,22 @@
+var socket = io.connect('http://localhost:3000');
 
-function checkLoginStatus(signedIn) {
-  //not signed in; set attribute to open in pop up instead of new page
-  if (!signedIn) {
+//gets loginStatus directly from app.js to avoid asynchronicity shit
+socket.once('loginStatus', function(signedIn)
+{
+  if (!signedIn) 
+  {
     $(".profile").attr({
       "data-toggle": "modal",
       "data-target": "#profile_popup",
     });
   }
 
-  $(".profile").attr("href", "/profile");
+  $(".profile").attr("href", "/profile");    
+});
+
+
+
+function addMediaHTML()
+{
+	socket.emit('addMediaHTML');
 }

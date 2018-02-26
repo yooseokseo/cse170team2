@@ -296,7 +296,14 @@
 
 
 
-#img {
+audio#audio
+{
+  position:absolute;
+  top:50%;
+  transform: translate(10%,-10%);
+}
+
+#mediaHTML {
   border: 1px solid #ddd;
   border-radius: 6px;
   display: block;
@@ -304,6 +311,7 @@
   padding:1%;
   float: left;
   position: relative
+  padding-top:50%;
 }
 
 

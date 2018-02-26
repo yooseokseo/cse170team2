@@ -172,72 +172,48 @@ io.sockets.on('connection', function(socket){
 
 
   //bookmark item
-  socket.on('bookmark', function(itemID)
+  socket.on('bookmark', function(itemID, pageLoad)
   {
-    var bookmarkSuccess = bookmark.bookmark(itemID);
-    console.log("bookmarked: "+bookmarkSuccess);
-
-    if (bookmarkSuccess) //user logged in; bookmarked 
+    var bookmarked;
+    if (pageLoad)
     {
-      socket.emit('bookmarkSuccess');
-
-      //updateUserData( bookmark.getUserData() );
-
-    }
-    else //not logged in; cannot bookmak
-    {
-      socket.emit('bookmarkFail');
-    }
-  });
-
-  //check if item is alrady bookmarked; display bookmark icon if so
-  socket.on('checkBookmark', function(itemID)
-  {
-    var bookmarked = bookmark.checkBookmark(itemID);
-
-    if (bookmarked)
-    {
-      socket.emit('bookmarked');
+      bookmarked = bookmark.checkBookmark(itemID);
+      bookmarked = (bookmarked == -1)? 0 : 1;
     }
     else
     {
-      console.log("not bookmarked");
-      socket.emit('notBookmarked');
+      bookmarked = bookmark.bookmark(itemID);
     }
+    socket.emit('bookmarkResult', bookmarked);
   });
 
-  //liking item
-  socket.on('like', function(itemID)
+  socket.on('like', function(itemID, pageLoad)
   {
-    var likeSuccess = like.like(itemID);
-    console.log("liked: "+likeSuccess)  ;
-    if (likeSuccess) //user logged in; bookmarked 
+    var liked;
+    if (pageLoad)
     {
-      socket.emit('likeSuccess');
-
-      //updateUserData( like.getUserData() );
-
-    }
-    else //not logged in; cannot bookmak
-    {
-      socket.emit('likeFail');
-    }
-  });
-
-  //check if item already liked; show like heart if so
-  socket.on('checkLike', function(itemID)
-  {
-    var liked = like.checkBookmark(itemID);
-
-    if (liked)
-    {
-      socket.emit('liked');
+      liked = like.checkLike(itemID);
+      liked = (liked == -1)? 0 : 1;
     }
     else
     {
-      socket.emit('notLiked');
+      liked = like.like(itemID);
     }
+    socket.emit('likeResult', liked);
+
   });
+
+  //used for displaying content in profile.handlebars
+  socket.on('addMediaHTML', function()
+  {
+    profile.addMediaHTML();
+
+    updateUserData( profile.getUserData() );
+  });
+
+  //sends loginStatus directly froma app.js to avoid error from asynchronicity
+  socket.emit('loginStatus', profile.getLoginStatus() );
+
 
 
 

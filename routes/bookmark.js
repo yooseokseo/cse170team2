@@ -1,23 +1,35 @@
 var data = require('../data.json');
 var userData = require('../userData.json');
 
-//return true if successfully bookmarked (user logged in);
+//return -1 if not logged in (cannot add)
+//return 0 if removing from list
+//return 1 if adding to list
 //false otherwise (not logged in)
 exports.bookmark = function(itemID)
 {
 	console.log("in routes/bookmark");
 
-	if (userData.loginStatus)
+	if (!userData.loginStatus) //not logged in
 	{
-		userData.bookmarkedList.push(data[itemID]);
-
-		return true;
+		return -1
 	}
 
-	console.log("not logged in; cannot bookmark");
-	return false;
+	//logged in; check if item is alerady bookmarked
+	var itemIndex = this.checkBookmark(itemID);
+
+	if (itemIndex != -1) //already bookmarked; removed from list
+	{
+		userData.bookmarkedList.splice(itemIndex, 1);
+		return 0;
+	}
+	else
+	{
+		userData.bookmarkedList.push(data[itemID]);
+		return 1;
+	}
 }
 
+//return index of item if bookmarked; -1 otherwise
 exports.checkBookmark = function(itemID)
 {
 	console.log("checkBookmark; itemID = "+itemID);
@@ -25,10 +37,10 @@ exports.checkBookmark = function(itemID)
 	{
 		if (itemID == userData.bookmarkedList[i].id)
 		{
-			return true;
+			return i;
 		}
 	}
-	return false;
+	return -1;
 }
 
 exports.updateUserData = function(usrData)
