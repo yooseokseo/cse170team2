@@ -175,40 +175,35 @@ io.sockets.on('connection', function(socket){
   socket.on('bookmark', function(itemID, pageLoad)
   {
     var bookmarked;
-    if (pageLoad)
+    if (pageLoad) //simply check if item is bookmarked
     {
       bookmarked = bookmark.checkBookmark(itemID);
       bookmarked = (bookmarked == -1)? 0 : 1;
     }
-    else
+    else //not page load; add/remove from list
     {
       bookmarked = bookmark.bookmark(itemID);
+
+      updateUserData( bookmark.getUserData() );
     }
     socket.emit('bookmarkResult', bookmarked);
   });
 
+  //like item
   socket.on('like', function(itemID, pageLoad)
   {
     var liked;
-    if (pageLoad)
+    if (pageLoad) //simply check if item is liked
     {
       liked = like.checkLike(itemID);
       liked = (liked == -1)? 0 : 1;
     }
-    else
+    else //user clicked; add/remove from list
     {
       liked = like.like(itemID);
     }
     socket.emit('likeResult', liked);
 
-  });
-
-  //used for displaying content in profile.handlebars
-  socket.on('addMediaHTML', function()
-  {
-    profile.addMediaHTML();
-
-    updateUserData( profile.getUserData() );
   });
 
   //sends loginStatus directly froma app.js to avoid error from asynchronicity
@@ -218,13 +213,6 @@ io.sockets.on('connection', function(socket){
 
 
 
-
-
-
-
-
-
-  
 
 });
 

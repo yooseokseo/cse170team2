@@ -43,6 +43,11 @@ exports.checkBookmark = function(itemID)
 	return -1;
 }
 
+exports.getUserData = function()
+{
+  return userData;
+}
+
 exports.updateUserData = function(usrData)
 {
   userData = usrData;

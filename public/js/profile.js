@@ -13,10 +13,3 @@ socket.once('loginStatus', function(signedIn)
 
   $(".profile").attr("href", "/profile");    
 });
-
-
-
-function addMediaHTML()
-{
-	socket.emit('addMediaHTML');
-}

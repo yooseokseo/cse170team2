@@ -4,6 +4,7 @@ var categoryList = require('../categoryListData.json');
 var wholeUserData = require('../wholeUserData.json');
 var dataTypeList = require('../dataType.json');
 
+function addMediaHTML(){};
 
 //-----------------------------------------------
 //---------------------VIEW()--------------------
@@ -16,10 +17,12 @@ exports.view = function(req, res) {
   if (!loginStatus) { //not logged in; show pop up
     res.render('profile_popup');
   } else { //logged in; show profile page
+    addMediaHTML();
     res.render('profile', userData);
   }
 
 };
+
 
 //return userIdNumber if user exists; -1 otherwise
 exports.existingUser = function(email, password, checkPassword)
@@ -229,7 +232,12 @@ exports.getLoginStatus = function()
   return userData.loginStatus;
 }
 
-exports.addMediaHTML = function()
+exports.updateUserData = function(usrData)
+{
+  userData = usrData;
+};
+
+function addMediaHTML()
 {
   console.log("addMediaHTML in routes/profile");
   for (var i = 0; i < userData.bookmarkedList.length; i++)
