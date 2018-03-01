@@ -13,3 +13,8 @@ socket.once('loginStatus', function(signedIn)
 
   $(".profile").attr("href", "/profile");    
 });
+
+function logout()
+{
+  alert("logout");
+}

@@ -152,7 +152,7 @@ io.sockets.on('connection', function(socket){
     }
   });
 
-  //for registering
+  //registering
   socket.on('register', function (email, password, userName, img, actualName) 
   {
     var alreadyExist = profile.existingUser(email, password, false);
@@ -168,6 +168,11 @@ io.sockets.on('connection', function(socket){
 
       updateUserData( profile.getUserData() );
     }
+  });
+
+  socket.on('logout', function()
+  {
+    profile.logout();
   });
 
 

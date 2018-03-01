@@ -19,16 +19,13 @@
         <p>{{actualName}}</p>
       </div>
 
-      <!-- hide buttons to fix bugs for now 
+      <!-- hide buttons to fix bugs for now -->
 
       <div class= "edit-profile">
         <a href="/">Edit Profile</a>
-        <div style="color: red;" class="">
-          * please do not log out..there is a bug which we need to fix
-        </div>
-        <a href="/profile_logout">LOG OUT</a>
+        <a id="logout_btn" onclick="logout()">LOG OUT</a>
       </div> 
-    -->
+    
 
 
     </div>
@@ -43,11 +40,12 @@
 
       <!-- Tab panes -->
       <div class="tab-content">
+        <p>profileURL = [{{profileImgURL}}]</p>
 
         <!-- Saved tab -->
         <div class="tab-pane active" id="Bookmarked">
             {{#each bookmarkedList}}
-              <a href="#"> {{{mediaHTML}}} </a>
+              <a href="/{{category}}/{{id}}/showOneItem"> {{{mediaHTML}}} </a>
             {{/each}}
 
         </div>

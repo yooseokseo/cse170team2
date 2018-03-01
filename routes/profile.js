@@ -14,12 +14,17 @@ exports.view = function(req, res) {
 
   console.log("User is loggeed in: " + loginStatus);
 
-  if (!loginStatus) { //not logged in; show pop up
+  if (!loginStatus) //not logged in; show pop up 
+  { 
     res.render('profile_popup');
-  } else { //logged in; show profile page
+  } 
+  else //logged in; show profile page
+  { 
     addMediaHTML();
-    res.render('profile', userData);
+      res.render('profile', userData);  
   }
+
+  
 
 };
 
@@ -194,28 +199,17 @@ function resetUserData(userIdNumber) {
 //----------------/PROFILE_LOGOUT----------------
 //-----------------------------------------------
 exports.logout = function(req, res) {
-  resetUserData(userData.userIdNumber);
-
-  //Code copied from index.js
-  var popularCategoryList = require('../popularCategoryListData.json');
-  userData.currentCategorySelected = "Popular";
-
-  userData.userList = [];
-  for (var i = 0; i < 4; i++) {
-    userData.userList.push(popularCategoryList[i]);
-  }
-
-  var userList = userData.userList;
-  res.render('index', {
-    'currentCategorySelected': userData.currentCategorySelected,
-    'currentUserCategoryList': userList,
-    'loginStatus': userData.loginStatus,
-    categoryList,
-    userData,
-    'dataTypeList': dataTypeList
-  });
-
-};
+  console.log("userData before logging out ");
+  console.log(userData);
+  userData.splice(userData.indexOf('currentPageViewed'), 1);
+  userData.splice(userData.indexOf('currentCategorySelected'), 1);
+  userData.splice(userData.indexOf('loginStatus'), 1);
+  wholeUserData[userIdNumber] = userData;
+  console.log('wholeUserData');
+  console.log(wholeUserData[userIdNumber]);
+  userData = require('../defaultUserData.json');
+  console.log("defaultUserData");
+  console.log(userData);};
 
 exports.getUserData = function()
 {
