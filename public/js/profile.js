@@ -16,5 +16,5 @@ socket.once('loginStatus', function(signedIn)
 
 function logout()
 {
-  alert("logout");
+  socket.emit('logout');
 }

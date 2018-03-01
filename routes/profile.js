@@ -150,7 +150,7 @@ function resetUserData(userIdNumber) {
   delete userData['currentPageViewed'];
   delete userData['currentCategorySelected'];
   delete userData['loginStatus'];
-  wholeUserData[userIdNumber] = userData;
+  wholeUserData[userData.userIdNumber] = userData;
 
   //replace userData w/ default data
   //id, userName, password, email, img, actualName
@@ -198,18 +198,20 @@ function resetUserData(userIdNumber) {
 //-----------------------------------------------
 //----------------/PROFILE_LOGOUT----------------
 //-----------------------------------------------
-exports.logout = function(req, res) {
+exports.logout = function()
+{
   console.log("userData before logging out ");
   console.log(userData);
-  userData.splice(userData.indexOf('currentPageViewed'), 1);
-  userData.splice(userData.indexOf('currentCategorySelected'), 1);
-  userData.splice(userData.indexOf('loginStatus'), 1);
-  wholeUserData[userIdNumber] = userData;
+  delete userData['currentPageViewed'];
+  delete userData['currentCategorySelected'];
+  delete userData['loginStatus'];
+  wholeUserData[userData.userIdNumber] = userData;
   console.log('wholeUserData');
-  console.log(wholeUserData[userIdNumber]);
+  console.log(wholeUserData[userData.userIdNumber]);
   userData = require('../defaultUserData.json');
   console.log("defaultUserData");
-  console.log(userData);};
+  console.log(userData);
+};
 
 exports.getUserData = function()
 {
