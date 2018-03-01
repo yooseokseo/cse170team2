@@ -343,7 +343,7 @@ a {
     margin: 0 auto;
   }
 
-  #save-btn2{
+  #bookmark-btn2{
     grid-area: btn2;
     margin: 0 auto;
   }
@@ -393,7 +393,10 @@ a {
     font-size: 1rem;
 }
 
-.save-popup{
+.bookmark-popup, 
+.bookmark-fail-popup,
+.like-fail-popup
+{
   display: none;
   border-radius: 1rem;
   height: 16rem;
@@ -405,6 +408,17 @@ a {
   margin-top: 20rem;
 }
 
+.like-popup 
+{
+  display: none;
+  border-radius: 1rem;
+  height: 16rem;
+  font-size: 1.2rem;
+  padding:  1rem;
+  width: 15rem;
+  text-align: center;
+  margin-top: 20rem; 
+}
 .notification-hidden{
   width: 100%;
   height: 0;
@@ -425,3 +439,8 @@ a {
 #like-heart{
   display: none;
 }
+
+#bookmark-icon{
+  display:none;
+}
+

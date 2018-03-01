@@ -72,6 +72,10 @@ if (loginStatus) {
 }
 var userList = userData.userList;
 
+exports.updateUserData = function(usrData)
+{
+  userData = usrData;
+};
 
 exports.view = function(req, res) {
   userData.currentItemIndex = 0;
@@ -87,4 +91,9 @@ exports.view = function(req, res) {
     'categoryTitle': todayCategoryTitle,
     'itemId': todayItemId
   });
+};
+
+exports.updateUserData = function(usrData)
+{
+  userData = usrData;
 };

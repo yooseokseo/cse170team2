@@ -7,6 +7,8 @@ var express = require('express');
 var http = require('http');
 var path = require('path');
 var handlebars = require('express3-handlebars')
+var fs = require('fs');
+
 
 var index = require('./routes/index');
 var dataSelector = require('./routes/dataSelector');
@@ -20,9 +22,11 @@ var userInfo = require('./routes/userInfo');
 var browse = require('./routes/browse');
 var preference = require('./routes/preference');
 var filteredrRandom = require('./routes/filteredRandom');
-// Example route
-// var user = require('./routes/user');
 var profile = require('./routes/profile');
+var bookmark = require('./routes/bookmark');
+var like = require('./routes/like');
+
+
 var app = express();
 var server = http.createServer(app);
 var io = require('socket.io')(server);
@@ -52,8 +56,6 @@ app.get('/', index.view);
 app.get('/browse', browse.view);
 app.get('/profile', profile.view);
 app.get('/profile_register', profile.register);
-app.get('/profile_login', profile.login);
-app.get('/profile_incorrect_login', profile.incorrect_login);
 app.get('/profile_logout', profile.logout);
 
 //app.get('/profile_goodle', profile.google);
@@ -83,6 +85,8 @@ app.get('/:categoryTitle/:itemId/info/:externalId/external', external.view);
 app.get('/preference', preference.view);
 app.get('/app/:title/filteredRandom', filteredrRandom.view);
 //app.get('/:categoryTitle/:itemId/info/:externalId/external/:webaddress', external.webview);
+
+
 
 
 // Example route
@@ -116,7 +120,6 @@ io.sockets.on('connection', function(socket){
 
   });
 
-
   //send message
   socket.on('sendChat', function(data){
     console.log(socket.username + "sent a message");
@@ -131,7 +134,110 @@ io.sockets.on('connection', function(socket){
     socket.leave(socket.room);
   });
 
+  //check login in (both manual input and social media login)
+  socket.on('login', function (email, password, userName, img, actualName) 
+  {
+    var validLogin = profile.login(email, password, userName, img, actualName);
+    console.log('logged in successfully: '+validLogin);
+
+    if (!validLogin)
+    {
+      socket.emit('failedLogin');
+    }
+    else
+    {
+      socket.emit('successfulLogin');
+
+      updateUserData( profile.getUserData() );
+    }
+  });
+
+  //for registering
+  socket.on('register', function (email, password, userName, img, actualName) 
+  {
+    var alreadyExist = profile.existingUser(email, password, false);
+
+    if (alreadyExist != -1)
+    {
+      socket.emit('alreadyExist');
+    }
+    else
+    {
+      profile.register(email, password, userName, img, actualName);
+      socket.emit('successfulLogin');
+
+      updateUserData( profile.getUserData() );
+    }
+  });
+
+
+  //bookmark item
+  socket.on('bookmark', function(itemID, pageLoad)
+  {
+    var bookmarked;
+    if (pageLoad) //simply check if item is bookmarked
+    {
+      bookmarked = bookmark.checkBookmark(itemID);
+      bookmarked = (bookmarked == -1)? 0 : 1;
+    }
+    else //not page load; add/remove from list
+    {
+      bookmarked = bookmark.bookmark(itemID);
+
+      updateUserData( bookmark.getUserData() );
+    }
+    socket.emit('bookmarkResult', bookmarked);
+  });
+
+  //like item
+  socket.on('like', function(itemID, pageLoad)
+  {
+    var liked;
+    if (pageLoad) //simply check if item is liked
+    {
+      liked = like.checkLike(itemID);
+      liked = (liked == -1)? 0 : 1;
+    }
+    else //user clicked; add/remove from list
+    {
+      liked = like.like(itemID);
+    }
+    socket.emit('likeResult', liked);
+
+  });
+
+  //sends loginStatus directly froma app.js to avoid error from asynchronicity
+  socket.emit('loginStatus', profile.getLoginStatus() );
+
+
+
+
+
+
 });
+
+
+//get all routes file and add it to an array
+//updateUserData() loops through it
+var routeFiles = [];
+fs.readdirSync('./routes/').forEach(file => 
+{
+  var fileName = file.substring(0, file.length-3); //removes ".js"
+  if (fileName != "profile")
+  {
+    routeFiles.push( require('./routes/'+fileName) );
+  }
+});
+
+//manually update userData in every route files
+//fixes "bug" (from asynchronicity) where loginStatus sometimes isn't updated
+function updateUserData(userData)
+{
+  for (var i = 0; i < routeFiles.length; i++)
+  {
+    routeFiles[i].updateUserData(userData);
+  }
+}
 
 
 function updateClient(socket, username, newRoom){

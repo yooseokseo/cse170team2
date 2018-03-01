@@ -196,7 +196,7 @@ exports.shareview = function(req, res) {
   }
 
 
-
+  console.log("userData loginStatus: " +userData.loginStatus );
 
   res.render('linkshare', {
     'categoryTitle': categoryTitle,
@@ -268,4 +268,9 @@ exports.viewOne = function(req, res) {
     isOneItem
 
   });
+};
+
+exports.updateUserData = function(usrData)
+{
+  userData = usrData;
 };

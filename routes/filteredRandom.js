@@ -47,7 +47,8 @@ exports.view = function(req, res) {
 
 
 
-
+ console.log("filtered room");
+ console.log(userData);
 
   res.render('play', {
     "isScreenShared": userData.isScreenShared,
@@ -64,4 +65,9 @@ exports.view = function(req, res) {
 
   });
 
+};
+
+exports.updateUserData = function(usrData)
+{
+  userData = usrData;
 };

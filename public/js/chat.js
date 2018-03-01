@@ -1,4 +1,8 @@
+//for testing
 var socket = io.connect('http://localhost:3000');
+//for deploying
+//var socket = io.connect('https://a7-cogs120team2.herokuapp.com');
+
 
 socket.on('connect', function() {
   socket.emit('addUser', 'user');

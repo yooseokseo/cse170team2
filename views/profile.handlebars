@@ -14,15 +14,21 @@
               Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
           </div>
       </div>
-      
+
       <div class = "username">
         <p>{{actualName}}</p>
       </div>
 
+      <!-- hide buttons to fix bugs for now 
+
       <div class= "edit-profile">
         <a href="/">Edit Profile</a>
+        <div style="color: red;" class="">
+          * please do not log out..there is a bug which we need to fix
+        </div>
         <a href="/profile_logout">LOG OUT</a>
-      </div>
+      </div> 
+    -->
 
 
     </div>
@@ -30,7 +36,7 @@
 
     <div class = "tabs_container">
       <ul class="nav nav-tabs">
-        <li class="active"><a href="#Saved" data-toggle="tab">Saved</a></li>
+        <li class="active"><a href="#Bookmarked" data-toggle="tab">Bookmarked</a></li>
         <li><a href="#Uploaded" data-toggle="tab">Uploaded</a></li>
         <li><a href="#Shared" data-toggle="tab">Shared</a></li>
       </ul>
@@ -39,8 +45,11 @@
       <div class="tab-content">
 
         <!-- Saved tab -->
-        <div class="tab-pane active" id="Saved">
-            <h5> <center><br>SAVED CONTENT.. </center></h5>
+        <div class="tab-pane active" id="Bookmarked">
+            {{#each bookmarkedList}}
+              <a href="#"> {{{mediaHTML}}} </a>
+            {{/each}}
+
         </div>
 
         <!-- Uploaded tab -->
@@ -71,6 +80,8 @@
   </div>
 
   {{>script}}
+  <script src="/socket.io/socket.io.js"></script>
+
 
 </body>
 

@@ -99,6 +99,7 @@ exports.view = function(req, res){
 
 
   console.log("current Item (Ready To View):" + userData.categoryList[itemIndex].URL);
+  
   //need to check type
   var categoryListUser = userData.categoryList;
 
@@ -140,4 +141,9 @@ exports.view = function(req, res){
     categoryList,
     'loginStatus': userData.loginStatus
   });
+};
+
+exports.updateUserData = function(usrData)
+{
+  userData = usrData;
 };

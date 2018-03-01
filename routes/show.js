@@ -113,3 +113,8 @@ exports.viewOneItem = function(req, res) {
     isOneItem
   });
 };
+
+exports.updateUserData = function(usrData)
+{
+  userData = usrData;
+};

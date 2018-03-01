@@ -10,15 +10,15 @@
             <div class="col-lg-11">
                 <!-- Nav tabs -->
                 <ul class="nav nav-tabs" id="nav-tabs">
-                    <li id="login-tab" class="active"><a href="#Login" data-toggle="tab">Login</a></li>
-                    <li id="signup-tab"><a href="#Registration" data-toggle="tab">Signup</a></li>
+                    <li id="login-tab" ><a href="#Login" data-toggle="tab">Login</a></li>
+                    <li id="signup-tab" class="active"><a href="#Registration" data-toggle="tab">Signup</a></li>
                 </ul>
                 <!-- Tab panes -->
                 <div class="tab-content" id="tab-content">
 
                     <!-- Login form -->
-                    <div class="tab-pane active" id="Login">
-                        <form role="form" class="form-horizontal" method="get" action="/profile_login">
+                    <div class="tab-pane " id="Login">
+                        <form role="form" class="form-horizontal">
 
                             <!-- Email -->
                             <div class="form-group">
@@ -79,26 +79,19 @@
                                 <div class="col-sm-12">
 
                                     <!-- Facebook submit button -->
-                                    <input id="flogin-btn" type="button" class="btn btn-primary btn-sm" value="Login with Facebook" data-target="#login-btn" onclick="checkLoginState();"/>
+                                    <input id="flogin-btn" type="button" class="btn btn-primary btn-sm" value="Login with Facebook" onclick="checkLoginState();"/>
 
                                 </div>
                             </div>
 
-                            <script>startApp();</script>
-                            <!-- Login with Google -->
-                            <div class="row" id="customBtn1">
-                                <div class="col-sm-12">
-                                    <!-- Google submit button -->
-                                    <input id="glogin-btn"type="button" class="btn btn-primary btn-sm" value="Login with Google">
-                                </div>
-                            </div>
+                      
 
                         </form>
                     </div>
 
                     <!-- Registration form -->
-                    <div class="tab-pane" id="Registration">
-                        <form id="addFriendForm" role="form" method="get" action="/profile_register">
+                    <div class="tab-pane active" id="Registration">
+                        <form id="addFriendForm" role="form">
 
                           <!-- Email -->
                           <div class="form-group">
@@ -122,7 +115,7 @@
 
                             <!-- Sign-up button -->
                             <div id="signup-btn" class="form-group">
-                              <input type="submit" id="submitBtn" class="btn btn-default signup-input" value="Sign Up" ></input>
+                              <input type="submit" id="signUpBtn" class="btn btn-default signup-input" value="Sign Up" ></input>
                             </div>
 
                         </form>
@@ -138,3 +131,64 @@
     </div>
 </div>
 
+<div class="notification-hidden">
+  <div class="success-popup">
+    <img id="check-icon" src="/images/icons/check-500.png" alt=""> Added to Your Profile
+  </div>
+</div>
+
+<!-- Check if user enter correct login information -->
+<script src="/socket.io/socket.io.js"></script>
+<script>
+    var socket = io.connect('http://localhost:3000');
+
+    //---------
+
+    //for login
+    $('#login-btn').click(function() 
+    {
+        var email = $('#email1').val();
+        var pWord = $('#exampleInputPassword1').val();
+        var usrName = $('fb_gg_username').val();
+        var usrImg = $('fb_gg_image').val();
+        var actualName = $('fb_gg_name').val();
+        socket.emit('login', email, pWord, usrName, usrImg, actualName); 
+    });
+
+    socket.on('failedLogin', function() 
+    {
+        alert('INCORRECT EMAIL AND/OR PASSWORD!');
+        console.log("incorrect")
+        //$('.success-popup').fadeIn(500);
+        //$('.success-popup').fadeOut(50000);
+
+    });
+
+   
+    socket.on('successfulLogin', function() 
+    {
+        alert("Successful Login");
+        //$('.success-popup').fadeIn(500);
+        //$('.success-popup').fadeOut(50000);
+    })
+
+    //---------
+
+    //for signup
+    $('#signUpBtn').click(function()
+    {
+        console.log("SIGN UP");
+        var email = $('#email').val();
+        var actualName = $('#name').val();
+        var usrName = $('#username').val();
+        var pWord = $('#password').val();
+        var usrImg = '/images/icons/default_profile.jpg';
+        socket.emit('register', email, pWord, usrName, usrImg, actualName);
+    });
+
+    socket.on('alreadyExist', function()
+    {
+        alert("This email already exists. Please sign in or try a different email");
+    })
+
+</script>

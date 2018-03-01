@@ -4,8 +4,10 @@ var categoryList = require('../categoryListData.json');
 var wholeUserData = require('../wholeUserData.json');
 var dataTypeList = require('../dataType.json');
 
+function addMediaHTML(){};
+
 //-----------------------------------------------
-//-----------------/PROFILE_VIEW-----------------
+//---------------------VIEW()--------------------
 //-----------------------------------------------
 exports.view = function(req, res) {
   var loginStatus = userData.loginStatus;
@@ -15,42 +17,81 @@ exports.view = function(req, res) {
   if (!loginStatus) { //not logged in; show pop up
     res.render('profile_popup');
   } else { //logged in; show profile page
+    addMediaHTML();
     res.render('profile', userData);
   }
 
 };
 
-//------------------------------------------------
-//----------------/PROFILE_REGISTER---------------
-//------------------------------------------------
-exports.register = function(req, res) {
-  console.log("register");
 
-  var newUser = createNewUser(wholeUserData.length,
-    req.query.username,
-    req.query.password,
-    req.query.email,
-    "/images/icons/default_profile.jpg",
-    req.query.name);
+//return userIdNumber if user exists; -1 otherwise
+exports.existingUser = function(email, password, checkPassword)
+{
+  for (var i = 0; i < wholeUserData.length; i++) 
+  {
+    //user alreay exists
+    if (email == wholeUserData[i].email) 
+    {
+      if (checkPassword && password != wholeUserData[i].password)
+      {
+        return -1;
+      }
+      return i;
+    }
+  }
+
+  return -1; //new user
+}
+
+//-----------------------------------------------
+//--------------------LOGIN()--------------------
+//-----------------------------------------------
+//return true if successful login; false otherwise
+exports.login = function(email, password, userName, img, actualName)
+{
+  //check if existing user (matching email and password in database)
+  var i;
+  if ( (i = this.existingUser(email, password, true)) != -1)
+  {
+    populateUserData(i);
+    return true;
+  }
+
+  //-----------------------
+
+  var facebook_google_login = userName != null;
+
+  //not existing user; if Facebook or Google login, create user based on extracted info
+  if (facebook_google_login)
+  {
+    this.register(email, password, userName, img, actualName)
+
+    return true;
+  }
+
+  return false; //not existing user and manual login = invalid login info  
+}
+
+//------------------------------------------------
+//-------------------REGISTER()-------------------
+//------------------------------------------------
+exports.register = function(email, password, userName, img, actualName)
+{
+  //user doesn't exist; register user with provided info
+  var id = wholeUserData.length;
+  var newUser = createNewUser(id, userName, password, email, img, actualName);
+
   wholeUserData.push(newUser);
-  populateUserData(newUser.userIdNumber);
-
-  console.log(userData);
-
-  //TODO: need to fix here. userdata should push into wholeUserData Json.
-  //userData.userList.push(newUser);
-  console.log("login status: " + userData.loginStatus);
-  res.render('preference', {
-    userData,
-    categoryList
-  });
-};
+  populateUserData(id); 
+}
 
 
 
 //helper function to create new users
 function createNewUser(id, userName, password, email, img, actualName) {
   var newUser = {
+    "loginStatus": false,
+    "userRole":null,
     "userIdNumber": id,
     "userName": userName,
     "password": password,
@@ -59,6 +100,7 @@ function createNewUser(id, userName, password, email, img, actualName) {
     "actualName": actualName,
     "currentItemIndex": 0,
     "isScreenShared": false,
+    "isAtChatroom": false,
     "categoryList": [],
     "favoriteList": [{
       "title": "Activities",
@@ -78,7 +120,10 @@ function createNewUser(id, userName, password, email, img, actualName) {
     }, {
       "title": "Home",
       "id": "home"
-    }]
+    }],
+     "userList": [],
+     "likedList" : [],
+     "bookmarkedList":[]
   }
 
   return newUser;
@@ -87,102 +132,62 @@ function createNewUser(id, userName, password, email, img, actualName) {
 //helper function to populate userData after new user/existing user logs in
 //sets userData to values from wholeUserData
 function populateUserData(userIdNumber) {
-  userData.userIdNumber = userIdNumber;
-  userData.userName = wholeUserData[userIdNumber].userName;
-  userData.actualName = wholeUserData[userIdNumber].actualName;
-  userData.currentItemIndex = wholeUserData[userIdNumber].currentItemIndex;
-  userData.isScreenShared = wholeUserData[userIdNumber].isScreenShared;
-  userData.categoryList = wholeUserData[userIdNumber].categoryList;
-  userData.favoriteList = wholeUserData[userIdNumber].favoriteList;
-  userData.profileImgURL = wholeUserData[userIdNumber].profileImgURL;
-  userData.loginStatus = true;
+  userData = wholeUserData[userIdNumber];
+  userData["currentPageViewed"] = null;
+  userData["currentCategorySelected"] = null;
+  userData["loginStatus"] = true;
 }
 
 //helper function to populate wholeUserData after user logs out
 //stores current userData to wholeUserData and replace userData w/ default data
 function resetUserData(userIdNumber) {
   //populate wholeUserData with current userData
-  wholeUserData[userIdNumber].currentItemIndex = userData.currentItemIndex;
-  wholeUserData[userIdNumber].isScreenShared = userData.isScreenShared;
-  wholeUserData[userIdNumber].categoryList = userData.categoryList;
-  wholeUserData[userIdNumber].favoriteList = userData.favoriteList;
-  userData.loginStatus = false;
+  delete userData['currentPageViewed'];
+  delete userData['currentCategorySelected'];
+  delete userData['loginStatus'];
+  wholeUserData[userIdNumber] = userData;
 
   //replace userData w/ default data
-  userData = wholeUserData[0];
+  //id, userName, password, email, img, actualName
+  userData = {
+    "loginStatus": false,
+    "userRole":null,
+    "userIdNumber": 0,
+    "userName": null,
+    "actualName": null,
+    "profileImgURL": "/images/icons/default_profile.jpg",
+    "currentPageViewed": null,
+    "currentCategorySelected": null,
+    "currentItemIndex": 0,
+    "isScreenShared": false,
+    "isAtChatroom": false,
+    "categoryList": [],
+    "favoriteList": [{
+      "title": "Activities",
+      "id": "activities"
+    }, {
+      "title": "Food",
+      "id": "food"
+    }, {
+      "title": "Travel",
+      "id": "travel"
+    }, {
+      "title": "Movies",
+      "id": "movies"
+    }, {
+      "title": "Pets",
+      "id": "pets"
+    }, {
+      "title": "Home",
+      "id": "home"
+    }],
+    "userList": [],
+    "likedList" : [],
+    "bookmarkedList": []
+  }
 
   console.log(userData);
 }
-
-//-----------------------------------------------
-//---------------/PROFILE_FACEBOOK---------------
-//-----------------------------------------------
-exports.login = function(req, res) {
-
-  //facebook/google login
-  if (req.query.fb_gg_username != "") {
-    console.log("facebook/google login");
-
-    var newUser = createNewUser(wholeUserData.length,
-      req.query.fb_gg_username,
-      req.query.exampleInputPassword1,
-      req.query.email1,
-      req.query.fb_gg_image,
-      req.query.fb_gg_name);
-    var isNewUser = true;
-    var userIdNumber = newUser.userIdNumber;
-
-    for (var i = 0; i < wholeUserData.length; i++) {
-      //existing user (email and password exists in database)
-      if (newUser.email == wholeUserData[i].email &&
-        newUser.password == wholeUserData[i].password) {
-        isNewUser = false;
-        userIdNumber = i;
-      }
-    }
-
-    //new user; push newUser to wholeUserData
-    if (isNewUser) {
-      wholeUserData.push(newUser);
-    }
-
-    populateUserData(userIdNumber);
-
-    console.log("userData");
-    console.log(userData);
-
-    res.render('profile', userData);
-  }
-
-  //manual login
-  else {
-    console.log("manual login");
-
-    for (var i = 0; i < wholeUserData.length; i++) {
-      //existing user (email and password exists in database)
-      if (req.query.email1 == wholeUserData[i].email &&
-        req.query.exampleInputPassword1 == wholeUserData[i].password) {
-        console.log("EXISTING USER");
-
-        populateUserData(i);
-
-        console.log("userData");
-        console.log(userData);
-
-        res.render('profile', userData);
-      }
-    }
-
-    console.log("Wrong username or password");
-    res.render('profile_incorrect_login');
-
-  }
-}
-
-exports.incorrect_login = function(req, res) {
-  res.render('profile_incorrect_login');
-}
-
 
 
 //-----------------------------------------------
@@ -211,3 +216,77 @@ exports.logout = function(req, res) {
   });
 
 };
+
+exports.getUserData = function()
+{
+  return userData;
+}
+
+exports.getWholeUserData = function()
+{
+  return wholeUserData;
+}
+
+exports.getLoginStatus = function()
+{
+  return userData.loginStatus;
+}
+
+exports.updateUserData = function(usrData)
+{
+  userData = usrData;
+};
+
+function addMediaHTML()
+{
+  console.log("addMediaHTML in routes/profile");
+  for (var i = 0; i < userData.bookmarkedList.length; i++)
+  {
+    var mediaHTML = getMediaHTML(userData.bookmarkedList[i]);
+    userData.bookmarkedList[i]['mediaHTML'] = mediaHTML;
+  }
+
+  /*
+  for (var i = 0; i < user.UPLOADLIST.length; i++)
+  {
+    var mediaHTML = getMediaHTML(userData.UPLOADLIST[i]);
+    userData.UPLOADLIST[i]['mediaHTML'] = mediaHTML
+  }
+
+  for (var i = 0; i < user.SHARED.length; i++)
+  {
+    var mediaHTML = getMediaHTML(userData.SHARED[i]);
+    userData.SHARED[i]['mediaHTML'] = mediaHTML
+  }
+  */
+}
+
+function getMediaHTML(item)
+{
+  var mediaHTML;
+  switch(item.type)
+  {
+    case 'image':
+          console.log('image Type');
+          mediaHTML = '<img id="mediaHTML" src="'+item.URL+'" alt="">';
+          break;
+      case 'video':
+          console.log('video Type');
+          mediaHTML = '<video id="mediaHTML" style="width:100%;" controls><source src='+ item.URL+' type=video/mp4></video>';
+          break;
+      case 'literature':
+          mediaHTML = '<img id="mediaHTML" src="' + item.URL + '" alt="">';
+          break;
+      case 'music':
+        mediaHTML = '<div id="mediaHTML"> <audio id="audio" style="width:70%;" controls><source src="'
+                    + item.URL + '" type="audio/ogg">Your browser does not support the audio element.'
+                    +'</audio></div>';
+        break;
+      default:
+          console.log('check mediaType!');
+          break;
+  }
+
+  return mediaHTML;
+
+}
