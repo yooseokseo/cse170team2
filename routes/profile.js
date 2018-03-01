@@ -3,6 +3,7 @@ var userData = require('../userData.json');
 var categoryList = require('../categoryListData.json');
 var wholeUserData = require('../wholeUserData.json');
 var dataTypeList = require('../dataType.json');
+var userIP = require('../userIP.json');
 
 function addMediaHTML(){};
 
@@ -216,4 +217,23 @@ function getMediaHTML(item)
 
 }
 
+exports.checkIP = function(ip)
+{
+  var i, ipIndex;
+  console.log("in exports.checkIP; ip = "+ip);
+  for (i = 0; i < userIP.length; i++)
+  {
+    if (ip == userIP[i].ip)
+    {
+      console.log("user ip in system");
+      return i;
 
+    }
+  }
+
+  var newIP = {"ip": ip};
+  userIP.push(newIP);
+  console.log(userIP);
+  return userIP.length - 1;
+
+}

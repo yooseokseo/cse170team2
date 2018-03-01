@@ -7,7 +7,6 @@ var userData = require('../userData.json');
 //false otherwise (not logged in)
 exports.bookmark = function(itemID)
 {
-	console.log("in routes/bookmark");
 
 	if (!userData.loginStatus) //not logged in
 	{
@@ -47,6 +46,7 @@ exports.getUserData = function()
 {
   return userData;
 }
+
 
 exports.updateUserData = function(usrData)
 {
