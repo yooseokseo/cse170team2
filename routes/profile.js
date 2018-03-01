@@ -77,9 +77,27 @@ exports.login = function(email, password, userName, img, actualName)
   return false; //not existing user and manual login = invalid login info  
 }
 
-//------------------------------------------------
-//-------------------REGISTER()-------------------
-//------------------------------------------------
+exports.facebook_google_login = function(email, password, userName, img, actualName)
+{
+  console.log('facebook_google_login in profile.js');
+
+  var i;
+  if ( (i = this.existingUser(email, password, true)) != -1)
+  {
+    populateUserData(i);
+    return true;
+  }
+
+
+  //not existing user; if Facebook or Google login, create user based on extracted info
+  this.register(email, password, userName, img, actualName);
+  console.log(userData);
+
+  return true;
+  
+
+}
+
 exports.register = function(email, password, userName, img, actualName)
 {
   //user doesn't exist; register user with provided info
@@ -94,43 +112,15 @@ exports.register = function(email, password, userName, img, actualName)
 
 //helper function to create new users
 function createNewUser(id, userName, password, email, img, actualName) {
-  var newUser = {
-    "loginStatus": false,
-    "userRole":null,
-    "userIdNumber": id,
-    "userName": userName,
-    "password": password,
-    "email": email,
-    "profileImgURL": img,
-    "actualName": actualName,
-    "currentItemIndex": 0,
-    "isScreenShared": false,
-    "isAtChatroom": false,
-    "categoryList": [],
-    "favoriteList": [{
-      "title": "Activities",
-      "id": "activities"
-    }, {
-      "title": "Food",
-      "id": "food"
-    }, {
-      "title": "Travel",
-      "id": "travel"
-    }, {
-      "title": "Movies",
-      "id": "movies"
-    }, {
-      "title": "Pets",
-      "id": "pets"
-    }, {
-      "title": "Home",
-      "id": "home"
-    }],
-     "userList": [],
-     "likedList" : [],
-     "bookmarkedList":[]
-  }
-
+  var newUser = require('../defaultUserData.json');
+  delete userData['currentPageViewed'];
+  delete userData['currentCategorySelected'];
+  delete userData['loginStatus'];
+  newUser.userIdNumber = id;
+  newUser.userName = userName;
+  newUser.password = password;
+  newUser.profileImgURL = img;
+  newUser.actualName = actualName;
   return newUser;
 }
 
@@ -143,74 +133,13 @@ function populateUserData(userIdNumber) {
   userData["loginStatus"] = true;
 }
 
-//helper function to populate wholeUserData after user logs out
-//stores current userData to wholeUserData and replace userData w/ default data
-function resetUserData(userIdNumber) {
-  //populate wholeUserData with current userData
-  delete userData['currentPageViewed'];
-  delete userData['currentCategorySelected'];
-  delete userData['loginStatus'];
-  wholeUserData[userData.userIdNumber] = userData;
-
-  //replace userData w/ default data
-  //id, userName, password, email, img, actualName
-  userData = {
-    "loginStatus": false,
-    "userRole":null,
-    "userIdNumber": 0,
-    "userName": null,
-    "actualName": null,
-    "profileImgURL": "/images/icons/default_profile.jpg",
-    "currentPageViewed": null,
-    "currentCategorySelected": null,
-    "currentItemIndex": 0,
-    "isScreenShared": false,
-    "isAtChatroom": false,
-    "categoryList": [],
-    "favoriteList": [{
-      "title": "Activities",
-      "id": "activities"
-    }, {
-      "title": "Food",
-      "id": "food"
-    }, {
-      "title": "Travel",
-      "id": "travel"
-    }, {
-      "title": "Movies",
-      "id": "movies"
-    }, {
-      "title": "Pets",
-      "id": "pets"
-    }, {
-      "title": "Home",
-      "id": "home"
-    }],
-    "userList": [],
-    "likedList" : [],
-    "bookmarkedList": []
-  }
-
-  console.log(userData);
-}
-
-
-//-----------------------------------------------
-//----------------/PROFILE_LOGOUT----------------
-//-----------------------------------------------
 exports.logout = function()
 {
-  console.log("userData before logging out ");
-  console.log(userData);
   delete userData['currentPageViewed'];
   delete userData['currentCategorySelected'];
   delete userData['loginStatus'];
   wholeUserData[userData.userIdNumber] = userData;
-  console.log('wholeUserData');
-  console.log(wholeUserData[userData.userIdNumber]);
   userData = require('../defaultUserData.json');
-  console.log("defaultUserData");
-  console.log(userData);
 };
 
 exports.getUserData = function()
@@ -286,3 +215,5 @@ function getMediaHTML(item)
   return mediaHTML;
 
 }
+
+

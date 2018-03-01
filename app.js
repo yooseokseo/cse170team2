@@ -108,6 +108,12 @@ var rooms = ['room1', 'room2', 'room3'];
 io.sockets.on('connection', function(socket){
   console.log('a user connected');
 
+  socket.on('getIP', function(ip)
+  {
+    console.log("app.js; ip = "+ip);
+  });
+
+
   socket.on('addUser', function(username){
     socket.username = username;
     console.log(username + "has logged in");
@@ -150,6 +156,12 @@ io.sockets.on('connection', function(socket){
 
       updateUserData( profile.getUserData() );
     }
+  });
+
+  socket.on('facebook_google_login', function(email, password, userName, img, actualName)
+  {
+    profile.facebook_google_login();
+    updateUserData( profile.getUserData() );
   });
 
   //registering
