@@ -13,5 +13,8 @@ $(document).ready(function() {
     $('.save-popup').fadeIn(500);
     $('.save-popup').fadeOut(2000);
   })
-
+  $('#group-chat-send').click(function(){
+		console.log('clicked');
+		ga("send", "event", "shareScreen", "click");
+	});
 });

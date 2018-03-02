@@ -92,3 +92,42 @@
   width: 100%;
   height: 5rem;
 }
+.page-subtitle-alt{
+  width: 100%;
+  height: 28rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 3fr;
+  grid-template-areas:
+    "email email" "link screen";
+}
+
+.page-input-box-alt{
+  grid-area:email;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-bottom: 1px solid gray;
+}
+.page-link-box-alt{
+  grid-area:link;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  border-right: 1px solid gray;
+}
+.alt-cover{
+  height: 3rem;
+
+  margin: 0 1rem;
+  font-size: 2rem;
+}
+.page-screen-box-alt{
+  grid-area:screen;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+}

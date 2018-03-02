@@ -48,6 +48,7 @@ exports.linkview = function(req, res) {
 };
 
 exports.view = function(req, res) {
+  data['viewAlt'] = false;
   var categoryTitle = req.params.categoryTitle;
   var itemId = req.params.itemId;
   var itemObj = data[itemId];
@@ -100,7 +101,68 @@ exports.view = function(req, res) {
     'loginStatus': userData.loginStatus,
     'isScreenShared': userData.isScreenShared,
     'userIdNumber': userData.userIdNumber,
-    'isAtChatroom': userData.isAtChatroom
+    'isAtChatroom': userData.isAtChatroom,
+    'data': data
+
+  });
+};
+
+exports.viewAlt = function(req, res) {
+  data['viewAlt'] = true;
+  var categoryTitle = req.params.categoryTitle;
+  var itemId = req.params.itemId;
+  var itemObj = data[itemId];
+  var itemTitle = itemObj.itemTitle;
+  var mediaHTML = '';
+  var categoryListUser = userData.categoryList;
+  var currentItemIndex = userData.currentItemIndex;
+  var userIdNumber = 0;
+  if (userData.loginStatus) {
+    userIdNumber = userData.userIdNumber;
+  } else {
+    // dummy data
+    userIdNumber = 0;
+  }
+
+
+
+  switch (categoryListUser[currentItemIndex].type) {
+    case 'image':
+      console.log('image Type');
+      mediaHTML = '<div class="preview-content"><img id="media" src="' + categoryListUser[currentItemIndex].URL + '" alt=""></div>';
+      break;
+    case 'video':
+      console.log('video Type');
+      mediaHTML = '<video style="width:100%;" controls><source src=' + categoryListUser[currentItemIndex].URL + ' type=video/mp4></video>';
+      break;
+    case 'literature':
+      mediaHTML = '<div class="preview-content"><img id="media" src="' + categoryListUser[currentItemIndex].URL + '" alt=""></div>';
+      break;
+
+      case 'music':
+        mediaHTML = '<audio style="width:70%;" controls><source src="'+ categoryListUser[currentItemIndex].URL  + '" type="audio/ogg">Your browser does not support the audio element.</audio>';
+        break;
+
+    default:
+      console.log('check mediaType!');
+      break;
+  }
+
+
+
+  res.render('share', {
+    'categoryTitle': categoryTitle,
+    'itemTitle': itemTitle,
+    'itemId': itemId,
+    'mediaHTML': mediaHTML,
+    'itemIdTotal': itemId,
+    'userIdNumber': userIdNumber,
+    categoryList,
+    'loginStatus': userData.loginStatus,
+    'isScreenShared': userData.isScreenShared,
+    'userIdNumber': userData.userIdNumber,
+    'isAtChatroom': userData.isAtChatroom,
+    'data': data
 
   });
 };
