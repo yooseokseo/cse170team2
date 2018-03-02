@@ -3,6 +3,7 @@
   "userIdNumber": 0,
   "userName": null,
   "actualName": null,
+  "email" : null,
   "profileImgURL": "/images/icons/default_profile.jpg",
   "currentPageViewed": null,
   "currentCategorySelected": null,
@@ -31,5 +32,6 @@
   }],
   "userList": [],
   "likedList" : [],
-  "bookmarkedList": []
+  "bookmarkedList": [],
+  "ipIndex" : -1
 }

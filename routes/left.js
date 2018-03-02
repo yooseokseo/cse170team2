@@ -1,4 +1,6 @@
-var userData = require('../userData.json');
+var ip = require('./ip.js');
+//var userData = require('../userData.json');
+var userData = ip.getUserData();
 var categoryList = require('../categoryListData.json');
 
 

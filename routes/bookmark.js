@@ -1,5 +1,7 @@
 var data = require('../data.json');
-var userData = require('../userData.json');
+var ip = require('./ip.js');
+//var userData = require('../userData.json');
+var userData = ip.getUserData();
 
 //return -1 if not logged in (cannot add)
 //return 0 if removing from list
@@ -7,6 +9,8 @@ var userData = require('../userData.json');
 //false otherwise (not logged in)
 exports.bookmark = function(itemID)
 {
+	console.log("BOOKMARK");
+	console.log(userData);
 
 	if (!userData.loginStatus) //not logged in
 	{

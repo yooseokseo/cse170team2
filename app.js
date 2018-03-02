@@ -109,7 +109,7 @@ io.sockets.on('connection', function(socket){
   console.log('a user connected');
 
   //print out ip address
-  require("./routes/ip.js").func();
+  require("./routes/ip.js").getIP();
 
 
   socket.on('addUser', function(username){

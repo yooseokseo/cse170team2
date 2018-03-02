@@ -1,9 +1,14 @@
+var ip = require('./ip.js');
+//var userData = require('../userData.json');
+var userData = ip.getUserData();
 var data = require('../data.json');
-var userData = require('../userData.json');
 var categoryList = require('../categoryListData.json');
 var wholeUserData = require('../wholeUserData.json');
 var dataTypeList = require('../dataType.json');
 var userIP = require('../userIP.json');
+var defaultUserData = require('../defaultUserData.json');
+
+var ipIndex = userData.ipIndex;
 
 function addMediaHTML(){};
 
@@ -11,6 +16,11 @@ function addMediaHTML(){};
 //---------------------VIEW()--------------------
 //-----------------------------------------------
 exports.view = function(req, res) {
+  var i;
+  for (i = 0; i < wholeUserData.length; i++)
+  {
+    console.log(wholeUserData[i]);
+  }
   var loginStatus = userData.loginStatus;
 
   console.log("User is loggeed in: " + loginStatus);
@@ -21,8 +31,16 @@ exports.view = function(req, res) {
   } 
   else //logged in; show profile page
   { 
-    addMediaHTML();
-      res.render('profile', userData);  
+    /*console.log("USER DATA");
+    console.log(userData);
+    console.log("---");
+    console.log("DEFAULT");
+    console.log(defaultUserData);
+    console.log("---");
+    console.log("WHOLE");
+    console.log(wholeUserData);
+    addMediaHTML();*/
+    res.render('profile', userData);  
   }
 
   
@@ -35,6 +53,7 @@ exports.existingUser = function(email, password, checkPassword)
 {
   for (var i = 0; i < wholeUserData.length; i++) 
   {
+    console.log(wholeUserData[i]);
     //user alreay exists
     if (email == wholeUserData[i].email) 
     {
@@ -101,46 +120,101 @@ exports.facebook_google_login = function(email, password, userName, img, actualN
 
 exports.register = function(email, password, userName, img, actualName)
 {
+  var i;
+  if ( (i = this.existingUser(email, password, false) != -1) )
+  {
+    return false;
+  }
+
   //user doesn't exist; register user with provided info
   var id = wholeUserData.length;
   var newUser = createNewUser(id, userName, password, email, img, actualName);
 
-  wholeUserData.push(newUser);
+  wholeUserData.push(JSON.parse(JSON.stringify(newUser)));
   populateUserData(id); 
+
+  return true;
 }
 
 
 
 //helper function to create new users
 function createNewUser(id, userName, password, email, img, actualName) {
-  var newUser = require('../defaultUserData.json');
-  delete userData['currentPageViewed'];
-  delete userData['currentCategorySelected'];
-  delete userData['loginStatus'];
+  var newUser = JSON.parse(JSON.stringify(defaultUserData));
+
+
+  delete newUser['currentPageViewed'];
+  delete newUser['currentCategorySelected'];
+  delete newUser['loginStatus'];
+  delete newUser['ipIndex']; 
   newUser.userIdNumber = id;
   newUser.userName = userName;
   newUser.password = password;
   newUser.profileImgURL = img;
   newUser.actualName = actualName;
+  newUser.email = email;
   return newUser;
 }
 
 //helper function to populate userData after new user/existing user logs in
 //sets userData to values from wholeUserData
 function populateUserData(userIdNumber) {
-  userData = wholeUserData[userIdNumber];
+  userData = JSON.parse(JSON.stringify(wholeUserData[userIdNumber]));
   userData["currentPageViewed"] = null;
   userData["currentCategorySelected"] = null;
   userData["loginStatus"] = true;
+  userData["ipIndex"] = ipIndex;
 }
 
 exports.logout = function()
 {
+  /*delete later console.log("LOOOOOOOOOGGGGGGGGGGGG OUTTTTTTTTTTT");
+  console.log("defaul");
+
+
+  console.log("whole user data");
+  console.log(wholeUserData[userData.userIdNumber]);
+  console.log("----");
+  console.log("userData");
+  console.log(userData);
+    console.log("----");
+
+  console.log("default");
+  console.log(defaultUserData); 
+    console.log("----");
+
+  console.log("----");
+
+  console.log("----");
+
+  console.log("----");*/
+
+
   delete userData['currentPageViewed'];
   delete userData['currentCategorySelected'];
   delete userData['loginStatus'];
-  wholeUserData[userData.userIdNumber] = userData;
-  userData = require('../defaultUserData.json');
+  delete userData['ipIndex'];
+  //console.log("USER ID NMBER: "+userData.userIdNumber);
+  wholeUserData[userData.userIdNumber] = JSON.parse(JSON.stringify(userData));
+
+  var idNum = userData.userIdNumber;
+
+
+  userData = JSON.parse(JSON.stringify(defaultUserData));
+  userData['ipIndex'] = ipIndex;
+
+  /*delete later console.log("whole user data");
+  console.log(wholeUserData[idNum]);
+  console.log("----");
+
+  console.log("userData");
+  console.log(userData);
+  console.log("----");
+
+  console.log("default");
+  console.log(defaultUserData);*/
+
+
 };
 
 exports.getUserData = function()
@@ -214,26 +288,5 @@ function getMediaHTML(item)
   }
 
   return mediaHTML;
-
-}
-
-exports.checkIP = function(ip)
-{
-  var i, ipIndex;
-  console.log("in exports.checkIP; ip = "+ip);
-  for (i = 0; i < userIP.length; i++)
-  {
-    if (ip == userIP[i].ip)
-    {
-      console.log("user ip in system");
-      return i;
-
-    }
-  }
-
-  var newIP = {"ip": ip};
-  userIP.push(newIP);
-  console.log(userIP);
-  return userIP.length - 1;
 
 }
