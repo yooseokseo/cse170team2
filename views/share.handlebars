@@ -4,15 +4,16 @@
 <link href="/css/profile.css" rel="stylesheet">
 <link href="/css/share.css" rel="stylesheet">
 </head>
-  {{>searchbar}}
+{{>searchbar}}
+
 <body>
   <div class="page-container">
     <div class="pageTitle-container">
       <div class="page-back">
         {{#if isOneItem}}
-        <a href="/{{categoryTitle}}/{{itemId}}/showOneItem"> &lt; Back  </a>
+          <a href="/{{categoryTitle}}/{{itemId}}/showOneItem"> &lt; Back  </a>
         {{else}}
-        <a href="/{{categoryTitle}}/{{itemId}}/show"> &lt; Back  </a>
+          <a href="/{{categoryTitle}}/{{itemId}}/show"> &lt; Back  </a>
         {{/if}}
       </div>
 
@@ -31,23 +32,76 @@
 
     <div class="preview">
 
-        {{{mediaHTML}}}
+      {{{mediaHTML}}}
 
     </div>
+    {{#if data.viewAlt}}
+      <div class="page-subtitle-alt">
 
-    <div class="page-subtitle">
-      Share Link
-    </div>
-    <div class="page-box page-box-padding share">
-      <input id="email" style="border: 0px; width:95%; height:1.5rem; font-size:1.5rem; padding-top:0;" type="text" name="" value="" placeholder="Email Address">
-      <div id="link-send" class="shareBtn">Send</div>
-      <div id="link-copy" class="shareBtn">Copy</div>
-    </div>
-    <div style="color: red;" class="required">
-      * In order to simulate shared like<br>
-      https://a7-cogs120team2.herokuapp.com/sharedlink/{{itemIdTotal}}/show
-    </div>
-  <!--
+        <div class="page-link-box-alt">
+          <div class="alt-cover">
+            Share Link
+          </div>
+          <div class="page-input-box-alt">
+            <div class="">
+                <input id="email" style="border: 1px solid gray; width:100%; height:2rem; font-size:1.5rem; padding-top:0;" type="text" name="" value="" placeholder="Email Address">
+            </div>
+
+
+
+
+          </div>
+          <div style="width:90%; height:3rem;" id="link-send" class="shareBtn">Send</div>
+          <div class="" style="margin:0 1rem;">
+
+          </div>
+          <div class="" style="margin:0 1rem; margin-top:4rem;">
+            description here
+          </div>
+
+
+        </div>
+        <div class="page-screen-box-alt">
+          <div class="alt-cover">
+            Share Screen
+          </div>
+          <div class="page-input-box-alt">
+            <div class="">
+                <input id="email" style="border: 1px solid gray; width:100%; height:2rem; font-size:1.5rem; padding-top:0;" type="text" name="" value="" placeholder="UserName">
+            </div>
+
+
+
+
+          </div>
+          <a style="width:90%; height:3rem;" id="group-chat-send-a" href="/userData/{{userIdNumber}}/{{categoryTitle}}/{{itemId}}/setShare">
+            <div id="group-chat-send" class="shareBtn">Start Sharing</div>
+          </a>
+          <div class="" style="margin:0 1rem; ">
+            you are required to login to use screen sharing.
+          </div>
+          <div class="" style="margin:0 1rem; margin-top:1rem;">
+            description here
+          </div>
+        </div>
+
+      </div>
+
+
+
+    {{else}}
+      <div class="page-subtitle">
+        Share Link
+      </div>
+      <div class="page-box page-box-padding share">
+        <input id="email" style="border: 0px; width:95%; height:1.5rem; font-size:1.5rem; padding-top:0;" type="text" name="" value="" placeholder="Email Address">
+        <div id="link-send" class="shareBtn">Send</div>
+        <div id="link-copy" class="shareBtn">Copy</div>
+      </div>
+      <div style="color: red;" class="required">
+        * In order to simulate shared like<br> https://a7-cogs120team2.herokuapp.com/sharedlink/{{itemIdTotal}}/show
+      </div>
+      <!--
     <div class="page-subtitle">
       Get a Sharable Link
     </div>
@@ -60,33 +114,37 @@
 
     </div>
 
--->{{#unless isOneItem}}
-    <div class="page-subtitle">
-      Screen Sharing with Others
-    </div>
-    <div class="page-box page-box-padding share2">
-      <input id="username" style="margin-top:1rem; border: 0px; width:95%; height:1.5rem; font-size:1.5rem;" type="text" name="" value="" placeholder="UserName">
-      <a id="group-chat-send-a" href="/userData/{{userIdNumber}}/{{categoryTitle}}/{{itemId}}/setShare"><div id="group-chat-send" class="shareBtn">Start Sharing</div></a>
-    </div>
-    <div class="required">
-      you are required to login to use screen sharing.
-    </div>
-    <div  style="color: red;" class="required">
-      * In order to simulate shared link<br>https://a7-cogs120team2.herokuapp.com/sharedChat/1/random/0/show
-    </div>
+
+-->
+      {{#unless isOneItem}}
+        <div class="page-subtitle">
+          Screen Sharing with Others
+        </div>
+        <div class="page-box page-box-padding share2">
+          <input id="username" style="margin-top:1rem; border: 0px; width:95%; height:1.5rem; font-size:1.5rem;" type="text" name="" value="" placeholder="UserName">
+          <a id="group-chat-send-a" href="/userData/{{userIdNumber}}/{{categoryTitle}}/{{itemId}}/setShare">
+            <div id="group-chat-send" class="shareBtn">Start Sharing</div>
+          </a>
+        </div>
+        <div class="required">
+          you are required to login to use screen sharing.
+        </div>
+        <div style="color: red;" class="required">
+          * In order to simulate shared link<br>https://a7-cogs120team2.herokuapp.com/sharedChat/1/random/0/show
+        </div>
 
 
-    </div>
+  </div>
 
-    {{/unless}}
+  {{/unless}}
 
+  {{/if}}
+  <div class="nav-cover-down">
+  </div>
 
-    <div class="nav-cover-down">
-    </div>
-
-    <!-- SPACE FOR POPUP -->
-    <div id="profile_popup" class="modal"> </div>
-    {{#unless isOneItem}}
+  <!-- SPACE FOR POPUP -->
+  <div id="profile_popup" class="modal"> </div>
+  {{#unless isOneItem}}
     <div class="nav-share-2 chatroom-btns-layout">
       {{#if isScreenShared}}
         {{#unless isAtChatroom}}
@@ -99,7 +157,8 @@
             </a>
             <a href="/userData/{{userIdNumber}}/{{categoryTitle}}/{{itemId}}/setChatShare">
               <div id="enterChatRoom" class="">
-                <img src="/images/icons/chat50.png" alt=""><div class="centered">
+                <img src="/images/icons/chat50.png" alt="">
+                <div class="centered">
                   Chat
                 </div>
               </div>
@@ -146,7 +205,7 @@
 
     {{/if}}
 
-      {{/unless}}
+  {{/unless}}
 
 
   </div>
@@ -157,12 +216,10 @@
     </div>
   </div>
 
-  		{{>script}}
+  {{>script}} {{>chatScript}}
 
-      {{>chatScript}}
-
-      <script src="/js/share.js">
-      </script>
+  <script src="/js/share.js">
+  </script>
 </body>
 
 </html>

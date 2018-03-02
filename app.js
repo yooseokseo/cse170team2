@@ -78,6 +78,7 @@ app.get('/:categoryTitle/left', left.view);
 app.get('/:categoryTitle/:itemId/info', info.view);
 app.get('/:categoryTitle/:itemId/infoOne', info.viewOne);
 app.get('/:categoryTitle/:itemId/share', share.view);
+app.get('/:categoryTitle/:itemId/share/viewAlt', share.viewAlt);
 app.get('/:categoryTitle/:itemId/shareOne', share.viewOne);
 app.get('/:categoryTitle/:itemId/show', show.view);
 app.get('/:categoryTitle/:itemId/showOneItem', show.viewOneItem);
@@ -139,7 +140,7 @@ io.sockets.on('connection', function(socket){
   });
 
   //check login in (both manual input and social media login)
-  socket.on('login', function (email, password, userName, img, actualName) 
+  socket.on('login', function (email, password, userName, img, actualName)
   {
     var validLogin = profile.login(email, password, userName, img, actualName);
     console.log('logged in successfully: '+validLogin);
@@ -156,6 +157,7 @@ io.sockets.on('connection', function(socket){
     }
   });
 
+
   socket.on('facebook_google_login', function(email, password, userName, img, actualName)
   {
     profile.facebook_google_login();
@@ -164,6 +166,7 @@ io.sockets.on('connection', function(socket){
 
   //registering
   socket.on('register', function (email, password, userName, img, actualName) 
+
   {
     var alreadyExist = profile.existingUser(email, password, false);
 
@@ -235,7 +238,7 @@ io.sockets.on('connection', function(socket){
 //get all routes file and add it to an array
 //updateUserData() loops through it
 var routeFiles = [];
-fs.readdirSync('./routes/').forEach(file => 
+fs.readdirSync('./routes/').forEach(file =>
 {
   var fileName = file.substring(0, file.length-3); //removes ".js"
   if (fileName != "profile")
