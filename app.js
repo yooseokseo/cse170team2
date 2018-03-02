@@ -109,6 +109,10 @@ var rooms = ['room1', 'room2', 'room3'];
 io.sockets.on('connection', function(socket){
   console.log('a user connected');
 
+  //print out ip address
+  require("./routes/ip.js").getIP();
+
+
   socket.on('addUser', function(username){
     socket.username = username;
     console.log(username + "has logged in");
@@ -153,8 +157,16 @@ io.sockets.on('connection', function(socket){
     }
   });
 
-  //for registering
-  socket.on('register', function (email, password, userName, img, actualName)
+
+  socket.on('facebook_google_login', function(email, password, userName, img, actualName)
+  {
+    profile.facebook_google_login();
+    updateUserData( profile.getUserData() );
+  });
+
+  //registering
+  socket.on('register', function (email, password, userName, img, actualName) 
+
   {
     var alreadyExist = profile.existingUser(email, password, false);
 
@@ -169,6 +181,11 @@ io.sockets.on('connection', function(socket){
 
       updateUserData( profile.getUserData() );
     }
+  });
+
+  socket.on('logout', function()
+  {
+    profile.logout();
   });
 
 

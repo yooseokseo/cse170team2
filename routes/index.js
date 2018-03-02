@@ -1,9 +1,14 @@
 //database
-var userData = require('../userData.json');
+var ip = require('./ip.js');
+//var userData = require('../userData.json');
+var userData = ip.getUserData();
 var popularCategoryList = require('../popularCategoryListData.json');
 var categoryList = require('../categoryListData.json');
 var dataType = require('../dataType.json');
 var data = require('../data.json');
+
+console.log("userData ipIndex: "+userData.ipIndex);
+
 //variables
 var loginStatus = userData.loginStatus;
 var totalNumberOfItems = data.length;
@@ -38,6 +43,12 @@ switch (todayType) {
     console.log('check mediaType!');
     break;
 }
+
+var usrData = ip.getUserData();
+console.log("usrData");
+console.log(usrData);
+
+
 
 //check a user is logged in or not
 if (loginStatus) {
@@ -78,6 +89,10 @@ exports.updateUserData = function(usrData)
 };
 
 exports.view = function(req, res) {
+
+  console.log("DEFAULT");
+  console.log(require('../defaultUserData.json'));
+  
   userData.currentItemIndex = 0;
   console.log(userList);
   res.render('index', {
