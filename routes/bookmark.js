@@ -28,6 +28,9 @@ exports.bookmark = function(itemID)
 	else
 	{
 		userData.bookmarkedList.push(data[itemID]);
+		console.log("in book mark");
+		console.log(userData);
+		
 		return 1;
 	}
 }

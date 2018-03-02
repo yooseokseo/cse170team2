@@ -31,6 +31,8 @@ exports.view = function(req, res) {
   } 
   else //logged in; show profile page
   { 
+    console.log("profile view");
+    console.log(userData);
     /*console.log("USER DATA");
     console.log(userData);
     console.log("---");
@@ -38,8 +40,8 @@ exports.view = function(req, res) {
     console.log(defaultUserData);
     console.log("---");
     console.log("WHOLE");
-    console.log(wholeUserData);
-    addMediaHTML();*/
+    console.log(wholeUserData);*/
+    addMediaHTML();
     res.render('profile', userData);  
   }
 
@@ -53,7 +55,6 @@ exports.existingUser = function(email, password, checkPassword)
 {
   for (var i = 0; i < wholeUserData.length; i++) 
   {
-    console.log(wholeUserData[i]);
     //user alreay exists
     if (email == wholeUserData[i].email) 
     {
