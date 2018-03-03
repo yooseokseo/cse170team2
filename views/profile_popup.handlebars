@@ -160,12 +160,13 @@ var socket = io.connect('http://localhost:3000');
         $('.login-fail-popup').fadeOut(2500);
     });
 
-   
+    //show login success message and go to homepage
     socket.on('successfulLogin', function() 
     {
-        $('.login-popup').fadeIn(500, function() 
+        $('.login-popup').fadeIn(500, function()
         {
-            window.location.href = "/";
+            //undo effect of preventDefault and reload page
+            location.reload();
         });
     })
 
