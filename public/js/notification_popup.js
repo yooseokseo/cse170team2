@@ -47,7 +47,7 @@ function like(itemID, pageLoad)
       if (!pageLoad) //user clicks bookmark; show confirmation 
       {
         $('.like-popup').fadeIn(500);
-        $('.like-popup').fadeOut(2000);
+        $('.like-popup').fadeOut(2500);
       }
       //show bookmark icon
       $('#like-iconDefault').hide();
