@@ -78,12 +78,12 @@ function bookmark(itemID, pageLoad)
         $('.bookmark-popup').fadeOut(2000);
       }
       //show bookmark icon
-      $('#bookmark-lable').hide();
+      $('#bookmark-iconDefault').hide();
       $('#bookmark-icon').show();
     }
     else if (success == 0) //unbookmark or not bookmarked
     { //hide bookmark icon
-      $('#bookmark-lable').show();
+      $('#bookmark-iconDefault').show();
       $('#bookmark-icon').hide();
     }
     else //not logged in; bookmark fail
@@ -107,12 +107,12 @@ function like(itemID, pageLoad)
         $('.like-popup').fadeOut(2000);
       }
       //show bookmark icon
-      $('#like-lable').hide();
+      $('#like-iconDefault').hide();
       $('#like-heart').show();
     }
     else if (success == 0) //unbookmark or not bookmarked
     { //hide bookmark icon
-      $('#like-lable').show();
+      $('#like-iconDefault').show();
       $('#like-heart').hide();
     }
     else //not logged in; bookmark fail

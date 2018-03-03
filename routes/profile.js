@@ -12,17 +12,17 @@ var ipIndex = userData.ipIndex;
 
 function addMediaHTML(){};
 
-//-----------------------------------------------
-//---------------------VIEW()--------------------
-//-----------------------------------------------
-exports.view = function(req, res) {
-  var i;
-  for (i = 0; i < wholeUserData.length; i++)
-  {
-    console.log(wholeUserData[i]);
-  }
-  var loginStatus = userData.loginStatus;
+//----------------------------------------------------
+//------------------ main functions ------------------
+//----------------------------------------------------
 
+exports.view = function(req, res) {
+  console.log("exports.view in routes/profile.js");
+  console.log("userData");
+  console.log(userData);
+
+
+  var loginStatus = userData.loginStatus;
   console.log("User is loggeed in: " + loginStatus);
 
   if (!loginStatus) //not logged in; show pop up 
@@ -30,48 +30,12 @@ exports.view = function(req, res) {
     res.render('profile_popup');
   } 
   else //logged in; show profile page
-  { 
-    console.log("profile view");
-    console.log(userData);
-    /*console.log("USER DATA");
-    console.log(userData);
-    console.log("---");
-    console.log("DEFAULT");
-    console.log(defaultUserData);
-    console.log("---");
-    console.log("WHOLE");
-    console.log(wholeUserData);*/
+  {
     addMediaHTML();
     res.render('profile', userData);  
   }
-
-  
-
 };
 
-
-//return userIdNumber if user exists; -1 otherwise
-exports.existingUser = function(email, password, checkPassword)
-{
-  for (var i = 0; i < wholeUserData.length; i++) 
-  {
-    //user alreay exists
-    if (email == wholeUserData[i].email) 
-    {
-      if (checkPassword && password != wholeUserData[i].password)
-      {
-        return -1;
-      }
-      return i;
-    }
-  }
-
-  return -1; //new user
-}
-
-//-----------------------------------------------
-//--------------------LOGIN()--------------------
-//-----------------------------------------------
 //return true if successful login; false otherwise
 exports.login = function(email, password, userName, img, actualName)
 {
@@ -109,14 +73,11 @@ exports.facebook_google_login = function(email, password, userName, img, actualN
     return true;
   }
 
-
   //not existing user; if Facebook or Google login, create user based on extracted info
   this.register(email, password, userName, img, actualName);
   console.log(userData);
 
   return true;
-  
-
 }
 
 exports.register = function(email, password, userName, img, actualName)
@@ -131,29 +92,56 @@ exports.register = function(email, password, userName, img, actualName)
   var id = wholeUserData.length;
   var newUser = createNewUser(id, userName, password, email, img, actualName);
 
-  wholeUserData.push(JSON.parse(JSON.stringify(newUser)));
+  wholeUserData.push(JSON.parse( JSON.stringify(newUser) ));
   populateUserData(id); 
 
   return true;
 }
 
 
+exports.logout = function()
+{ 
+  //stores data in wholeUserData
+  wholeUserData[userData.userIdNumber] = JSON.parse(JSON.stringify(userData));
+
+  //replace userData with default user data
+  userData = JSON.parse(JSON.stringify(defaultUserData));
+};
+
+
+//------------------ side/helper functions ------------------
+
+//return userIdNumber if user exists; -1 otherwise
+exports.existingUser = function(email, password, checkPassword)
+{
+  for (var i = 0; i < wholeUserData.length; i++) 
+  {
+    //user alreay exists
+    if (email == wholeUserData[i].email) 
+    {
+      if (checkPassword && password != wholeUserData[i].password)
+      {
+        return -1;
+      }
+      return i;
+    }
+  }
+
+  return -1; //new user
+}
+
 
 //helper function to create new users
 function createNewUser(id, userName, password, email, img, actualName) {
   var newUser = JSON.parse(JSON.stringify(defaultUserData));
 
-
-  delete newUser['currentPageViewed'];
-  delete newUser['currentCategorySelected'];
-  delete newUser['loginStatus'];
-  delete newUser['ipIndex']; 
   newUser.userIdNumber = id;
   newUser.userName = userName;
   newUser.password = password;
   newUser.profileImgURL = img;
   newUser.actualName = actualName;
   newUser.email = email;
+  newUser.loginStatus = true;
   return newUser;
 }
 
@@ -167,70 +155,9 @@ function populateUserData(userIdNumber) {
   userData["ipIndex"] = ipIndex;
 }
 
-exports.logout = function()
-{
-  /*delete later console.log("LOOOOOOOOOGGGGGGGGGGGG OUTTTTTTTTTTT");
-  console.log("defaul");
-
-
-  console.log("whole user data");
-  console.log(wholeUserData[userData.userIdNumber]);
-  console.log("----");
-  console.log("userData");
-  console.log(userData);
-    console.log("----");
-
-  console.log("default");
-  console.log(defaultUserData); 
-    console.log("----");
-
-  console.log("----");
-
-  console.log("----");
-
-  console.log("----");*/
-
-
-  delete userData['currentPageViewed'];
-  delete userData['currentCategorySelected'];
-  delete userData['loginStatus'];
-  delete userData['ipIndex'];
-  //console.log("USER ID NMBER: "+userData.userIdNumber);
-  wholeUserData[userData.userIdNumber] = JSON.parse(JSON.stringify(userData));
-
-  var idNum = userData.userIdNumber;
-
-
-  userData = JSON.parse(JSON.stringify(defaultUserData));
-  userData['ipIndex'] = ipIndex;
-
-  /*delete later console.log("whole user data");
-  console.log(wholeUserData[idNum]);
-  console.log("----");
-
-  console.log("userData");
-  console.log(userData);
-  console.log("----");
-
-  console.log("default");
-  console.log(defaultUserData);*/
-
-
-};
-
 exports.getUserData = function()
 {
   return userData;
-}
-
-exports.getWholeUserData = function()
-{
-  return wholeUserData;
-}
-
-exports.getLoginStatus = function()
-{
-  return userData.loginStatus;
 }
 
 exports.updateUserData = function(usrData)

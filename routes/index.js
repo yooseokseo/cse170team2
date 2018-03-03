@@ -88,11 +88,7 @@ exports.updateUserData = function(usrData)
   userData = usrData;
 };
 
-exports.view = function(req, res) {
-
-  console.log("DEFAULT");
-  console.log(require('../defaultUserData.json'));
-  
+exports.view = function(req, res) {  
   userData.currentItemIndex = 0;
   console.log(userList);
   res.render('index', {

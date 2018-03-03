@@ -9,9 +9,6 @@ var userData = ip.getUserData();
 //false otherwise (not logged in)
 exports.bookmark = function(itemID)
 {
-	console.log("BOOKMARK");
-	console.log(userData);
-
 	if (!userData.loginStatus) //not logged in
 	{
 		return -1
@@ -27,10 +24,7 @@ exports.bookmark = function(itemID)
 	}
 	else
 	{
-		userData.bookmarkedList.push(data[itemID]);
-		console.log("in book mark");
-		console.log(userData);
-		
+		userData.bookmarkedList.push(data[itemID]);		
 		return 1;
 	}
 }

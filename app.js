@@ -109,10 +109,6 @@ var rooms = ['room1', 'room2', 'room3'];
 io.sockets.on('connection', function(socket){
   console.log('a user connected');
 
-  //print out ip address
-  require("./routes/ip.js").getIP();
-
-
   socket.on('addUser', function(username){
     socket.username = username;
     console.log(username + "has logged in");
@@ -186,6 +182,8 @@ io.sockets.on('connection', function(socket){
   socket.on('logout', function()
   {
     profile.logout();
+    updateUserData( profile.getUserData() );
+
   });
 
 
@@ -224,8 +222,10 @@ io.sockets.on('connection', function(socket){
 
   });
 
+
   //sends loginStatus directly froma app.js to avoid error from asynchronicity
-  socket.emit('loginStatus', profile.getLoginStatus() );
+
+  //console.log("app.js; loginStatus = "+profile.getLoginStatus());
 
 
 
@@ -241,10 +241,7 @@ var routeFiles = [];
 fs.readdirSync('./routes/').forEach(file =>
 {
   var fileName = file.substring(0, file.length-3); //removes ".js"
-  if (fileName != "profile")
-  {
-    routeFiles.push( require('./routes/'+fileName) );
-  }
+  routeFiles.push( require('./routes/'+fileName) );
 });
 
 //manually update userData in every route files

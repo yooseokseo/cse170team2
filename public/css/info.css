@@ -94,7 +94,6 @@ a {
 
 .page-box {
   margin: auto 1rem;
-  border: 1px solid #DFDFDF;
 }
 
 .page-box input {
@@ -435,4 +434,67 @@ a {
 
 #check-icon{
   width: 100%;
+}
+
+ .centered {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 1rem;
+}
+
+.bookmark-popup, 
+.bookmark-fail-popup,
+.like-fail-popup
+{
+  display: none;
+  border-radius: 1rem;
+  height: 16rem;
+  font-size: 1.2rem;
+  padding:  1rem;
+  background-color: #a9a9a9;
+  width: 15rem;
+  text-align: center;
+  margin-top: 20rem;
+}
+
+.like-popup 
+{
+  display: none;
+  border-radius: 1rem;
+  height: 16rem;
+  font-size: 1.2rem;
+  padding:  1rem;
+  width: 15rem;
+  text-align: center;
+  margin-top: 20rem; 
+}
+.notification-hidden{
+  width: 100%;
+  height: 0;
+  position: fixed;
+  top: 10rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+
+
+}
+
+#check-icon{
+  width: 100%;
+}
+
+#like-heart{
+  display: none;
+}
+
+#bookmark-icon{
+  display:none;
+}
+
+#bookmark-iconDefault{
+  display:block;
 }

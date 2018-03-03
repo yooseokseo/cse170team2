@@ -1,11 +1,9 @@
 {{>header}}
 
 </head>
-<body onload="getIP()">
+<body>
 
 {{>searchbar}}
-
-
 
 <div class="page-container">
 		<div class="pageTitle-container">
@@ -39,7 +37,7 @@
 			<div class="categories-button">
 				<a href="/app/random">
 					<div class="categories">
-						Random <img src="/images/icons/random-100.png" alt="random play icon" height="70">
+						Random
 					</div>
 				</a>
 
@@ -47,7 +45,7 @@
 					{{#each dataTypeList}}
 						<a href="/app/{{title}}/filteredRandom">
 							<div id="{{title}}" class="categories">
-								{{dataType}} <img src="/images/icons/random-100.png" alt="random play icon" height="70">
+								{{dataType}}
 							</div>
 						</a>
 					{{/each}}
@@ -66,10 +64,6 @@
 
 		<!-- SPACE FOR POPUP -->
 		<div id="profile_popup" class="modal"> </div>
-
-
-
-
 
 		<!-- BOTTOM NAVIGATION BAR -->
 		{{>navigation}}

@@ -351,6 +351,10 @@ a {
   #like-btn2{
     grid-area: btn3;
     margin: 0 auto;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
   }
 
   #info-btn2{
@@ -442,5 +446,9 @@ a {
 
 #bookmark-icon{
   display:none;
+}
+
+#bookmark-iconDefault{
+  display:block;
 }
 
