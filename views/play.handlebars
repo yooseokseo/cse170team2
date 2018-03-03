@@ -170,33 +170,10 @@
       </div>
 
     {{/if}}
-    <!-- bookmark success popup -->
-    <div class="notification-hidden">
-      <div class="bookmark-popup">
-        <img id="check-icon" src="/images/icons/check-500.png" alt=""> Added to Your Profile
-      </div>
-    </div>
+    
+    <!-- notifications popup for liking, bookmarking, etc -->
+    {{>notification_popup}}
 
-    <!-- bookmark fail popup -->
-    <div class="notification-hidden">
-      <div class="bookmark-fail-popup">
-        <img id="check-icon" src="/images/icons/x-mark.png" alt=""> Sign in to bookmark
-      </div>
-    </div>
-
-    <!-- like success popup -->
-    <div class="notification-hidden">
-      <div class="like-popup">
-        <img id="check-icon" src="/images/icons/heart-popup.png" alt="">
-      </div>
-    </div>
-
-    <!-- like fail popup -->
-    <div class="notification-hidden">
-      <div class="like-fail-popup">
-        <img id="check-icon" src="/images/icons/x-mark.png" alt=""> Sign in to like
-      </div>
-    </div>
 
     <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
     <script type="text/javascript" src="/js/materialize.js"></script>
