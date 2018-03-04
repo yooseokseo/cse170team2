@@ -33,5 +33,7 @@
   "userList": [],
   "likedList" : [],
   "bookmarkedList": [],
-  "ipIndex" : -1
+  "ipIndex" : -1,
+  "ip" : null,
+  "hostname" : null
 }
