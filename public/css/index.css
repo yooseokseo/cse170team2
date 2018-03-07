@@ -131,6 +131,7 @@ a {
   align-items: center;
   justify-content: center;
   margin: 0.5rem 0;
+  border-radius: 1rem;
 }
 
 .recently-button{
@@ -217,6 +218,7 @@ a {
   grid-template-areas:
     "Image Video"
     "Music Literature";
+    grid-column-gap: 0.5rem;
 }
 
 #Image{
