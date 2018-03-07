@@ -15,6 +15,6 @@ $(document).ready(function() {
   })
   $('#group-chat-send').click(function(){
 		console.log('clicked');
-		ga("send", "event", "shareScreen", "click");
+		
 	});
 });
