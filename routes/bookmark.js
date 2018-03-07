@@ -1,7 +1,7 @@
 var data = require('../data.json');
-var ip = require('./ip.js');
-//var userData = require('../userData.json');
-var userData = ip.getUserData();
+//var ip = require('./ip.js');
+var userData = require('../userData.json');
+//var userData = ip.getUserData();
 
 //return -1 if not logged in (cannot add)
 //return 0 if removing from list

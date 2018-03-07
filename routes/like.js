@@ -1,7 +1,7 @@
 var data = require('../data.json');
-var ip = require('./ip.js');
-//var userData = require('../userData.json');
-var userData = ip.getUserData();
+//var ip = require('./ip.js');
+var userData = require('../userData.json');
+//var userData = ip.getUserData();
 
 //return true if successfully liked (user logged in);
 //false otherwise (not logged in)

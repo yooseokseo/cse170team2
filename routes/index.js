@@ -1,7 +1,7 @@
 //database
-var ip = require('./ip.js');
-//var userData = require('../userData.json');
-var userData = ip.getUserData();
+//var ip = require('./ip.js');
+var userData = require('../userData.json');
+//var userData = ip.getUserData();
 var popularCategoryList = require('../popularCategoryListData.json');
 var categoryList = require('../categoryListData.json');
 var dataType = require('../dataType.json');
@@ -44,9 +44,6 @@ switch (todayType) {
     break;
 }
 
-var usrData = ip.getUserData();
-console.log("usrData");
-console.log(usrData);
 
 
 

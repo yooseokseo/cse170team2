@@ -1,6 +1,6 @@
-var ip = require('./ip.js');
-//var userData = require('../userData.json');
-var userData = ip.getUserData();
+//var ip = require('./ip.js');
+var userData = require('../userData.json');
+//var userData = ip.getUserData();
 var data = require('../data.json');
 var categoryList = require('../categoryListData.json');
 

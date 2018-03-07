@@ -1,9 +1,9 @@
 //database
 var data = require('../data.json');
 var categoryList = require('../categoryListData.json');
-var ip = require('./ip.js');
-//var userData = require('../userData.json');
-var userData = ip.getUserData();
+//var ip = require('./ip.js');
+var userData = require('../userData.json');
+//var userData = ip.getUserData();
 
 exports.view = function(req, res) {
   var categoryTitle = req.params.categoryTitle;
