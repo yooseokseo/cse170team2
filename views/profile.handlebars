@@ -1,0 +1,85 @@
+{{>header}}
+</head>
+<body>
+
+  {{>searchbar}}
+  <div class="page-container">
+    <div class="heading-container">
+      <div class= "profile_pic">
+        <img src={{profileImgURL}} alt="profile picture" style="width:130px;height:130px;">
+      </div>
+
+      <div class = "description">
+        <div class="page-box page-box-padding">
+              Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+          </div>
+      </div>
+
+      <div class = "username">
+        <p>{{actualName}}</p>
+      </div>
+
+      <!-- hide buttons to fix bugs for now -->
+
+      <div class= "edit-profile">
+        <a href="/">Edit Profile</a>
+        <a href="/" id="logout_btn" onclick="logout()">LOG OUT</a>
+      </div> 
+    
+
+
+    </div>
+
+
+    <div class = "tabs_container">
+      <ul class="nav nav-tabs">
+        <li class="active"><a href="#Bookmarked" data-toggle="tab">Bookmarked</a></li>
+        <li><a href="#Uploaded" data-toggle="tab">Uploaded</a></li>
+        <li><a href="#Shared" data-toggle="tab">Shared</a></li>
+      </ul>
+
+      <!-- Tab panes -->
+      <div class="tab-content">
+
+        <!-- Saved tab -->
+        <div class="tab-pane active" id="Bookmarked">
+            {{#each bookmarkedList}}
+              <a href="/{{category}}/{{id}}/showOneItem"> {{{mediaHTML}}} </a>
+            {{/each}}
+
+        </div>
+
+        <!-- Uploaded tab -->
+        <div class="tab-pane" id="Uploaded">
+            <h5> <center><br>UPLOADED CONTENT.. </center></h5>
+
+        </div>
+
+        <!-- Shared tab -->
+        <div class="tab-pane" id="Shared">
+            <h5> <center><br>SHARED CONTENT.. </center></h5>
+
+        </div>
+
+      </div>
+    </div>
+
+
+
+
+
+    <!-- BOTTOM NAVIGATION BAR -->
+		{{>navigation}}
+
+
+
+
+  </div>
+
+  {{>script}}
+  <script src="/socket.io/socket.io.js"></script>
+
+
+</body>
+
+</html>
