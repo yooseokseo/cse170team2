@@ -89,7 +89,7 @@ a {
 }
 
 #desc {
-  margin-top: 5.5rem;
+  margin-top: 4.5rem;
 }
 
 .page-box {
@@ -444,7 +444,7 @@ a {
     font-size: 1rem;
 }
 
-.bookmark-popup, 
+.bookmark-popup,
 .bookmark-fail-popup,
 .like-fail-popup
 {
@@ -459,7 +459,7 @@ a {
   margin-top: 20rem;
 }
 
-.like-popup 
+.like-popup
 {
   display: none;
   border-radius: 1rem;
@@ -468,7 +468,7 @@ a {
   padding:  1rem;
   width: 15rem;
   text-align: center;
-  margin-top: 20rem; 
+  margin-top: 20rem;
 }
 .notification-hidden{
   width: 100%;
