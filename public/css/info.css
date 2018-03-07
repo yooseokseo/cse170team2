@@ -51,6 +51,7 @@ a {
 
 .page-filter {
   text-align: right;
+  position: relative;
 }
 
 .nav-container {
@@ -497,4 +498,23 @@ a {
 
 #bookmark-iconDefault{
   display:block;
+}
+#bookmark-filter{
+  position: absolute;
+  left: 0;
+  top:-1rem;
+}
+
+#like-filter{
+  position: absolute;
+  right: 0;
+    top:-1rem;
+}
+#like-btn2{
+  background-color: transparent;
+  box-shadow: none;
+}
+#bookmark-btn2{
+  background-color: transparent;
+  box-shadow: none;
 }
