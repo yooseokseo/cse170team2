@@ -51,7 +51,7 @@
  }
  .edit-profile{
    grid-column: 2;
-   text-align:right;
+
    margin-right: 20px;
 
  }
@@ -314,6 +314,68 @@ audio#audio
   padding-top:50%;
 }
 
+.nav{
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 1fr;
+  grid-template-areas:
+    "bookmark uploaded shared";
+}
+
+#profile-bookmark{
+  grid-area:bookmark;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+
+#profile-upload{
+  grid-area:uploaded ;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+#profile-share{
+  grid-area:shared ;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.edit-profile{
+  position: relative;
+}
+
+
+#profile-edit{
+  border: 1px solid gray;
+  padding: 0.5rem;
+  position: absolute;
+  left: 1rem;
+  top: -2.5rem;
+
+}
+#profile-logout{
+  border: 1px solid gray;
+  padding: 0.5rem;
+  position: absolute;
+  right: 1rem;
+  top: -2.5rem;
+
+}
+
+.tabs_container{
+  margin-top: 2rem;
+}
+
+.heading-container{
+  margin-top: 1.5rem;
+}
 
 /* pop up css; combined into one file */
 input::-webkit-input-placeholder {
