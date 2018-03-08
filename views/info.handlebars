@@ -6,7 +6,7 @@
 </head>
 
 <body onload="check( {{itemId}} )"  >
-  
+
   {{>searchbar}}
 
   <div class="page-container">
@@ -28,14 +28,14 @@
       <div class="page-filter">
 
         <!-- Bookmark button -->
-        <div onclick="bookmark( {{itemId}} )" >
+        <div id="bookmark-filter" onclick="bookmark( {{itemId}} )" >
           <a id="bookmark-btn2" class="btn-floating more-options-btns" >
             <img id="bookmark-iconDefault" width="40" src="/images/icons/bookmark.png" class="material-icons">
             <img id="bookmark-icon" width="40" src="/images/icons/bookmark_filledIn.png" alt="">
           </a>
         </div>
 
-        <div onclick="like( {{itemId}} )" >
+        <div id="like-filter" onclick="like( {{itemId}} )" >
           <a id="like-btn2" class="btn-floating more-options-btns">
             <img id="like-iconDefault" width="30" src="/images/icons/heart-outline.png" class="material-icons"/>
             <img id="like-heart" width="30" src="/images/icons/heart-filledIn.png" alt="">
