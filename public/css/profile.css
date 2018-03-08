@@ -48,6 +48,8 @@
   grid-column: 2;
   margin-top: 20px;
   font-size: medium;
+  font-family:  "Garamond", Palatino, serif;
+  
  }
  .edit-profile{
    grid-column: 2;
@@ -119,7 +121,6 @@
   margin: 0;
   text-align: center;
   font-size: 1.5rem;
-  font-family:  "Garamond", Palatino, serif;
 
 }
 
@@ -159,10 +160,13 @@
   position: absolute;
   right: 2rem;
   bottom: 15.5rem;
+  font-family:  "Garamond", Palatino, serif;
+
 }
 
 #login-btn{
   width: 100%;
+
 }
 
 #flogin-btn{
@@ -331,6 +335,9 @@ audio#audio
   grid-template-rows: 1fr;
   grid-template-areas:
     "bookmark uploaded shared";
+  font-family:  "Garamond", Palatino, serif;
+  font-size: medium;
+
 }
 
 #profile-bookmark{
@@ -368,7 +375,8 @@ audio#audio
   position: absolute;
   left: 1rem;
   top: -2.5rem;
-
+  border-radius: 7px;
+  font-family:  "Garamond", Palatino, serif;
 }
 #profile-logout{
   border: 1px solid gray;
@@ -376,7 +384,8 @@ audio#audio
   position: absolute;
   right: 1rem;
   top: -2.5rem;
-
+  border-radius: 7px;
+  font-family:  "Garamond", Palatino, serif;
 }
 
 .tabs_container{
