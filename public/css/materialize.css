@@ -4511,6 +4511,8 @@ h4 {
   font-size: 2.28rem;
   line-height: 110%;
   margin: 1.14rem 0 0.912rem 0;
+  font-family:  "Garamond", Palatino, serif;
+
 }
 
 h5 {
@@ -5006,6 +5008,7 @@ small {
 
 .tabs.tabs-transparent {
   background-color: transparent;
+
 }
 
 .tabs.tabs-transparent .tab a,
@@ -5207,12 +5210,14 @@ small {
 .btn, .btn-large {
   text-decoration: none;
   color: #fff;
-  background-color: #26a69a;
+  background-color: #2b7564c7;
   text-align: center;
   letter-spacing: .5px;
   -webkit-transition: .2s ease-out;
   transition: .2s ease-out;
   cursor: pointer;
+  font-family:  "Garamond", Palatino, serif;
+
 }
 
 .btn:hover, .btn-large:hover {
@@ -8309,10 +8314,19 @@ input[type=range]:focus::-ms-fill-upper {
   visibility: visible;
   -webkit-animation: pulse-animation 1s cubic-bezier(0.24, 0, 0.38, 1) infinite;
           animation: pulse-animation 1s cubic-bezier(0.24, 0, 0.38, 1) infinite;
-  -webkit-transition: opacity .3s, visibility 0s 1s, -webkit-transform .3s;
-  transition: opacity .3s, visibility 0s 1s, -webkit-transform .3s;
-  transition: opacity .3s, transform .3s, visibility 0s 1s;
-  transition: opacity .3s, transform .3s, visibility 0s 1s, -webkit-transform .3s;
+  -webkit-transition: opacity .3s,
+ visibility 0s 1s,
+ -webkit-transform .3s;
+  transition: opacity .3s,
+ visibility 0s 1s,
+ -webkit-transform .3s;
+  transition: opacity .3s,
+ transform .3s,
+ visibility 0s 1s;
+  transition: opacity .3s,
+ transform .3s,
+ visibility 0s 1s,
+ -webkit-transform .3s;
 }
 
 .tap-target {
@@ -8365,10 +8379,19 @@ input[type=range]:focus::-ms-fill-upper {
 
 .tap-target-wave::after {
   visibility: hidden;
-  -webkit-transition: opacity .3s, visibility 0s, -webkit-transform .3s;
-  transition: opacity .3s, visibility 0s, -webkit-transform .3s;
-  transition: opacity .3s, transform .3s, visibility 0s;
-  transition: opacity .3s, transform .3s, visibility 0s, -webkit-transform .3s;
+  -webkit-transition: opacity .3s,
+ visibility 0s,
+ -webkit-transform .3s;
+  transition: opacity .3s,
+ visibility 0s,
+ -webkit-transform .3s;
+  transition: opacity .3s,
+ transform .3s,
+ visibility 0s;
+  transition: opacity .3s,
+ transform .3s,
+ visibility 0s,
+ -webkit-transform .3s;
   z-index: -1;
 }
 

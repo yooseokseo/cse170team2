@@ -119,6 +119,8 @@
   margin: 0;
   text-align: center;
   font-size: 1.5rem;
+  font-family:  "Garamond", Palatino, serif;
+
 }
 
 #login-tab {
@@ -210,6 +212,8 @@
   margin: auto;
     height: 2rem;
     padding-top: 1rem;
+  font-family:  "Garamond", Palatino, serif;
+
 }
 
 #email::placeholder{
@@ -220,6 +224,8 @@
   width: 90%;
   margin: auto;
     height: 2rem;
+  font-family:  "Garamond", Palatino, serif;
+
 }
 #name::placeholder{
   font-size: 1.3rem;
@@ -229,6 +235,8 @@
   width: 90%;
   margin: auto;
     height: 2rem;
+  font-family:  "Garamond", Palatino, serif;
+  
 }
 #username::placeholder{
   font-size: 1.3rem;
@@ -238,6 +246,8 @@
   width: 90%;
   margin: auto;
     height: 2rem;
+  font-family:  "Garamond", Palatino, serif;
+
 }
 #password::placeholder{
   font-size: 1.3rem;
